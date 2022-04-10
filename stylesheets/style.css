@@ -1,0 +1,310 @@
+/* Mise en forme des documents */
+
+body {
+  font-family: sans-serif;
+}
+
+
+/* Section de navigation */
+
+.nav__btn-retour::before {
+  content: "\1F870\0205F";
+}
+
+.nav__sep {
+  border-left: 2px solid gray;
+}
+
+
+/* ⬆️ En-tête */
+
+.header-magasin {
+  background-color: whitesmoke;
+}
+
+.header__logo, .header__btn {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* 🏠 Accueil du site - Landing page */
+
+.recherche-magasin {
+  color: black;
+}
+
+.landing__milieu {
+  background-color: white;
+  color: black;
+}
+
+/* Provisoire */
+.landing__btn {
+  border: 2px solid black;
+  color: black;
+  text-decoration: none;
+}
+
+/* Provisoire */
+.landing__btn--white {
+  border-color: white;
+  color: white;
+}
+
+/* Provisoire */
+.landing__fonctionnement, .landing__avantages {
+  border: 2px solid gray;
+}
+
+
+/* 🏠 Accueil du magasin */
+
+.annonces, .rayons {
+  border: 2px solid black;   /* Provisoire */
+}
+
+/* Provisoire */
+.magasin__switch {
+  border: 2px solid white;
+  padding: 7.5px;
+  color: white;
+  text-decoration: none;
+}
+
+
+/* Landing page et accueil du magasin */
+
+.magasin, .landing {
+  background-color: mediumspringgreen;
+  color: white;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,.4), rgba(0,0,0,.4)), url("/img/yu-hosoi-qplKfNIP_5g-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+
+/* 📂 Liste des rayons */
+
+.ls-rayons__item a {
+  color: black;
+  text-decoration: none;
+
+  border: 1px solid black; /* Provisoire */
+}
+
+.ls-rayons__item span {
+  font-weight: bold;
+}
+
+
+/* 📂 Liste des articles */
+
+.ls-articles__description{
+  color: black;
+  text-decoration: none;
+}
+
+.ls-articles__cabas{
+  width: 50px;
+}
+
+.ls-articles__img{
+  text-align: center;
+}
+
+.ls-articles__titre-article{
+  font-size: 140%;
+}
+
+.ls-articles__item{
+  border: 1px solid black;
+  padding: 4px;
+  background-color: lightgray;
+  text-decoration: none;
+  color: black;
+  list-style: none;
+  width: 320px;
+  height: 320px;
+}
+
+
+/* 📄 Détails d'un produit */
+
+/* Provisoire */
+.details-produit__rayon {
+  border: 2px solid black;
+  color: black;
+  text-decoration: none;
+}
+
+/* Provisoire */
+.details-produit__producteur {
+  border: 2px solid black;
+}
+
+
+/* 🧺 Panier / Cabas */
+
+.cabas__valider_panier{
+  border: 1px solid black;
+  padding: 4px;
+  background-color: lightgray;
+  text-decoration: none;
+  color: black;
+}
+
+
+/* 💳 Paiement */
+
+.paiement__titre{
+  margin-left: 15px;
+}
+
+
+/* ✅ Confirmation de commande */
+
+#commande__bouton-commande{
+  border: 1px solid black;
+  padding: 4px;
+  background-color: lightgray;
+  text-decoration: none;
+  color: black;
+}
+
+
+/* 🧑‍🌾 Page d'un fournisseur */
+
+.fournisseur__banniere {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position-y: center;
+}
+
+.fournisseur__photo-profil {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+@media screen and (max-width: 768px) {
+  .fournisseur__nom, .fournisseur__domaine {
+    margin-block-start: 0.1em;
+    margin-block-end: 0.1em;
+    text-align: center;
+  }
+}
+
+.fournisseur__favori {
+  font-size: 3em;
+  text-align: right;
+  color: darkgoldenrod;
+}
+
+.fournisseur__description {
+  text-align: justify;
+}
+
+.fournisseur__cellule {
+  border: solid gray 1px ;
+}
+
+.fournisseur__etiquette {
+  border-top: solid gray 1px;
+}
+
+.fournisseur__voir-autres-produits {
+  color: black;
+  background-color: white;
+  border: solid black 1px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 2px;
+  font-size: 1.5em;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.fournisseur__voir-autres-produits:hover {
+  color: white;
+  background-color: black;
+}
+
+
+/* ⬇️ Pied de page du site */
+
+.pied-de-page h2 {
+  text-transform: uppercase;
+}
+
+.pied-de-page a {
+  text-decoration: none;
+  color: black;
+}
+
+.pied-de-page__newsletter {
+  text-align: justify;
+}
+
+
+/* 🔒 Page de connexion */
+
+.connexion_connecter {
+  border: 1px solid black;
+}
+
+#connexion_bouton_mdp, #connexion_bouton_inscription {
+  border: 1px solid grey;
+  background-color: #E9E9ED;
+  color: black;
+  font-size: 11pt;
+}
+
+/* 🔒 Page d'inscription */
+
+.inscritpion_inscrire {
+  border: 1px solid black;
+}
+
+#inscription_bouton_connexion {
+  border: 1px solid grey;
+  background-color: #E9E9ED;
+  color: black;
+  font-size: 11pt;
+}
+
+/* 🔒 Réinitialistaion du mot de passe */
+
+.reinitialise_reinitialiser {
+  border: 1px solid black;
+}
+
+#reinitialise_bouton_envoyer {
+  border: 1px solid grey;
+  background-color: #E9E9ED;
+  color: black;
+  font-size: 11pt;
+}
+
+/* 🔒 Message réinitialisation du mot de passe */
+
+.message_mdp {
+  border: 1px solid black;
+}
+
+#message_mdp_bouton_accueil {
+  border: 1px solid grey;
+  background-color: #E9E9ED;
+  color: black;
+  font-size: 11pt;
+}
+
+/* Espace client */
+
+.client__derniere-commande{
+  color: black;
+  text-decoration: none;
+  border: 1px solid black;
+}
