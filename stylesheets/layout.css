@@ -171,6 +171,19 @@ nav {
   margin: auto;
 }
 
+.resultats-magasin {
+  max-width: 700px;
+  margin: auto;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.resultats-magasin__item {
+  padding: 10px 20px;
+}
+
 .landing__milieu {
   padding: 25px;
 }

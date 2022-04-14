@@ -57,11 +57,22 @@ body {
   border: 2px solid gray;
 }
 
+/* Résultats de recherche */
+.resultats-magasin {
+  background-color: white;
+}
 
-/* 🏠 Accueil du magasin */
+.resultats-magasin__item:hover {
+  background-color: rgba(0,0,0,.1);
+}
 
-.annonces, .rayons {
-  border: 2px solid black;   /* Provisoire */
+.resultats-magasin a {
+  color: black;
+  text-decoration: none;
+}
+
+.resultats-magasin__nom {
+  font-weight: bold;
 }
 
 /* Provisoire */

@@ -26,6 +26,7 @@ error_reporting(E_ALL);
   </header>
 
   <div class="landing__haut">
+
     <h1 class="landing__titre">Avocaba</h1>
     <p class="landing__sous-titre">Votre marché 100% local</p>
 
@@ -39,6 +40,22 @@ error_reporting(E_ALL);
         <span class="material-icons">search</span>
       </label>
     </form>
+
+    <div class="resultats-magasin">
+      <div class="resultats-magasin__item">
+        <a href="/avocaba/vues/magasin?id=1">
+          <div class="resultats-magasin__nom">Avocaba Tours</div>
+          <div class="resultats-magasin__adresse">12, Avenue Monge, 37200 Tours</div>
+        </a>
+      </div>
+      <div class="resultats-magasin__item">
+        <a href="/avocaba/vues/magasin?id=2">
+          <div class="resultats-magasin__nom">Avocaba Fay-aux-Loges</div>
+          <div class="resultats-magasin__adresse">316, Rue Aristide Briand, 45450 Fay-aux-Loges</div>
+        </a>
+      </div>
+    </div>
+    
   </div>
 
   <div class="landing__milieu">
