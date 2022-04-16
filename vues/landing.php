@@ -4,6 +4,41 @@
 
 error_reporting(E_ALL);
 
+require_once '../traitements/recherche-magasin.php';
+
+/*************
+ * Fonctions *
+ *************/
+
+function afficherMagasins ($magasins) {
+  echo '<div class="resultats-magasins">';
+  if (!empty($magasins)) {
+    foreach ($magasins as $magasin)
+      echo '
+      <div class="resultats-magasins__item">
+        <a href="/avocaba/vues/magasin?id='.$magasin['IdDepot'].'">
+          <div class="resultats-magasins__nom">'.$magasin['Nom'].'</div>
+          <div class="resultats-magasins__adresse">'.$magasin['Adresse'].', '.$magasin['CodePostal'].' '.$magasin['Ville'].'</div>
+        </a>
+      </div>
+      ';
+  } else
+    echo '<div class="resultats-magasins__vide">Aucun résultat</div>';
+  echo '</div>';
+}
+
+
+
+/********************
+ * Script principal *
+ ********************/
+
+// Recherche d'un magasin : Réception de données
+
+if ( !empty($_GET['recherche']) ) {
+  $magasins = rechercherMagasin($_GET['recherche']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -32,8 +67,13 @@ error_reporting(E_ALL);
 
     <p>Où souhaitez-vous retirer vos courses ?</p>
     
-    <form class="recherche recherche-magasin" action="/avocaba/" method="get">
-      <input class="recherche__input" type="search" name="recherche" id="recherche" placeholder="Ville, code postal ou département" required>
+    <form class="recherche recherche-magasin" action="/avocaba" method="get">
+      <input class="recherche__input"
+             type="search" name="recherche" id="recherche"
+             placeholder="Ville, code postal ou numéro de département"
+             value="<?php echo $_GET['recherche'] ?? '' ?>"
+             required maxlength="50">
+
       <!-- Label permettant de "fabriquer" un bouton de recherche personnalisé -->
       <label class="recherche__btn">
         <input type="submit" value="Rechercher">
@@ -41,20 +81,12 @@ error_reporting(E_ALL);
       </label>
     </form>
 
-    <div class="resultats-magasin">
-      <div class="resultats-magasin__item">
-        <a href="/avocaba/vues/magasin?id=1">
-          <div class="resultats-magasin__nom">Avocaba Tours</div>
-          <div class="resultats-magasin__adresse">12, Avenue Monge, 37200 Tours</div>
-        </a>
-      </div>
-      <div class="resultats-magasin__item">
-        <a href="/avocaba/vues/magasin?id=2">
-          <div class="resultats-magasin__nom">Avocaba Fay-aux-Loges</div>
-          <div class="resultats-magasin__adresse">316, Rue Aristide Briand, 45450 Fay-aux-Loges</div>
-        </a>
-      </div>
-    </div>
+
+    <?php
+    // Affichage des résultats de recherche
+    if (isset($magasins))
+      afficherMagasins($magasins);
+    ?>
     
   </div>
 

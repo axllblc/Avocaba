@@ -127,6 +127,7 @@ nav {
 .recherche__btn {
   position: absolute;
   right: 10px;
+  cursor: pointer;
 }
 
 .recherche__btn span {
@@ -135,7 +136,9 @@ nav {
 }
 
 .recherche__btn input[type=submit] {
-  display: none;
+  width: 0;
+  height: 0;
+  visibility: collapse;
 }
 
 
@@ -171,7 +174,7 @@ nav {
   margin: auto;
 }
 
-.resultats-magasin {
+.resultats-magasins {
   max-width: 700px;
   margin: auto;
   margin-top: 15px;
@@ -180,7 +183,12 @@ nav {
   text-align: left;
 }
 
-.resultats-magasin__item {
+.resultats-magasins__vide {
+  padding: 15px;
+  text-align: center;
+}
+
+.resultats-magasins__item {
   padding: 10px 20px;
 }
 
@@ -827,8 +835,9 @@ nav {
   grid-area: client__bt-deconnexion;
 }
 
+/* TODO à corriger */
 #client__bt-general #client__bt-commandes #client__bt-info-perso #client__bt-deconnexion{
-  size: 30%;
+  /*size: 30%;*/
 }
 
 

@@ -58,20 +58,25 @@ body {
 }
 
 /* Résultats de recherche */
-.resultats-magasin {
+.resultats-magasins {
   background-color: white;
 }
 
-.resultats-magasin__item:hover {
+.resultats-magasins__vide {
+  color: black;
+  font-style: italic;
+}
+
+.resultats-magasins__item:hover {
   background-color: rgba(0,0,0,.1);
 }
 
-.resultats-magasin a {
+.resultats-magasins a {
   color: black;
   text-decoration: none;
 }
 
-.resultats-magasin__nom {
+.resultats-magasins__nom {
   font-weight: bold;
 }
 
@@ -233,9 +238,7 @@ body {
   text-decoration: none;
   border-radius: 2px;
   font-size: 1.5em;
-  padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 5px 10px;
 }
 
 .fournisseur__voir-autres-produits:hover {
@@ -286,7 +289,7 @@ body {
   font-size: 11pt;
 }
 
-/* 🔒 Réinitialistaion du mot de passe */
+/* 🔒 Réinitialisation du mot de passe */
 
 .reinitialise_reinitialiser {
   border: 1px solid black;
