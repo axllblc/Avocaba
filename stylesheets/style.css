@@ -249,17 +249,33 @@ body {
 
 /* ⬇️ Pied de page du site */
 
-.pied-de-page h2 {
+.pied-de-page {
+  background-color: #F5F5F5;
+}
+
+.pied-de-page__avocaba {
+  font-weight: bold;
+  font-size: 2.5em;
+  text-transform: uppercase;
+}
+
+.pied-de-page__section-header {
+  font-weight: bold;
+  font-size: 1.5em;
   text-transform: uppercase;
 }
 
 .pied-de-page a {
-  text-decoration: none;
-  color: black;
+  text-decoration: underline solid #bfbfbf 2px;
+  color: #404040;
 }
 
 .pied-de-page__newsletter {
   text-align: justify;
+}
+
+.pied-de-page__juridique {
+  background-color: #e8e8e8;
 }
 
 
@@ -278,7 +294,7 @@ body {
 
 /* 🔒 Page d'inscription */
 
-.inscritpion_inscrire {
+.inscription_inscrire {
   border: 1px solid black;
 }
 

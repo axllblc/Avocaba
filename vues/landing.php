@@ -5,6 +5,7 @@
 error_reporting(E_ALL);
 
 require_once '../traitements/recherche-magasin.php';
+require_once '../composants/footer.php';
 
 /*************
  * Fonctions *
@@ -53,8 +54,9 @@ if ( !empty($_GET['recherche']) ) {
   <title>Avocaba : votre marché 100% local</title>
 </head>
 
-<body class="landing">
+<body>
 
+<div class="landing">
   <header class="landing__header">
     <div class="landing__header__logo">Logo Avocaba</div>
     <a class="landing__header__connexion landing__btn landing__btn--white" href="/avocaba/vues/espace-client/connexion/">Se connecter</a>
@@ -66,7 +68,7 @@ if ( !empty($_GET['recherche']) ) {
     <p class="landing__sous-titre">Votre marché 100% local</p>
 
     <p>Où souhaitez-vous retirer vos courses ?</p>
-    
+
     <form class="recherche recherche-magasin" action="/avocaba" method="get">
       <input class="recherche__input"
              type="search" name="recherche" id="recherche"
@@ -87,7 +89,7 @@ if ( !empty($_GET['recherche']) ) {
     if (isset($magasins))
       afficherMagasins($magasins);
     ?>
-    
+
   </div>
 
   <div class="landing__milieu">
@@ -98,7 +100,7 @@ if ( !empty($_GET['recherche']) ) {
     <h2>Comment ça marche ?</h2>
     <div class="landing__fonctionnement">Infographie</div>
     <a href="/avocaba/vues/a-propos" class="landing__btn">En savoir plus</a>
-    
+
     <h2>Pourquoi Avocaba ?</h2>
     <div class="landing__avantages">Infographie</div>
     <a href="/avocaba/vues/a-propos/engagements" class="landing__btn">Découvrez nos engagements</a>
@@ -108,10 +110,9 @@ if ( !empty($_GET['recherche']) ) {
     <p>Avocaba, votre marché 100% local</p>
     <a href="#" class="landing__btn landing__btn--white">Haut de page</a>
   </div>
+</div>
 
-  <footer>
-    Pied de page
-  </footer>
+<?php footer(); ?>
 
 </body>
 
