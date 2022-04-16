@@ -5,6 +5,7 @@
 error_reporting(E_ALL);
 
 require_once '../traitements/recherche-magasin.php';
+require_once '../composants/html_head.php';
 require_once '../composants/footer.php';
 
 /*************
@@ -45,14 +46,7 @@ if ( !empty($_GET['recherche']) ) {
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/avocaba/stylesheets/layout.css">
-  <link rel="stylesheet" href="/avocaba/stylesheets/style.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <title>Avocaba : votre marché 100% local</title>
-</head>
+<?php htmlHead('Avocaba : votre marché 100% local'); ?>
 
 <body>
 

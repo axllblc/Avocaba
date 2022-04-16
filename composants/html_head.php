@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * En-tête du document HTML.
+ * @param string $title Titre de la page
+ */
+function htmlHead(string $title = 'Avocaba') { ?>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/avocaba/stylesheets/layout.css">
+  <link rel="stylesheet" href="/avocaba/stylesheets/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <title><?php echo $title; ?></title>
+</head>
+<?php }
