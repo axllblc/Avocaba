@@ -755,7 +755,7 @@ nav {
   line-height: 1.5em;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 875px) {
   .pied-de-page {
       display: grid;
       grid-template-areas: "pied-de-page__a-propos  pied-de-page__services  pied-de-page__newsletter"
@@ -769,7 +769,7 @@ nav {
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
   .pied-de-page {
       display: grid;
       grid-template-areas: "pied-de-page__newsletter"
