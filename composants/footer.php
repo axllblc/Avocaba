@@ -6,6 +6,7 @@
 
 /**
  * Afficher le pied-de-page du site
+ * @return void
  */
 function footer () { ?>
   <footer class="pied-de-page">

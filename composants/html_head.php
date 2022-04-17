@@ -3,6 +3,7 @@
 /**
  * En-tête du document HTML.
  * @param string $title Titre de la page
+ * @return void
  */
 function htmlHead(string $title = 'Avocaba') { ?>
 <head>
