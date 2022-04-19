@@ -2,7 +2,8 @@
 
 /*  Page d'inscription (client) (sign-in page) */
 
-//error_reporting(E_ALL);
+error_reporting(E_ALL);
+
 require_once '../../composants/html_head.php';
 require_once '../../traitements/verifier-client.php';
 require_once '../../traitements/inscription-client.php';
@@ -20,11 +21,11 @@ if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) and !empty($_POST[
 
   $client = verifierClient($_POST['email'], $_POST['motdepasse']);
   if(!$client){
-    //Si le client n'est pas enregistré dans la base de donnée, on va l'inscire
+    //Si le client n'est pas enregistré dans la base de donnée, on va l'inscrire
     $inscrire = inscrireClient($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['motdepasse']);
 
     if($inscrire){
-      //Si l'inscription est un succès, on peut établir la mise en session et le rediger vers l'espace client
+      //Si l'inscription est un succès, on peut établir la mise en session et le rediriger vers l'espace client
       $client = verifierClient($email, $motdepasse);
       session_start();
       $_SESSION=$client;
@@ -32,7 +33,7 @@ if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) and !empty($_POST[
     }
   }
   else{
-    //Message à afficher en cas d'email déjà utilisée
+    //Message à afficher en cas d'adresse e-mail déjà utilisée
     $message = "cette adresse email est déjà utilisée, veuillez réessayer";
   }
 }
@@ -42,12 +43,12 @@ if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) and !empty($_POST[
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php htmlHead('Avocaba : S\'inscrire'); ?>
+<?php htmlHead('S\'inscrire – Avocaba'); ?>
 
 <body>
-  <main class="inscritpion">
-    <div id="inscritpion_formulaire">
-      <form class="inscritpion_inscrire" action="signin.php" method="post">
+  <main class="inscription">
+    <div id="inscription_formulaire">
+      <form class="inscription_inscrire" action="signup.php" method="post">
         <button class="nav__btn-retour" onclick="history.back();" title="Revenir à la page précédente">Retour</button>
         <h1 id="inscription__titre">Créer votre compte</h1>
         <label for="prenom">Prénom</label><br>

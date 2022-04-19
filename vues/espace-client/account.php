@@ -1,6 +1,6 @@
 <?php
 
-/*  Espace client (account page) */
+/* Espace client (account page) */
 
 error_reporting(E_ALL);
 
@@ -44,22 +44,23 @@ function affichage(){
     }
 }
 
+
+
+/********************
+ * Script principal *
+ ********************/
+
 //Script qui vérifie que la session est bien active, le cas échéant, redirection vers la page pour se connecter
 session_start();
 if (!isset($_SESSION["IdClient"])){
   header('Location: login.php');
 }
 
-
-
-/********************
- * Script principal *
- ********************/
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php htmlHead('Avocaba : Espace Client'); ?>
+<?php htmlHead('Espace Client – Avocaba'); ?>
 
 <body>
   <main class="client">

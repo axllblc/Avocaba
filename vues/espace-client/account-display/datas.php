@@ -1,5 +1,5 @@
 <?php
-/*  Bloc de l'espace client */
+/* Bloc de l'espace client */
 // TODO: Finir l'aspect dynamique
 error_reporting(E_ALL);
 
@@ -7,7 +7,7 @@ error_reporting(E_ALL);
  * Fonctions *
  *************/
 
-//Contenu de la section données personnelles du client
+//Contenu de la section "données personnelles" du client
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,7 +15,7 @@ error_reporting(E_ALL);
   <h2>Vos informations personnelles</h2><br>
   <ul>
     <li>NOM</li>
-    <li>PRENOM</li>
+    <li>PRÉNOM</li>
     <li>DATE DE NAISSANCE</li>
   </ul>
 </div>

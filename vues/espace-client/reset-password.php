@@ -5,12 +5,14 @@
 // TODO: Gérer les cas où l'utilisateur ne souhaite pas que l'on "se souvienne" de lui
 
 error_reporting(E_ALL);
+
 require_once '../../composants/html_head.php';
 
 
 /********************
  * Script principal *
  ********************/
+
 if(isset($_POST['email'])){
   if(preg_match('/^[a-zA-Z1-9-\.]+@[a-zA-Z1-9-]+\.[a-zA-Z]{2,6}$/', $_POST['email'])){
     header('Location: confirmation-reinitialiser.php');
@@ -22,7 +24,7 @@ if(isset($_POST['email'])){
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php htmlHead('Avocaba : Se connecter'); ?>
+<?php htmlHead('Réinitialisation du mot de passe – Avocaba'); ?>
 
 <body>
 <main class="reinitialise__mot__passe">
@@ -38,7 +40,7 @@ if(isset($_POST['email'])){
         </p>
           <label for="email">Votre adresse email</label><br>
           <input type="text" name="email" id="email" size="40" pattern="^[a-zA-Z1-9-\.]+@[a-zA-Z1-9-]+\.[a-zA-Z]{2,6}$" required><br><br>
-        <input type="submit" id="reinitialise_bouton_envoyer" name="valider-reset" value="Reinitialiser" title="reinitialiser le mot de passe"><br><br>
+        <input type="submit" id="reinitialise_bouton_envoyer" name="valider-reset" value="Réinitialiser" title="Réinitialiser le mot de passe"><br><br>
 
     </form>
   </div>

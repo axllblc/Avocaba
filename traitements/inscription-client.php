@@ -27,8 +27,12 @@ VALUES (?, ?, ?, ?);
  *************/
 
 /**
- * Rechercher du client.
- * @param $str : critère de recherche : Email et MotDePasse
+ * Rechercher un client.
+ * @param $nom
+ * @param $prenom
+ * @param $email
+ * @param $motdepasse
+ * @return bool
  */
 function inscrireClient ($nom, $prenom, $email, $motdepasse) {
   // Sert à inscrire un client dans la base de donnée, renvoie un booléen selon le succès de la requete

@@ -1,5 +1,6 @@
 <?php
-//Page de confirmation de l'envoie d'un email pour réinitialiser le mot de passe
+/* Page de confirmation de l'envoi d'un email pour réinitialiser le mot de passe */
+
 error_reporting(E_ALL);
 
 require_once '../../composants/html_head.php';
@@ -7,7 +8,7 @@ require_once '../../composants/html_head.php';
 
 <!DOCTYPE html>
 <html lang="fr">
-    <?php htmlHead('Avocaba : Se connecter'); ?>
+    <?php htmlHead('Réinitialisation du mot de passe – Avocaba'); ?>
     <body>
         <main class="message__mdp">
           <div id="message_affiche">
