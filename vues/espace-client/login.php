@@ -49,7 +49,7 @@ if ( !empty($_POST['email']) and !empty($_POST['motdepasse'])) {
         <input type="password" size="40" name="motdepasse" id="motdepasse" minlength="8" maxlength="16" pattern="([0-9a-zA-Z._#-]){8,16}" required><br>
         <input type="checkbox" name="sesouvenirdemoi" id="check">
         <label for="check">Se souvenir de moi</label><br><br>
-        <span id="connexion_bouton_mdp"><a style="text-decoration:none" href="/espace-client/reinitialisation/reinitialisation.html" title="Cliquez ici pour réinitialiser votre mot de passe">J'ai oublié mon mot de passe</a></span><br><br>
+        <span id="connexion_bouton_mdp"><a style="text-decoration:none" href="reset-password.php" title="Cliquez ici pour réinitialiser votre mot de passe">J'ai oublié mon mot de passe</a></span><br><br>
         <input type="submit" id="connexion__bouton__connecter" name="se_connecter" value="Se connecter" title="Cliquez ici pour vous connecter"><br>
         <?php if (isset($message)) echo "<strong>$message</strong>";?>
         <hr>

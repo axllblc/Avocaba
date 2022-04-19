@@ -316,6 +316,7 @@ body {
   background-color: #E9E9ED;
   color: black;
   font-size: 11pt;
+  text-decoration:none;
 }
 
 /* 🔒 Message réinitialisation du mot de passe */

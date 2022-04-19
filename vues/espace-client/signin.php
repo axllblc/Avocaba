@@ -64,7 +64,7 @@ if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) and !empty($_POST[
         <label for="check2">Vous acceptez de recevoir les communications commerciales et bons plans par email de la part d'Avocaba. <span id="inscription_facultatif">(facultatif)</span></label><br><br>
         <input type="submit" id="inscription_bouton_inscrire" name="creercompte" value="Créer mon compte" title="Cliquez ici pour valider et créer votre compte"><br><br>
         <hr>
-        <?php if (isset($message)) echo "<strong>$message</strong>";?> // Si l'utilisateur a déjà rentré de mauvaises infos, on lui indique qu'il doit réessayer
+        <?php if (isset($message)) echo "<strong>$message</strong>"; // Si l'utilisateur a déjà rentré de mauvaises infos, on lui indique qu'il doit réessayer?>
         <p>Vous avez déjà un compte ?</p>
         <span id="inscription_bouton_connexion"><a style="text-decoration:none;" href="login.php" title="Vous avez déjà un compte, cliquez ici pour vous connecter">Se connecter</a></span>
       </form>
