@@ -2,10 +2,15 @@
 /*  Bloc de l'espace client */
 // TODO: Finir l'aspect dynamique
 error_reporting(E_ALL);
+require_once '../../traitements/commandes-client.php';
+require_once '../../composants/bloc-commande.php';
 
-/*************
- * Fonctions *
- *************/
+/********************
+* Script principal *
+********************/
+
+//On récupère les commandes (on se limite au 20 dernières)
+$commandes = rechercheCommandes ($_SESSION['IdClient'],20);
 
 //Contenu de la section commandes
 ?>
@@ -13,10 +18,8 @@ error_reporting(E_ALL);
 <html lang="fr">
 <div class="client__affichage-commandes">
   <h2>Vos dernières commandes</h2><br>
-  <ul>
-    <li>Commande 1</li>
-    <li>Commande 2</li>
-    <li>Commande 3</li>
-  </ul>
+  <?php if($commandes) foreach ($commandes as $key => $comm) {
+    afficheCommande($comm);
+  } ?>
 </div>
 </html>

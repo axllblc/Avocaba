@@ -1,15 +1,29 @@
 <?php
 /*  Bloc main de l'espace client */
-// TODO: Finir l'aspect dynamique
 error_reporting(E_ALL);
+require_once '../../traitements/commandes-client.php';
+require_once '../../composants/bloc-commande.php';
 
 /*************
  * Fonctions *
  *************/
 function recupNom(){
-  if(isset($_SESSION['IdClient']))
+  if(isset($_SESSION['IdClient'])){
     echo $_SESSION['Prenom'].' '.$_SESSION['Nom'];
+  }
 }
+
+/********************
+ * Script principal *
+ ********************/
+
+//On essaie de récupérer la commande la plus récente du client
+$commande = rechercheCommandes ($_SESSION['IdClient'],1);
+if($commande){
+  //Si le client a déjà effectuée une commande
+  $commande = $commande[0];
+}
+
 //Contenu de la section main/accueil de l'espace client
 ?>
 <!DOCTYPE html>
@@ -18,12 +32,10 @@ function recupNom(){
   <h2>Bonjour,  <?php recupNom(); ?> !</h2>
   <p>Avocaba est ravi de vous retrouver sur votre espace client</p>
   <p>Dernière commande :</p>
-  <a class="client__derniere-commande" href="account.php">
-    <span class="client__date-commande">02/06/2022</span>
-    <span class="client__magasin-commande">Tours</span>
-    <span class="client__prix-commande">37,87€</span>
+  <a class="client__derniere-commande" href="account.php?btClient=commandes">
+    <?php afficheCommande($commande); ?>
   </a>
   <br>
-  <a class="client__voir-commandes" href="account.php">Voir toutes mes commandes</a>
+  <a class="client__voir-commandes" href="account.php?btClient=commandes">Voir toutes mes commandes</a>
 </div>
 </html>

@@ -12,10 +12,11 @@ require_once '../../composants/footer.php';
  *************/
 
 //Fonction qui sert à afficher les différents blocs de l'espace client
+
 function affichage(){
-  if (isset($_POST['btClient'])){
+  if (isset($_GET['btClient'])){
     //cas où le client a actionné un bouton pour l'affichage d'un bloc spécifique sur son espace client
-    $section = $_POST['btClient'];
+    $section = $_GET['btClient'];
   }
   else{
     //cas où le client vient d'être redirigé vers son espace client
@@ -65,7 +66,7 @@ if (!isset($_SESSION["IdClient"])){
 <body>
   <main class="client">
     <h1 class="client__titre">Mon compte</h1>
-    <form class="client__onglet" action="account.php" method="post">
+    <form class="client__onglet" action="account.php" method="GET">
       <button id="client__bt-general" type="submit" name="btClient" value="accueil">Général</button>
       <button id="client__bt-commandes" type="submit" name="btClient" value="commandes">Mes commandes</button>
       <button id="client__bt-info-perso" type="submit" name="btClient" value="infos">Mes informations personnelles</button>
