@@ -41,6 +41,14 @@ WHERE v.`Slug` LIKE ?
 LIMIT 10;
 ';
 
+const RECHERCHE_ID = '
+SELECT d.`IdDepot`, d.`Nom`, d.`Adresse`, v.`Nom` AS `Ville`, v.`CodePos` AS `CodePostal`
+FROM DEPOTS AS d
+INNER JOIN VILLES AS v USING (`IdVille`)
+WHERE d.`IdDepot` = ?
+LIMIT 1;
+';
+
 
 
 /*************
@@ -49,39 +57,50 @@ LIMIT 10;
 
 /**
  * Rechercher un dépôt.
- * @param $str : critère de recherche : il peut s'agir d'un code postal, d'un numéro de département ou d'un nom de ville.
+ * @param string|int $str Critère de recherche : il peut s'agir d'un code postal, d'un numéro de département ou d'un nom
+ *                        de ville OU de l'identifiant d'un dépôt.
+ * @param bool $id Vaut false si le premier paramètre correspond à un code postal, un numéro de département ou un nom de
+ *                 ville ; vaut true si le premier paramètre correspond à l'identifiant d'un dépôt.
+ * @return array Un tableau contenant les résultats (dépôts décrits par leur identifiant, nom, adresse, ville et code
+ *               postal).
  */
-function rechercherMagasin ($str) {
+function rechercherMagasin (string|int $str, bool $id = false): array {
   $link = dbConnect();
 
-  $resultArray = NULL;
-
   // Préparation de la requête
-  if ( preg_match(REGEX_CODE_POSTAL, $str) ) {
-    // Rechercher le(s) dépôt(s) présents dans la ville dont on connaît le code postal
-    $cp = +$str;
-
-    $stmt = $link->prepare(RECHERCHE_CP);
+  if ($id) {
+    $stmt = $link->prepare(RECHERCHE_ID);
     checkError($stmt, $link);
 
-    $status = $stmt->bind_param('i', $cp);
-
-  } elseif ( preg_match(REGEX_CODE_DEPT, $str) ) {
-    // Rechercher le(s) dépôt(s) présents dans un département
-    $stmt = $link->prepare(RECHERCHE_DEPT);
-    checkError($stmt, $link);
-
-    $status = $stmt->bind_param('s', $str);
+    $status = $stmt->bind_param('i', $str);
 
   } else {
-    // Rechercher un/des dépôt(s) par nom de ville
-    $slug = slugify($str);
+    if (preg_match(REGEX_CODE_POSTAL, $str)) {
+      // Rechercher le(s) dépôt(s) présents dans la ville dont on connaît le code postal
+      $cp = +$str;
 
-    $stmt = $link->prepare(RECHERCHE_VILLE);
-    checkError($stmt, $link);
+      $stmt = $link->prepare(RECHERCHE_CP);
+      checkError($stmt, $link);
 
-    $status = $stmt->bind_param('s', $slug);
+      $status = $stmt->bind_param('i', $cp);
 
+    } elseif (preg_match(REGEX_CODE_DEPT, $str)) {
+      // Rechercher le(s) dépôt(s) présents dans un département
+      $stmt = $link->prepare(RECHERCHE_DEPT);
+      checkError($stmt, $link);
+
+      $status = $stmt->bind_param('s', $str);
+
+    } else {
+      // Rechercher un/des dépôt(s) par nom de ville
+      $slug = slugify($str);
+
+      $stmt = $link->prepare(RECHERCHE_VILLE);
+      checkError($stmt, $link);
+
+      $status = $stmt->bind_param('s', $slug);
+
+    }
   }
   checkError($status, $link);
 

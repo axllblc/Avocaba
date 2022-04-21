@@ -31,3 +31,13 @@ INNER JOIN VILLES AS v USING (`IdVille`)
 WHERE v.`Slug` LIKE 'tours'
 LIMIT 10;
 ```
+
+- Recherche par identifiant
+
+```SQL
+SELECT d.`IdDepot`, d.`Nom`, d.`Adresse`, v.`Nom` AS `Ville`, v.`CodePos` AS `CodePostal`
+FROM DEPOTS AS d
+INNER JOIN VILLES AS v USING (`IdVille`)
+WHERE d.`IdDepot` = 1
+LIMIT 1;
+```
