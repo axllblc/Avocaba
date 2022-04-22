@@ -6,12 +6,16 @@
 
 /**
  * Afficher l'en-tête des pages du magasin.
+ * @param int|null $id Identifiant du magasin
  * @param string $query Contenu du champ de recherche
  * @return void
  */
-function htmlHeader (string $query = '') { ?>
+function htmlHeader (int $id = NULL, string $query = ''): void { ?>
   <header class="header-magasin">
-    <a class="header__logo" href="/magasin">Avocaba</a>
+    <a class="header__logo"
+       href="<?php echo isset($id) ? '/avocaba/vues/magasin.php?id='.$id : '/avocaba' ?>">
+      Avocaba
+    </a>
 
     <div class="header__btn header__rayons">
       <span class="header__btn-ic material-icons">menu</span>
