@@ -12,13 +12,13 @@ require_once '../composants/footer.php';
  * Fonctions *
  *************/
 
-function afficherMagasins ($magasins) {
+function afficherMagasins ($magasins): void {
   echo '<div class="resultats-magasins">';
   if (!empty($magasins)) {
     foreach ($magasins as $magasin)
       echo '
       <div class="resultats-magasins__item">
-        <a href="/avocaba/vues/magasin?id='.$magasin['IdDepot'].'">
+        <a href="/avocaba/vues/magasin.php?id='.$magasin['IdDepot'].'">
           <div class="resultats-magasins__nom">'.$magasin['Nom'].'</div>
           <div class="resultats-magasins__adresse">'.$magasin['Adresse'].', '.$magasin['CodePostal'].' '.$magasin['Ville'].'</div>
         </a>
