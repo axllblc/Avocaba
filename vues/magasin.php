@@ -50,7 +50,7 @@ if (!isset($magasin)) erreur404();
 <?php htmlHead($magasin['Nom'] . ' – Avocaba'); ?>
 
 <body>
-<?php htmlHeader(); ?>
+<?php htmlHeader($magasin['IdDepot']); ?>
 
 <div class="magasin">
   <div class="magasin__bienvenue">Bienvenue dans votre magasin</div>
