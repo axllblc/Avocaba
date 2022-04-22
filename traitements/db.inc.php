@@ -8,7 +8,7 @@ mysqli_report(MYSQLI_REPORT_OFF);
  */
 function dbConnect ()
 {
-    $link = mysqli_connect('localhost', 'avocaba', 'IPx@tVqM46!-zPyI', 'avocaba');
+    $link = mysqli_connect('localhost', 'Avocaba', 'IPx@tVqM46!-zPyI', 'avocaba');
     checkError($link, $link, 'Erreur de connexion à la base de données.');
 
     $status = $link->set_charset('utf8mb4');
@@ -23,7 +23,7 @@ function dbConnect ()
  */
 function checkError ($data, $link, $message = 'Une erreur s\'est produite.') {
     if (!$data) {
-        $link?->close();
+        if ($link) $link->close();
         exit($message);
     }
 }
