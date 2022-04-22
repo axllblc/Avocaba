@@ -32,7 +32,7 @@ function footer () { ?>
       <div class="pied-de-page__section-header">Services</div>
       <ul class="pied-de-page__liste">
         <li class="pied-de-page__item">
-          <a href="#">Espace Client</a>
+          <a href="/Avocaba/vues/espace-client/account.php">Espace Client</a>
         </li>
         <li class="pied-de-page__item">
           <a href="#">Espace Pro</a>
