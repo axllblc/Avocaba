@@ -9,6 +9,19 @@ const RECHERCHE_FOURNISSEUR = '
   WHERE `Siret` = ?;
 ';
 
+const NOMBRE_FOURNISSEUR = '
+  SELECT COUNT(*)
+  FROM `fournisseurs`;
+';
+
+const PRODUITS_PHARES = '
+  SELECT `IdArticle`
+  FROM `articles`
+  WHERE `SiretProducteur` = ?
+  AND `ProduitPhare` = 1;
+';
+
+
 class Fournisseur {
   private $_siret;
   private $_nom;
@@ -29,7 +42,6 @@ class Fournisseur {
    * @param $siret
    */
   function __construct($siret) {
-    
     // connexion à la base de données
     $link = dbConnect();
 
@@ -85,5 +97,54 @@ class Fournisseur {
   function getPhotoProfil() {return $this->_photoProfil;}
   function getPhotoBanniere() {return $this->_photoBanniere;}
   function getIdVille() {return $this->_idVille;}
+
+  /**
+   * Obtenir la liste des produits phares du fournisseur
+   * @return Array liste des identifiants des produits phares
+   */
+  function produitsPhares() {
+    // connexion à la base de données
+    $link = dbConnect();
+
+    // Préparation de la requête
+    $stmt = $link->prepare(PRODUITS_PHARES);
+    checkError($stmt, $link);
+    $status = $stmt->bind_param('i', $this->_siret);
+
+    // Exécution de la requête
+    $status = $stmt->execute();
+    checkError($status, $link);
+
+    // Récupération du résultat
+    $result = $stmt->get_result();
+    checkError($result, $link);
+    $resultArray = $result->fetch_all(MYSQLI_ASSOC);
+
+    // Fermeture de la connexion à la base de données
+    $link->close();
+    
+    return $resultArray;
+  }
+
+  /**
+   * Obtenir le nombre de fournisseur dans la base de données
+   * @return Integer nombre de fournisseur
+   */
+  static function nombreFournisseur() {
+    $nombre = 0;
+
+    // connexion à la base de données
+    $link = dbConnect();
+
+    // réalisation de la requête
+    if ($result = $link->query(NOMBRE_FOURNISSEUR)) {
+      // il y a forcément qu'une ligne obtenue
+      $nombre = $result->fetch_array()[0];
+      $result->free_result();
+    }
+    $link->close();
+
+    return $nombre;
+  }
 }
 ?>
