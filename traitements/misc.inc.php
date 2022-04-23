@@ -17,3 +17,12 @@ function slugify ($str) {
 
   return $str;
 }
+
+/**
+ * Changer les \n par <br> pour l'affichage html
+ * @param string chaine à modifier avec des \n
+ * @return string chaine avec des <br>
+ */
+function lineBreakChange(string $str) : string{
+  return str_replace('\n', '<br>', $str);
+}
