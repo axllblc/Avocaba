@@ -46,8 +46,9 @@ class Fournisseur {
   /**
    * Constructeur du Fournisseur
    * @param int|string $siret
+   * @throws Exception
    */
-  function __construct(int|string $siret) : void {
+  function __construct(int|string $siret) {
     // connexion à la base de données
     $link = dbConnect();
 
