@@ -8,7 +8,7 @@
  * Afficher le pied-de-page du site
  * @return void
  */
-function footer () { ?>
+function footer (): void { ?>
   <footer class="pied-de-page">
     <div class="pied-de-page__avocaba">Avocaba</div>
     <div class="pied-de-page__a-propos">
@@ -32,7 +32,7 @@ function footer () { ?>
       <div class="pied-de-page__section-header">Services</div>
       <ul class="pied-de-page__liste">
         <li class="pied-de-page__item">
-          <a href="/Avocaba/vues/espace-client/account.php">Espace Client</a>
+          <a href="/avocaba/vues/espace-client/account.php">Espace Client</a>
         </li>
         <li class="pied-de-page__item">
           <a href="#">Espace Pro</a>

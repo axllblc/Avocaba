@@ -39,7 +39,7 @@ function htmlHeader (int $id = NULL, string $query = ''): void { ?>
       <span class="header__btn-ic material-icons">summarize</span>
       <div class="header__btn-text">Mes produits</div>
     </a>
-    <a class="header__btn header__mon-compte" href="/espace-client/espace-client.html">
+    <a class="header__btn header__mon-compte" href="/avocaba/vues/espace-client/account.php">
       <span class="header__btn-ic material-icons">account_circle</span>
       <div class="header__btn-text">Mon compte</div>
     </a>
