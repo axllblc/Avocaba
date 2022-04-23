@@ -41,3 +41,15 @@ INNER JOIN VILLES AS v USING (`IdVille`)
 WHERE d.`IdDepot` = 1
 LIMIT 1;
 ```
+
+## Liste des rayons d'un magasin
+
+```SQL
+SELECT DISTINCT r.IdRayon, r.Nom
+FROM rayons r
+INNER JOIN articles a ON r.IdRayon = a.IdRayon
+INNER JOIN stocker s ON a.IdArticle = s.IdArticle
+INNER JOIN depots d ON s.IdDepot = d.IdDepot
+WHERE d.IdDepot = 1
+ORDER BY r.Nom;
+```
