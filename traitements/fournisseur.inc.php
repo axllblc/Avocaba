@@ -21,6 +21,12 @@ const PRODUITS_PHARES = '
   AND `ProduitPhare` = 1;
 ';
 
+const PHOTOS = '
+  SELECT IdPhotoFournisseur
+  FROM `photos_fournisseurs` 
+  WHERE Siret = ?;
+';
+
 
 class Fournisseur {
   private $_siret;
@@ -39,9 +45,9 @@ class Fournisseur {
 
   /**
    * Constructeur du Fournisseur
-   * @param $siret
+   * @param int|string $siret
    */
-  function __construct($siret) {
+  function __construct(int|string $siret) : void {
     // connexion à la base de données
     $link = dbConnect();
 
@@ -79,7 +85,7 @@ class Fournisseur {
       $this->_photoBanniere = $resultArray[0]['PhotoBanniere'];
       $this->_idVille = $resultArray[0]['IdVille'];
     } else {
-      trigger_error('Le fournisseur n\'existe pas');
+      throw new Exception("Le fournisseur de siret $siret n'existe pas.");
     }
   }
 
@@ -100,9 +106,9 @@ class Fournisseur {
 
   /**
    * Obtenir la liste des produits phares du fournisseur
-   * @return Array liste des identifiants des produits phares
+   * @return array liste des identifiants des produits phares
    */
-  function produitsPhares() {
+  function produitsPhares() : array {
     // connexion à la base de données
     $link = dbConnect();
 
@@ -127,10 +133,41 @@ class Fournisseur {
   }
 
   /**
-   * Obtenir le nombre de fournisseur dans la base de données
-   * @return Integer nombre de fournisseur
+   * Obtenir la liste des photos du fournisseur
+   * @return array liste des photos du fournisseur
    */
-  static function nombreFournisseur() {
+  function photoFournisseur() : array {
+    // connexion à la base de données
+    $link = dbConnect();
+
+    // Préparation de la requête
+    $stmt = $link->prepare(PHOTOS);
+    checkError($stmt, $link);
+    $status = $stmt->bind_param('i', $this->_siret);
+
+    // Exécution de la requête
+    $status = $stmt->execute();
+    checkError($status, $link);
+
+    // Récupération du résultat
+    $result = $stmt->get_result();
+    checkError($result, $link);
+    $resultArray = $result->fetch_all(MYSQLI_ASSOC);
+
+    // Fermeture de la connexion à la base de données
+    $link->close();
+    
+    foreach ($resultArray as $key => $value)
+      $resultArray[$key] = $value['IdPhotoFournisseur'];
+
+    return $resultArray;
+  }
+
+  /**
+   * Obtenir le nombre de fournisseur dans la base de données
+   * @return int nombre de fournisseur
+   */
+  static function nombreFournisseur() : int {
     $nombre = 0;
 
     // connexion à la base de données
