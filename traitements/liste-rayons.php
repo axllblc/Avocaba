@@ -1,6 +1,6 @@
 <?php
 
-/* Liste des rayons */
+/* 📂 Liste des rayons */
 
 require_once 'db.inc.php';
 
