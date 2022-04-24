@@ -56,10 +56,6 @@ function inscrireClient ($nom, $prenom, $email, $motdepasse) {
     $status = $stmt->execute();
     checkError($status, $link);
 
-    // Récupération du résultat
-    $result = $stmt->get_result();
-    checkError($result, $link);
-
     //On renvoie le booléen selon la réussite de l'inscription
     if(verifierClient($email, $motdepasse)){
       $link->close();
