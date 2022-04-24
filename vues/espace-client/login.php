@@ -19,7 +19,7 @@ require_once '../../traitements/verifier-client.php';
 if ( !empty($_POST['email']) and !empty($_POST['motdepasse'])) {
   //On vérifie si le client est dans la base de donnée
   $client = verifierClient($_POST['email'], $_POST['motdepasse']);
-  if($client AND $client != "wrong password"){
+  if($client){
     // Si l'adresse e-mail est présente et que le mot de passe est bon, on met en session avec IdClient et on se redirige vers l'espace client
     session_start();
     $_SESSION=$client;

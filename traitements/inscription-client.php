@@ -45,7 +45,7 @@ function inscrireClient ($nom, $prenom, $email, $motdepasse) {
   if ( preg_match(REGEX_EMAIL, $email) and preg_match(REGEX_MOTDEPASSE, $motdepasse) and preg_match(REGEX_NOM, $nom) and preg_match(REGEX_NOM, $prenom)) {
 
     $stmt = $link->prepare(INSCRIRE_CLIENT);
-    //checkError($stmt, $link);
+    checkError($stmt, $link);
 
     //On chiffre le mot de passe
     $motdepasseChiffre =  password_hash($motdepasse, PASSWORD_DEFAULT);
@@ -54,11 +54,11 @@ function inscrireClient ($nom, $prenom, $email, $motdepasse) {
 
     // Exécution de la requête
     $status = $stmt->execute();
-    //checkError($status, $link);
+    checkError($status, $link);
 
     // Récupération du résultat
     $result = $stmt->get_result();
-    //checkError($result, $link);
+    checkError($result, $link);
 
     //On renvoie le booléen selon la réussite de l'inscription
     if(verifierClient($email, $motdepasse)){

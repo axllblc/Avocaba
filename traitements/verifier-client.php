@@ -96,12 +96,6 @@ function verifierClient ($email, $motdepasse) {
 
         return $resultArrayInfos; // On renvoie les infos client
       }
-      else{
-        $link->close();
-
-        // TODO remplacer la valeur de retour par false ?
-        return "wrong password";
-      }
     }
   }
   // Fermeture de la connexion à la base de données
