@@ -67,30 +67,6 @@ const RECHERCHE_ARTICLE_NOM = RECHERCHE_ARTICLE_NOM_FOURNISSEUR.' UNION '.RECHER
 
 // NOTE: On ne peux pas utiliser la syntaxe "%?%" dans les requêtes préparées, donc c'est la variables qui sera entourée de "%"
 
-/*
-SELECT DISTINCT a.IdArticle, a.Nom, a.Prix, a.PrixRelatif, a.Unite, a.Description,
-a.PhotoVignette, a.ProduitPhare, a.IdRayon, a.SiretProducteur
-FROM ARTICLES a
-LEFT JOIN MOTS_CLES_ARTICLES USING (IdArticle)
-LEFT JOIN MOTS_CLES m USING (IdMotCle)
-WHERE (a.Nom LIKE 'ail' OR m.Nom LIKE '%miel%')
-
-UNION
-
-(SELECT a.IdArticle, a.Nom, a.Prix, a.PrixRelatif, a.Unite, a.Description,
-        a.PhotoVignette, a.ProduitPhare, a.IdRayon, a.SiretProducteur
-FROM ARTICLES a
-LEFT JOIN FOURNISSEURS f ON a.SiretProducteur = f.Siret
-WHERE f.Nom LIKE 'Boulangerie GM')
-
-UNION
-
-(SELECT a.IdArticle, a.Nom, a.Prix, a.PrixRelatif, a.Unite, a.Description,
-        a.PhotoVignette, a.ProduitPhare, a.IdRayon, a.SiretProducteur
-FROM ARTICLES a
-LEFT JOIN RAYONS r USING (IdRayon)
-WHERE r.Nom LIKE 'Apiculteur');
-*/
 
 /*************
  * Fonctions *
