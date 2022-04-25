@@ -67,7 +67,6 @@ function modifierClient ($idClient, $emailActuel, $motDePasseActuel, $nom, $pren
             $motDePasse = password_hash($motDePasseActuel, PASSWORD_DEFAULT);
           }
           $status = $stmt->bind_param('ssssi', $nom, $prenom, $email, $motDePasse, $idClient);
-          echo "1111111111111111111111111111111é<br>";
           var_dump($status);
 
           // Exécution de la requête
