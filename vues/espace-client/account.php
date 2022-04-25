@@ -41,7 +41,7 @@ function affichage () {
       session_unset();
       session_destroy();
       setcookie(session_name(), '', 0, '/');       // Le cookie de session est effacé sur le client
-      header('Location: ../landing.php');          // Redirection
+      header('Location: /avocaba');         // Redirection
       exit();
     default:
       break;
@@ -54,9 +54,9 @@ function affichage () {
  * Script principal *
  ********************/
 
-//Script qui vérifie que la session est bien active, le cas échéant, redirection vers la page pour se connecter
+// Si l'utilisateur n'est pas connecté, il est redirigé vers la page de connexion.
 session_start();
-if (!isset($_SESSION["IdClient"])){
+if ( !isset($_SESSION['Client']) ){
   header('Location: signin.php');
 }
 

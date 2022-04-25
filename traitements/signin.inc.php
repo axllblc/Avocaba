@@ -11,7 +11,7 @@
  * @param $client
  * @return void
  */
-function sessionClient ($client) {
+function sessionClient ($client): void {
   // Initialisation de la session ou récupération de la session courante si elle existe déjà
   session_start();
 
@@ -19,8 +19,12 @@ function sessionClient ($client) {
   session_regenerate_id(true);
 
   // Mise en session des informations sur le client
-  // TODO modifier la structure de la session
-  $_SESSION=$client;
+  $_SESSION['Client'] = array(
+    'IdClient' => $client['IdClient'],
+    'Nom' => $client['Nom'],
+    'Prenom' => $client['Prenom'],
+    'Email' => $client['Email']
+  );
 
   // L'utilisateur est redirigé
   // TODO modifier la redirection selon la page d'où vient l'utilisateur

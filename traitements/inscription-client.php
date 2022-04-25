@@ -4,6 +4,7 @@
 
 require_once 'db.inc.php';
 require_once 'misc.inc.php';
+require_once 'verifier-client.php';
 
 /**************
  * Constantes *
@@ -11,12 +12,12 @@ require_once 'misc.inc.php';
 
 // Expressions régulières (email et mot de passe déjà définie dans connexion client)
 
-const REGEX_NOM= "/[a-zA-Z -]{2,30}$/";
+const REGEX_NOM = "/^[a-zA-Z\s-]{2,30}$/";
 
 
 // Requêtes à préparer
 
-//IdClient est en Auto-increment, donc on ne le renseigne pas
+// IdClient est en Auto-increment, donc on ne le renseigne pas
 
 const EMAIL_EXISTE = '
 SELECT count(*) AS occurence
@@ -34,17 +35,14 @@ VALUES (?, ?, ?, ?);
  *************/
 
 /**
- * Rechercher un client.
+ * Inscrire un client.
  * @param $nom
  * @param $prenom
  * @param $email
  * @param $motdepasse
  * @return bool
  */
-
 function inscrireClient ($nom, $prenom, $email, $motdepasse) {
-  // Sert à inscrire un client dans la base de donnée, renvoie un booléen selon le succès de la requete
-
   $link = dbConnect();
 
   $result = NULL;
@@ -76,14 +74,11 @@ function inscrireClient ($nom, $prenom, $email, $motdepasse) {
 }
 
 /**
- * Rechercher un email.
+ * Vérifier la présence ou non d'une adresse e-mail dans la base de données.
  * @param $email
  * @return bool
  */
-
-function emailAbsente($email){
-  // Sert à vérifier la présence ou non d'une adresse mail dans la base de donnée, renvoie un booléen
-
+function emailAbsente ($email) {
   $link = dbConnect();
 
   $result = NULL;
@@ -105,7 +100,7 @@ function emailAbsente($email){
 
     $link->close();
 
-    //On renvoie le booléen selon la présence ou nom de l'email dans la base de donnée
+    // On renvoie le booléen selon la présence ou nom de l'email dans la base de données
     if($resultArray[0]['occurence'] == 0){
       return true;
     }
@@ -114,5 +109,5 @@ function emailAbsente($email){
     }
   }
   $link->close();
-  return false; //cas où une erreur est lancée, on ne veut
+  return false; // cas où une erreur est lancée, on ne veut
 }
