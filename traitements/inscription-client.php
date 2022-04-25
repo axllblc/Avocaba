@@ -6,6 +6,8 @@ require_once 'db.inc.php';
 require_once 'misc.inc.php';
 require_once 'verifier-client.php';
 
+
+
 /**************
  * Constantes *
  **************/
@@ -20,7 +22,7 @@ const REGEX_NOM = "/^[a-zA-Z\s-]{2,30}$/";
 // IdClient est en Auto-increment, donc on ne le renseigne pas
 
 const EMAIL_EXISTE = '
-SELECT count(*) AS occurence
+SELECT count(*) AS occurrence
 FROM CLIENTS
 WHERE Email = ?;
 ';
@@ -29,6 +31,8 @@ const INSCRIRE_CLIENT = '
 INSERT INTO CLIENTS (`Nom`, `Prenom`, `Email`, `MotDePasse`)
 VALUES (?, ?, ?, ?);
 ';
+
+
 
 /*************
  * Fonctions *
@@ -39,32 +43,32 @@ VALUES (?, ?, ?, ?);
  * @param $nom
  * @param $prenom
  * @param $email
- * @param $motdepasse
+ * @param $motDePasse
  * @return bool
  */
-function inscrireClient ($nom, $prenom, $email, $motdepasse) {
+function inscrireClient ($nom, $prenom, $email, $motDePasse) {
   $link = dbConnect();
 
   $result = NULL;
 
   // Préparation de la requête
-  if ( preg_match(REGEX_EMAIL, $email) and preg_match(REGEX_MOTDEPASSE, $motdepasse)
+  if ( preg_match(REGEX_EMAIL, $email) and preg_match(REGEX_MOTDEPASSE, $motDePasse)
   and preg_match(REGEX_NOM, $nom) and preg_match(REGEX_NOM, $prenom) and emailAbsente($email)) {
 
     $stmt = $link->prepare(INSCRIRE_CLIENT);
     checkError($stmt, $link);
 
     //On chiffre le mot de passe
-    $motdepasseChiffre =  password_hash($motdepasse, PASSWORD_DEFAULT);
+    $motDePasseChiffre =  password_hash($motDePasse, PASSWORD_DEFAULT);
 
-    $status = $stmt->bind_param('ssss', $nom, $prenom, $email, $motdepasseChiffre);
+    $status = $stmt->bind_param('ssss', $nom, $prenom, $email, $motDePasseChiffre);
 
     // Exécution de la requête
     $status = $stmt->execute();
     checkError($status, $link);
 
     //On renvoie le booléen selon la réussite de l'inscription
-    if(verifierClient($email, $motdepasse)){
+    if(verifierClient($email, $motDePasse)){
       $link->close();
       return true;
     }
@@ -72,6 +76,8 @@ function inscrireClient ($nom, $prenom, $email, $motdepasse) {
   $link->close();
   return false;
 }
+
+// TODO : Documenter la fonction ci-dessous : dans quels cas renvoie-t-elle true ou false ?
 
 /**
  * Vérifier la présence ou non d'une adresse e-mail dans la base de données.
@@ -101,7 +107,7 @@ function emailAbsente ($email) {
     $link->close();
 
     // On renvoie le booléen selon la présence ou nom de l'email dans la base de données
-    if($resultArray[0]['occurence'] == 0){
+    if ($resultArray[0]['occurrence'] == 0) {
       return true;
     }
     else{
