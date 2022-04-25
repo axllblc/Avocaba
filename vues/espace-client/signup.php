@@ -71,7 +71,7 @@ if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) and !empty($_POST[
         <hr>
         <?php if (isset($message)) echo "<strong>$message</strong>"; // Si l'utilisateur a déjà rentré de mauvaises infos, on lui indique qu'il doit réessayer?>
         <p>Vous avez déjà un compte ?</p>
-        <span id="inscription_bouton_connexion"><a style="text-decoration:none;" href="login.php" title="Vous avez déjà un compte, cliquez ici pour vous connecter">Se connecter</a></span>
+        <span id="inscription_bouton_connexion"><a style="text-decoration:none;" href="signin.php" title="Vous avez déjà un compte, cliquez ici pour vous connecter">Se connecter</a></span>
       </form>
     </div>
   </main>

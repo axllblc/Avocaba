@@ -1,6 +1,6 @@
 <?php
 
-/* 🔒 Page de connexion (client) (login page) */
+/* 🔒 Page de connexion (client) (sign-in page) */
 
 // TODO: Gérer les cas où l'utilisateur souhaite que l'on "se souvienne" de lui
 
@@ -47,7 +47,7 @@ if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) ) {
 <body>
   <main class="connexion">
     <div id="connexion_formulaire">
-      <form class="connexion_connecter" action="login.php" method="POST">
+      <form class="connexion_connecter" action="signin.php" method="POST">
         <button class="nav__btn-retour" onclick="history.back();" title="Revenir à la page précédente">Retour</button>
         <h1 id="connexion__titre">Connexion</h1>
         <label for="email">Adresse email</label><br>

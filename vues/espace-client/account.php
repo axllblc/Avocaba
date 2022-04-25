@@ -57,7 +57,7 @@ function affichage () {
 //Script qui vérifie que la session est bien active, le cas échéant, redirection vers la page pour se connecter
 session_start();
 if (!isset($_SESSION["IdClient"])){
-  header('Location: login.php');
+  header('Location: signin.php');
 }
 
 ?>
