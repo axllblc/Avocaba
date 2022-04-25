@@ -1,8 +1,8 @@
 <?php
 
-/*  Page de connexion (client) (login page) */
+/* 🔒 Page de connexion (client) (login page) */
 
-// TODO: Gérer les cas où l'utilisateur ne souhaite pas que l'on "se souvienne" de lui
+// TODO: Gérer les cas où l'utilisateur souhaite que l'on "se souvienne" de lui
 
 error_reporting(E_ALL);
 
@@ -16,16 +16,22 @@ require_once '../../traitements/verifier-client.php';
 
 // Recherche de l'utilisateur : Réception de données
 
-if ( !empty($_POST['email']) and !empty($_POST['motdepasse'])) {
-  //On vérifie si le client est dans la base de donnée
+if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) ) {
+  // On vérifie que le client est dans la base de données
   $client = verifierClient($_POST['email'], $_POST['motdepasse']);
-  if($client){
-    // Si l'adresse e-mail est présente et que le mot de passe est bon, on met en session avec IdClient et on se redirige vers l'espace client
+  if ($client) {
+    // Si l'adresse e-mail est présente et que le mot de passe est correct, une session est initialisée
     session_start();
+    // Création d'un nouvel identifiant de session, pour empêcher les attaques utilisant des sessions volées
+    session_regenerate_id(true);
+    // TODO modifier la structure de la session
     $_SESSION=$client;
-    header('location: account.php');
+    // L'utilisateur est redirigé
+    // TODO modifier la redirection selon la page d'où vient l'utilisateur
+    //      exemple : S'il vient de la page d'accueil, il est redirigé vers son dernier magasin fréquenté
+    header('Location: account.php');
   }
-  else{
+  else {
     // On définit un message qui indique que les informations de connexion ne sont pas correctes
     $message = "<p>Identifiant ou mot de passe incorrect, veuillez réessayer.</p>";
   }

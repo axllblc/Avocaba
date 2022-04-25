@@ -11,17 +11,20 @@ require_once '../../composants/footer.php';
  * Fonctions *
  *************/
 
-//Fonction qui sert à afficher les différents blocs de l'espace client
-
-function affichage(){
-  if (isset($_GET['btClient'])){
-    //cas où le client a actionné un bouton pour l'affichage d'un bloc spécifique sur son espace client
+/**
+ * Afficher les différents blocs de l'espace client
+ * @return void
+ */
+function affichage () {
+  if ( isset($_GET['btClient']) ) {
+    // Cas où le client a actionné un bouton pour l'affichage d'un bloc spécifique sur son espace client
     $section = $_GET['btClient'];
   }
   else{
-    //cas où le client vient d'être redirigé vers son espace client
+    // Cas où le client vient d'être redirigé vers son espace client
     $section = 'accueil';
   }
+
   switch ($section) {
     case 'accueil':
       include('account-display/main.php');
@@ -33,13 +36,13 @@ function affichage(){
       include('account-display/datas.php');
       break;
     case 'deco':
-    //Le client veut se déconnecter, on quitte la session
+      // Déconnexion : la session est détruite
       session_start();
       session_unset();
       session_destroy();
-      header('Location: ../landing.php');
+      setcookie(session_name(), '', 0, '/');       // Le cookie de session est effacé sur le client
+      header('Location: ../landing.php');          // Redirection
       exit();
-      break;
     default:
       break;
     }

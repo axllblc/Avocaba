@@ -1,6 +1,6 @@
 <?php
 
-/*  Page d'inscription (client) (sign-in page) */
+/* 🔒 Page d'inscription (client) (sign-up page) */
 
 error_reporting(E_ALL);
 
@@ -20,16 +20,20 @@ if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) and !empty($_POST[
   $motdepasse = $_POST['motdepasse'];
 
   $client = verifierClient($_POST['email'], $_POST['motdepasse']);
-  if(!$client){
-    //Si le client n'est pas enregistré dans la base de donnée, on va l'inscrire
+  if (!$client) {
+    // Si le client n'est pas enregistré dans la base de donnée, on va l'inscrire
     $inscrire = inscrireClient($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['motdepasse']);
 
-    if($inscrire){
-      //Si l'inscription est un succès, on peut établir la mise en session et le rediriger vers l'espace client
+    if ($inscrire) {
+      // Si l'inscription est un succès, on peut établir la mise en session et le rediriger vers l'espace client
+      // TODO : créer une fonction de connexion pour éviter les redondances de code
       $client = verifierClient($email, $motdepasse);
       session_start();
+      // Création d'un nouvel identifiant de session, pour empêcher les attaques utilisant des sessions volées
+      session_regenerate_id(true);
+      // TODO modifier la structure de la session
       $_SESSION=$client;
-      header('location: account.php');
+      header('Location: account.php');
     }
   }
   else{
