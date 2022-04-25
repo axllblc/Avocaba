@@ -5,6 +5,7 @@
 error_reporting(E_ALL);
 
 require_once '../../composants/html_head.php';
+require_once '../../traitements/signin.inc.php';
 require_once '../../traitements/verifier-client.php';
 require_once '../../traitements/inscription-client.php';
 
@@ -19,6 +20,8 @@ if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) and !empty($_POST[
   $email = $_POST['email'];
   $motdepasse = $_POST['motdepasse'];
 
+  // FIXME Si le client utilise un adresse e-mail déjà existante et un mot de passe différent de celui enregistré, alors il est inscrit
+  //       ce n'est pas le comportement souhaité !
   $client = verifierClient($_POST['email'], $_POST['motdepasse']);
   if (!$client) {
     // Si le client n'est pas enregistré dans la base de donnée, on va l'inscrire
@@ -26,14 +29,9 @@ if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) and !empty($_POST[
 
     if ($inscrire) {
       // Si l'inscription est un succès, on peut établir la mise en session et le rediriger vers l'espace client
-      // TODO : créer une fonction de connexion pour éviter les redondances de code
       $client = verifierClient($email, $motdepasse);
-      session_start();
-      // Création d'un nouvel identifiant de session, pour empêcher les attaques utilisant des sessions volées
-      session_regenerate_id(true);
-      // TODO modifier la structure de la session
-      $_SESSION=$client;
-      header('Location: account.php');
+
+      sessionClient($client);
     }
   }
   else{

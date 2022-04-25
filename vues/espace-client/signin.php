@@ -7,6 +7,7 @@
 error_reporting(E_ALL);
 
 require_once '../../composants/html_head.php';
+require_once '../../traitements/signin.inc.php';
 require_once '../../traitements/verifier-client.php';
 
 
@@ -21,15 +22,7 @@ if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) ) {
   $client = verifierClient($_POST['email'], $_POST['motdepasse']);
   if ($client) {
     // Si l'adresse e-mail est présente et que le mot de passe est correct, une session est initialisée
-    session_start();
-    // Création d'un nouvel identifiant de session, pour empêcher les attaques utilisant des sessions volées
-    session_regenerate_id(true);
-    // TODO modifier la structure de la session
-    $_SESSION=$client;
-    // L'utilisateur est redirigé
-    // TODO modifier la redirection selon la page d'où vient l'utilisateur
-    //      exemple : S'il vient de la page d'accueil, il est redirigé vers son dernier magasin fréquenté
-    header('Location: account.php');
+    sessionClient($client);
   }
   else {
     // On définit un message qui indique que les informations de connexion ne sont pas correctes
