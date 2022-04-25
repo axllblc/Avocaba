@@ -20,8 +20,6 @@ if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) and !empty($_POST[
   $email = $_POST['email'];
   $motdepasse = $_POST['motdepasse'];
 
-  // FIXME Si le client utilise un adresse e-mail déjà existante et un mot de passe différent de celui enregistré, alors il est inscrit
-  //       ce n'est pas le comportement souhaité !
   $client = verifierClient($_POST['email'], $_POST['motdepasse']);
 
   $inscrire = inscrireClient($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['motdepasse']);

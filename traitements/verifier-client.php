@@ -18,7 +18,7 @@ const REGEX_MOTDEPASSE = '/^([0-9a-zA-Z._#-]){8,16}$/';
 // Requêtes à préparer
 
 const RECHERCHE_CLIENT = '
-SELECT c.`Email`, c.`MotDePasse`
+SELECT c.IdClient, c.`Nom`, c.`Prenom`, c.`Email`, c.`IdDepot`, c.`MotDePasse`
 FROM CLIENTS AS c
 WHERE c.`Email` = ?
 LIMIT 1;
@@ -73,28 +73,11 @@ function verifierClient ($email, $motdepasse) {
       // Si l'on a trouvé l'adresse mail dans la base de données
       if( password_verify($motdepasse, $resultArrayRecherche[0]['MotDePasse']) ){
         // Si le mot de passe correspond avec celui associé à l'adresse e-mail renseignée,
-        // on récupère toutes les données d'information-client (e-mail, id du dernier dépôt fréquenté, nom et prénom)
-
-        $stmtInfos = $link->prepare(RECUPERE_CLIENT);
-        checkError($stmtInfos, $link);
-
-        $statusInfos = $stmtInfos ->bind_param('s', $email);
-
-        // Exécution de la requête pour les infos clients
-        $statusInfos = $stmtInfos->execute();
-        checkError($statusInfos, $link);
-
-        // Récupération du résultat
-        $resultInfos = $stmtInfos->get_result();
-        checkError($resultRecherche, $link);
-
-        $resultArrayInfos = $resultInfos->fetch_all(MYSQLI_ASSOC);
-        $resultArrayInfos = $resultArrayInfos[0];
 
         // Fermeture de la connexion à la base de données
         $link->close();
 
-        return $resultArrayInfos; // On renvoie les infos client
+        return $resultArrayRecherche[0]; // On renvoie les infos client
       }
     }
   }
