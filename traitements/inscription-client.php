@@ -17,6 +17,13 @@ const REGEX_NOM= "/[a-zA-Z -]{2,30}$/";
 // Requêtes à préparer
 
 //IdClient est en Auto-increment, donc on ne le renseigne pas
+
+const EMAIL_EXISTE = '
+SELECT count(*) AS occurence
+FROM CLIENTS
+WHERE Email = ?;
+';
+
 const INSCRIRE_CLIENT = '
 INSERT INTO CLIENTS (`Nom`, `Prenom`, `Email`, `MotDePasse`)
 VALUES (?, ?, ?, ?);
@@ -34,6 +41,7 @@ VALUES (?, ?, ?, ?);
  * @param $motdepasse
  * @return bool
  */
+
 function inscrireClient ($nom, $prenom, $email, $motdepasse) {
   // Sert à inscrire un client dans la base de donnée, renvoie un booléen selon le succès de la requete
 
@@ -42,7 +50,8 @@ function inscrireClient ($nom, $prenom, $email, $motdepasse) {
   $result = NULL;
 
   // Préparation de la requête
-  if ( preg_match(REGEX_EMAIL, $email) and preg_match(REGEX_MOTDEPASSE, $motdepasse) and preg_match(REGEX_NOM, $nom) and preg_match(REGEX_NOM, $prenom)) {
+  if ( preg_match(REGEX_EMAIL, $email) and preg_match(REGEX_MOTDEPASSE, $motdepasse)
+  and preg_match(REGEX_NOM, $nom) and preg_match(REGEX_NOM, $prenom) and emailAbsente($email)) {
 
     $stmt = $link->prepare(INSCRIRE_CLIENT);
     checkError($stmt, $link);
@@ -64,4 +73,46 @@ function inscrireClient ($nom, $prenom, $email, $motdepasse) {
   }
   $link->close();
   return false;
+}
+
+/**
+ * Rechercher un email.
+ * @param $email
+ * @return bool
+ */
+
+function emailAbsente($email){
+  // Sert à vérifier la présence ou non d'une adresse mail dans la base de donnée, renvoie un booléen
+
+  $link = dbConnect();
+
+  $result = NULL;
+
+  // Préparation de la requête
+  if ( preg_match(REGEX_EMAIL, $email) ) {
+
+    $stmt = $link->prepare(EMAIL_EXISTE);
+    checkError($stmt, $link);
+
+    $status = $stmt->bind_param('s',$email);
+
+    // Exécution de la requête
+    $status = $stmt->execute();
+    checkError($status, $link);
+
+    $result = $stmt->get_result();
+    $resultArray = $result->fetch_all(MYSQLI_ASSOC);
+
+    $link->close();
+
+    //On renvoie le booléen selon la présence ou nom de l'email dans la base de donnée
+    if($resultArray[0]['occurence'] == 0){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  $link->close();
+  return false; //cas où une erreur est lancée, on ne veut
 }

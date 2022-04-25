@@ -23,16 +23,14 @@ if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) and !empty($_POST[
   // FIXME Si le client utilise un adresse e-mail déjà existante et un mot de passe différent de celui enregistré, alors il est inscrit
   //       ce n'est pas le comportement souhaité !
   $client = verifierClient($_POST['email'], $_POST['motdepasse']);
-  if (!$client) {
-    // Si le client n'est pas enregistré dans la base de donnée, on va l'inscrire
-    $inscrire = inscrireClient($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['motdepasse']);
 
-    if ($inscrire) {
-      // Si l'inscription est un succès, on peut établir la mise en session et le rediriger vers l'espace client
-      $client = verifierClient($email, $motdepasse);
+  $inscrire = inscrireClient($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['motdepasse']);
 
-      sessionClient($client);
-    }
+  if ($inscrire) {
+    // Si l'inscription est un succès, on peut établir la mise en session et le rediriger vers l'espace client
+    $client = verifierClient($email, $motdepasse);
+
+    sessionClient($client);
   }
   else{
     //Message à afficher en cas d'adresse e-mail déjà utilisée
