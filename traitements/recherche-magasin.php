@@ -57,14 +57,14 @@ LIMIT 1;
 
 /**
  * Rechercher un dépôt.
- * @param string $query Critère de recherche : il peut s'agir d'un code postal, d'un numéro de département ou d'un nom
- *                      de ville OU de l'identifiant d'un dépôt.
+ * @param string|int $query Critère de recherche : il peut s'agir d'un code postal, d'un numéro de département ou d'un nom
+ *                          de ville OU de l'identifiant d'un dépôt.
  * @param bool $id Vaut false si le premier paramètre correspond à un code postal, un numéro de département ou un nom de
  *                 ville ; vaut true si le premier paramètre correspond à l'identifiant d'un dépôt.
  * @return array Un tableau contenant les résultats (dépôts décrits par leur identifiant, nom, adresse, ville et code
  *               postal).
  */
-function rechercherMagasin (string $query, bool $id = false): array {
+function rechercherMagasin (string|int $query, bool $id = false): array {
   $link = dbConnect();
 
   // Préparation de la requête
