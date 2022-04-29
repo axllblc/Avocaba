@@ -57,14 +57,14 @@ LIMIT 1;
 
 /**
  * Rechercher un dépôt.
- * @param string|int $str Critère de recherche : il peut s'agir d'un code postal, d'un numéro de département ou d'un nom
- *                        de ville OU de l'identifiant d'un dépôt.
+ * @param string $query Critère de recherche : il peut s'agir d'un code postal, d'un numéro de département ou d'un nom
+ *                      de ville OU de l'identifiant d'un dépôt.
  * @param bool $id Vaut false si le premier paramètre correspond à un code postal, un numéro de département ou un nom de
  *                 ville ; vaut true si le premier paramètre correspond à l'identifiant d'un dépôt.
  * @return array Un tableau contenant les résultats (dépôts décrits par leur identifiant, nom, adresse, ville et code
  *               postal).
  */
-function rechercherMagasin (string|int $str, bool $id = false): array {
+function rechercherMagasin (string $query, bool $id = false): array {
   $link = dbConnect();
 
   // Préparation de la requête
@@ -72,28 +72,28 @@ function rechercherMagasin (string|int $str, bool $id = false): array {
     $stmt = $link->prepare(RECHERCHE_ID);
     checkError($stmt, $link);
 
-    $status = $stmt->bind_param('i', $str);
+    $status = $stmt->bind_param('i', $query);
 
   } else {
-    if (preg_match(REGEX_CODE_POSTAL, $str)) {
+    if (preg_match(REGEX_CODE_POSTAL, $query)) {
       // Rechercher le(s) dépôt(s) présents dans la ville dont on connaît le code postal
-      $cp = +$str;
+      $cp = +$query;
 
       $stmt = $link->prepare(RECHERCHE_CP);
       checkError($stmt, $link);
 
       $status = $stmt->bind_param('i', $cp);
 
-    } elseif (preg_match(REGEX_CODE_DEPT, $str)) {
+    } elseif (preg_match(REGEX_CODE_DEPT, $query)) {
       // Rechercher le(s) dépôt(s) présents dans un département
       $stmt = $link->prepare(RECHERCHE_DEPT);
       checkError($stmt, $link);
 
-      $status = $stmt->bind_param('s', $str);
+      $status = $stmt->bind_param('s', $query);
 
     } else {
       // Rechercher un/des dépôt(s) par nom de ville
-      $slug = slugify($str);
+      $slug = slugify($query);
 
       $stmt = $link->prepare(RECHERCHE_VILLE);
       checkError($stmt, $link);
