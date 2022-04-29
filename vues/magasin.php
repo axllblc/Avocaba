@@ -31,15 +31,42 @@ function erreur404 (): void {
  * Script principal *
  ********************/
 
+/*
+ * Si un identifiant de magasin est passé en paramètre, celui-ci est enregistré dans la session et l'accueil du magasin
+ * correspondant est affiché.
+ * Sinon, si un identifiant de magasin est enregistré dans la session, alors l'accueil du magasin correspondant est
+ * affiché.
+ * Sinon (il n'y a pas d'identifiant de magasin passé en paramètre ou enregistré dans la session), l'utilisateur est
+ * redirigé vers l'accueil du site (landing page).
+ * Dans le cas où l'identifiant de magasin ne correspond pas à un magasin existant (enregistré dans la base de données),
+ * une erreur 404 est affichée.
+ */
 
-// Vérifier qu'un identifiant de magasin a été passé en paramètre (sinon erreur 404)
-if (!isset($_GET['id'])) erreur404();
+// Démarrage ou récupération de la session
+session_start();
 
-// Récupérer le magasin ayant pour identifiant celui passé en paramètre
-@$magasin = rechercherMagasin($_GET['id'], true)[0];
+// Vérifier qu'un identifiant de magasin est passé en paramètre et, le cas échéant, enregistrer celui-ci dans la session
+if ( isset($_GET['id']) && is_numeric($_GET['id']) )
+  $_SESSION['IdMagasin'] = intval($_GET['id']);
 
-// Vérifier l'existence du magasin correspondant à l'identifiant passé en paramètre (sinon erreur 404)
-if (!isset($magasin)) erreur404();
+// Vérifier qu'un identifiant de magasin est enregistré dans la session
+if ( isset($_SESSION['IdMagasin']) ) {
+  // Récupérer le magasin ayant pour identifiant celui enregistré dans la session
+  @$magasin = rechercherMagasin($_SESSION['IdMagasin'], true)[0];
+
+  // Si le magasin enregistré dans la session n'existe pas, alors une erreur 404 s'affiche ; l'identifiant du magasin
+  // est supprimé de la session
+  if (!isset($magasin)) {
+    unset($_SESSION['IdMagasin']);
+    erreur404();
+  }
+} else {
+  // Redirection vers l'accueil
+  header('Location: /avocaba');
+  exit;
+}
+
+
 
 ?>
 
