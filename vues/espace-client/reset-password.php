@@ -12,10 +12,11 @@ require_once '../../composants/html_head.php';
 /********************
  * Script principal *
  ********************/
-
+$done = false;
 if(isset($_POST['email'])){
   if(preg_match('/^[a-zA-Z1-9-\.]+@[a-zA-Z1-9-]+\.[a-zA-Z]{2,6}$/', $_POST['email'])){
     header('Location: confirmation-reinitialiser.php');
+    $done = true;
   }
 }
 
@@ -24,7 +25,8 @@ if(isset($_POST['email'])){
 <!DOCTYPE html>
 <html lang="fr">
 
-<?php htmlHead('Réinitialisation du mot de passe – Avocaba'); ?>
+<?php htmlHead('Réinitialisation du mot de passe – Avocaba');
+if (!$done){ ?>
 
 <body>
 <main class="reinitialise__mot__passe">
@@ -46,4 +48,20 @@ if(isset($_POST['email'])){
   </div>
 </main>
 </body>
+<?php } else {?>
+<body>
+    <main class="message__mdp">
+      <div id="message_affiche">
+        <form class="message_mdp">
+          <button class="nav__btn-retour" onclick="history.back();" title="Revenir à la page précédente">Retour</button>
+          <h1>Réinitialiser mon mot de passe</h1>
+            <p>
+              Un email muni d'un lien permettant de réinitialiser votre mot de passe vous a été envoyé.
+            </p>
+            <span id="message_mdp_bouton_accueil"><a style="text-decoration:none;" href="../landing.php">Revenir à l'accueil</a></span>
+        </form>
+      </div>
+    </main>
+</body>
+<?php } ?>
 </html>
