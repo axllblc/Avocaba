@@ -60,7 +60,7 @@ else{
     <input <?php if(!$edit) echo 'disabled="disabled"'; ?> type="text" name="nom" id="nom" minlength="2" size="40" pattern="[a-zA-Z -]{2,30}" value="<?php if(isset($_SESSION['Client']['Nom'])) echo $_SESSION['Client']['Nom']; ?>"><br>
     <label for="email">Adresse email</label><br>
     <input <?php if(!$edit) echo 'disabled="disabled"'; ?> type="text" size="50" name="email" id="email"  pattern="^[a-zA-Z1-9-\.]+@[a-zA-Z1-9-]+\.[a-zA-Z]{2,6}$" value="<?php if(isset($_SESSION['Client']['Email'])) echo $_SESSION['Client']['Email']; ?>"><br>
-    <label for="motdepasse1"><?php if($edit) echo "Nouveau " ?>mot de passe</label><br>
+    <label for="motdepasse1"><?php echo $edit ? 'Nouveau mot de passe' : 'Mot de passe'; ?></label><br>
     <input <?php if(!$edit) echo 'disabled="disabled"'; ?> type="password" size="30"  minlength="8" maxlength="16" name="motdepasse1" id="motdepasse1"  pattern="([0-9a-zA-Z._#-]){8,16}" value="<?php if(!$edit) echo "*********"; ?>"><br>
     <?php if($edit) echo '
     <label for="motdepasse2">Nouveau mot de passe</label><br>

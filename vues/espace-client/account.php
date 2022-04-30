@@ -34,7 +34,7 @@ function affichage () {
       include('account-display/orders.php');
       break;
     case 'infos':
-      include('account-display/datas.php');
+      include('account-display/data.php');
       break;
     case 'deco':
       // Déconnexion : la session est détruite
