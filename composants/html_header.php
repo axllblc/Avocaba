@@ -6,14 +6,16 @@
 
 /**
  * Afficher l'en-tête des pages du magasin.
- * @param int|null $id Identifiant du magasin
+ * @param bool $magasin Booléen indiquant si un clic sur le logo du site redirige vers l'accueil du magasin ou du site.
+ *                      Vaut true pour une redirection vers l'accueil du magasin ; false pour une redirection vers
+ *                      l'accueil du site (landing page).
  * @param string $query Contenu du champ de recherche
  * @return void
  */
-function htmlHeader (int $id = NULL, string $query = ''): void { ?>
+function htmlHeader (bool $magasin = false, string $query = ''): void { ?>
   <header class="header-magasin">
     <a class="header__logo"
-       href="<?php echo isset($id) ? '/avocaba/vues/magasin.php?id='.$id : '/avocaba' ?>">
+       href="<?php echo $magasin ? '/avocaba/vues/magasin.php' : '/avocaba' ?>">
       Avocaba
     </a>
 

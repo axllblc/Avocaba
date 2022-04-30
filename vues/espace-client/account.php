@@ -5,6 +5,7 @@
 error_reporting(E_ALL);
 
 require_once '../../composants/html_head.php';
+require_once '../../composants/html_header.php';
 require_once '../../composants/footer.php';
 
 /*************
@@ -67,6 +68,8 @@ if ( !isset($_SESSION['Client']) ){
 <?php htmlHead('Espace Client – Avocaba'); ?>
 
 <body>
+  <?php htmlHeader( isset($_SESSION['IdMagasin']) ); ?>
+
   <main class="client">
     <h1 class="client__titre">Mon compte</h1>
     <form class="client__onglet" action="account.php" method="GET">
