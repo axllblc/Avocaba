@@ -29,7 +29,9 @@ $commandes = rechercheCommandes ($_SESSION['Client']['IdClient'], 20);
   <h2>Vos dernières commandes</h2><br>
   <?php
   if($commandes)
-    foreach ($commandes as $key => $comm)
+    foreach ($commandes as $key => $comm){
       afficheCommande($comm);
+      echo "<br>";
+    }
   ?>
 </div>

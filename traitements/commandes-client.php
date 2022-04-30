@@ -12,9 +12,9 @@ require_once 'misc.inc.php';
 const RECHERCHE_COMMANDES = '
 SELECT comm.IdCommande, comm.DateRetrait, comm.DateValidation, d.Nom AS NomDepot, SUM(a.Prix*cont.Quantite) AS PrixCommande
 FROM COMMANDES AS comm
-INNER JOIN CONTENIR AS cont USING (IdCommande)
-INNER JOIN ARTICLES AS a USING (IdArticle)
-INNER JOIN DEPOTS  AS d USING (IdDepot)
+LEFT JOIN CONTENIR AS cont USING (IdCommande)
+LEFT JOIN ARTICLES AS a USING (IdArticle)
+LEFT JOIN DEPOTS  AS d USING (IdDepot)
 WHERE comm.IdClient = ?
 GROUP BY comm.IdCommande
 ORDER BY comm.DateValidation DESC
