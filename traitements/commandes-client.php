@@ -8,6 +8,7 @@ require_once 'misc.inc.php';
 
 // Requêtes à préparer
 
+// FIXME : Cette requête ne produit pas le résultat attendu.
 const RECHERCHE_COMMANDES = '
 SELECT comm.IdCommande, comm.DateRetrait, comm.DateValidation, d.Nom AS NomDepot, SUM(a.Prix*cont.Quantite) AS PrixCommande
 FROM COMMANDES AS comm
@@ -17,7 +18,7 @@ INNER JOIN DEPOTS  AS d USING (IdDepot)
 WHERE comm.IdClient = ?
 GROUP BY comm.IdCommande
 ORDER BY comm.DateValidation DESC
-LIMIT ?;;
+LIMIT ?;
 ';
 
 
@@ -57,10 +58,10 @@ function rechercheCommandes ($IdClient, $nbComm) {
   // Fermeture de la connexion à la base de données
   $link->close();
 
-  if(count($resultArray)>0){
+  if (count($resultArray) > 0) {
     return $resultArray;
   }
-  else{
-    return False;
+  else {
+    return false;
   }
 }

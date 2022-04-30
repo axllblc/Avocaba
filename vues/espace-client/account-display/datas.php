@@ -1,6 +1,6 @@
 <?php
 
-/* Bloc de l'espace client */
+/* Section des données personnelles l'espace client */
 
 // TODO: Finir l'aspect dynamique
 
@@ -46,7 +46,9 @@ else{
 
 
 
-// Contenu de la section "données personnelles" de l'espace client
+/***********
+ * Contenu *
+ ***********/
 ?>
 
 <div class="client__affichage-infos">

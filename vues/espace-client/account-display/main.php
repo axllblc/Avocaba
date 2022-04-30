@@ -1,6 +1,6 @@
 <?php
 
-/*  Bloc main de l'espace client */
+/* Section principale de l'espace client */
 
 error_reporting(E_ALL);
 
@@ -26,26 +26,32 @@ function recupNom () {
  ********************/
 
 // On essaie de récupérer la commande la plus récente du client
-$commande = rechercheCommandes ($_SESSION['Client']['IdClient'], 1);
+$commande = rechercheCommandes($_SESSION['Client']['IdClient'], 1);
 if ($commande) {
   // Si le client a déjà effectué une commande
   $commande = $commande[0];
 }
 
 
-// Contenu de la section main/accueil de l'espace client
+
+/***********
+ * Contenu *
+ ***********/
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
 <div class="client__affichage-general">
   <h2>Bonjour, <?php recupNom(); ?> !</h2>
-  <p>Avocaba est ravi de vous retrouver sur votre espace client</p>
-  <p>Dernière commande :</p>
-  <a class="client__derniere-commande" href="account.php?btClient=commandes">
-    <?php afficheCommande($commande); ?>
-  </a>
-  <br>
+  <p>Avocaba est ravi de vous retrouver sur votre espace client !</p>
+
+  <?php
+  // Affichage de la dernière commande
+  if (!empty($commande)) {
+    echo '<p>Dernière commande :</p>';
+    afficheCommande($commande);
+  }
+  else
+    echo '<p><em>Aucune commande effectuée.</em></p>';
+  ?>
+
   <a class="client__voir-commandes" href="account.php?btClient=commandes">Voir toutes mes commandes</a>
 </div>
-</html>

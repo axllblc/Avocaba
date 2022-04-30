@@ -1,6 +1,6 @@
 <?php
 
-/*  Bloc de l'espace client */
+/* Section des commandes du client */
 
 // TODO: Finir l'aspect dynamique
 
@@ -20,11 +20,11 @@ $commandes = rechercheCommandes ($_SESSION['Client']['IdClient'], 20);
 
 
 
-// Contenu de la section commandes
+/***********
+ * Contenu *
+ ***********/
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
 <div class="client__affichage-commandes">
   <h2>Vos dernières commandes</h2><br>
   <?php
@@ -33,4 +33,3 @@ $commandes = rechercheCommandes ($_SESSION['Client']['IdClient'], 20);
       afficheCommande($comm);
   ?>
 </div>
-</html>
