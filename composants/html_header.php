@@ -24,7 +24,7 @@ function htmlHeader (bool $magasin = false, string $query = ''): void { ?>
       <div class="header__btn-text">Rayons</div>
     </div>
 
-    <form class="header__recherche recherche" action="/magasin/recherche" method="get">
+    <form class="header__recherche recherche" action="/avocaba/vues/recherche.php" method="get">
       <input class="recherche__input" id="recherche"
              type="search" name="recherche"
              value="<?php echo $query ?>"
