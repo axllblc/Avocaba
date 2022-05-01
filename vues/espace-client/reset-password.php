@@ -1,8 +1,6 @@
 <?php
 
-/*  Page de connexion (client) (login page) */
-
-// TODO: Gérer les cas où l'utilisateur ne souhaite pas que l'on "se souvienne" de lui
+/* 🔒 Page de réinitialisation du mot de passe */
 
 error_reporting(E_ALL);
 
@@ -12,10 +10,10 @@ require_once '../../composants/html_head.php';
 /********************
  * Script principal *
  ********************/
+
 $done = false;
-if(isset($_POST['email'])){
-  if(preg_match('/^[a-zA-Z1-9-\.]+@[a-zA-Z1-9-]+\.[a-zA-Z]{2,6}$/', $_POST['email'])){
-    header('Location: confirmation-reinitialiser.php');
+if (isset($_POST['email'])) {
+  if (preg_match('/^[a-zA-Z1-9-.]+@[a-zA-Z1-9-]+\.[a-zA-Z]{2,6}$/', $_POST['email'])) {
     $done = true;
   }
 }
@@ -26,7 +24,8 @@ if(isset($_POST['email'])){
 <html lang="fr">
 
 <?php htmlHead('Réinitialisation du mot de passe – Avocaba');
-if (!$done){ ?>
+
+if (!$done) { ?>
 
 <body>
 <main class="reinitialise__mot__passe">
@@ -34,21 +33,22 @@ if (!$done){ ?>
     <form class="reinitialise_reinitialiser" action="reset-password.php" method="post">
       <button class="nav__btn-retour" onclick="history.back();" title="Revenir à la page précédente">Retour</button>
       <h1>Réinitialiser mon mot de passe</h1>
-        <p>
+      <p>
         Pour réinitialiser votre mot de passe, entrez votre adresse email ci-dessous.
-        </p>
-        <p>
+      </p>
+      <p>
         Vous recevrez un mail avec un lien pour réinitialiser votre mot de passe.
-        </p>
-          <label for="email">Votre adresse email</label><br>
-          <input type="text" name="email" id="email" size="40" pattern="^[a-zA-Z1-9-\.]+@[a-zA-Z1-9-]+\.[a-zA-Z]{2,6}$" required><br><br>
-        <input type="submit" id="reinitialise_bouton_envoyer" name="valider-reset" value="Réinitialiser" title="Réinitialiser le mot de passe"><br><br>
-
+      </p>
+      <label for="email">Votre adresse email</label><br>
+      <input type="text" name="email" id="email" size="40" pattern="^[a-zA-Z1-9-.]+@[a-zA-Z1-9-]+\.[a-zA-Z]{2,6}$" required><br><br>
+      <input type="submit" id="reinitialise_bouton_envoyer" name="valider-reset" value="Réinitialiser" title="Réinitialiser le mot de passe"><br><br>
     </form>
   </div>
 </main>
 </body>
-<?php } else {?>
+
+<?php } else { ?>
+
 <body>
     <main class="message__mdp">
       <div id="message_affiche">
@@ -63,5 +63,7 @@ if (!$done){ ?>
       </div>
     </main>
 </body>
+
 <?php } ?>
+
 </html>
