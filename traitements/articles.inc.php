@@ -65,7 +65,7 @@ WHERE (a.Nom LIKE ? OR m.Nom LIKE ?)
 
 const RECHERCHE_ARTICLE_NOM = RECHERCHE_ARTICLE_NOM_FOURNISSEUR.' UNION '.RECHERCHE_ARTICLE_NOM_RAYON.' UNION '.RECHERCHE_ARTICLE_NOM_ARTICLE;
 
-// NOTE: On ne peux pas utiliser la syntaxe "%?%" dans les requêtes préparées, donc c'est la variables qui sera entourée de "%"
+// NOTE : On ne peut pas utiliser la syntaxe "%?%" dans les requêtes préparées, donc c'est la variable qui sera entourée de "%"
 
 
 /*************
@@ -74,7 +74,7 @@ const RECHERCHE_ARTICLE_NOM = RECHERCHE_ARTICLE_NOM_FOURNISSEUR.' UNION '.RECHER
 
 /**
  * Rechercher un/des articles.
- * @param string|int $str Critère de recherche : valeur
+ * @param string|int $critere Critère de recherche : valeur
  * @param string $nature Nature du critère (au choix) : idArticle, nomArticle, idFournisseur, nomFournisseur, idRayon, nomRayon, nom (nom d'article, du fournisseur ou du rayon)
  * @return array Un tableau contenant les résultats (articles décrits par leur identifiant, nom,
  *               prix, prix relatif, unité, description, la photo de leur vignette (adresse),
