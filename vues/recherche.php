@@ -16,11 +16,12 @@ require_once '../composants/footer.php';
 /********************
  * Script principal *
  ********************/
-
 $ok = false;
+$q = "";
 session_start();
 // récupération de la recherche (minimum 2 caractères)
 if (isset($_GET['recherche']) and strlen($_GET['recherche']) > 1) {
+  $q = $_GET['recherche'];
   $IdVille = rechercherMagasin($_SESSION['IdMagasin'], true)[0]['IdVille'];
   $listeArticles = rechercherArticle($_GET['recherche'], 'nom', $IdVille);
   if ($listeArticles){
@@ -32,17 +33,19 @@ if (isset($_GET['recherche']) and strlen($_GET['recherche']) > 1) {
 
 <!DOCTYPE html>
 <html lang="fr">
-  <?php htmlHead('Recherche – Avocaba'); ?>
+<?php htmlHead($q . ' – Avocaba'); ?>
 
   <body>
+    <?php htmlHeader($q); ?>
     <main>
-    <?php htmlHeader(); // TODO
-    if($ok){
-      htmlListeRayons($listeArticles);
-    }
-    else{
-      echo "Aucun résultat, veuillez réessayer.";
-    }?>
+      <?php
+        if($ok){
+          htmlListeRayons($listeArticles);
+        }
+        else{
+          echo "Aucun résultat, veuillez réessayer.";
+        }
+      ?>
     </main>
     <?php footer(); ?>
   </body>
