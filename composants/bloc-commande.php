@@ -1,6 +1,6 @@
 <?php
 
-/* ⬇️ Bloc de commande client */
+/* Bloc de commande client */
 
 require_once '../../composants/html_head.php';
 
@@ -10,11 +10,9 @@ require_once '../../composants/html_head.php';
  * @return void
  */
 function afficheCommande ($commande) { ?>
-  <a class="client__derniere-commande" href="account.php?btClient=commandes">
-    <div>
-      <span class="client__date-commande"><?php if($commande) echo $commande['DateValidation']; ?></span>
-      <span class="client__magasin-commande"><?php if($commande) echo $commande['NomDepot']; ?></span>
-      <span class="client__prix-commande"><?php if($commande) echo $commande['PrixCommande'].'€'; ?></span>
-    </div>
+  <a class="client__commande" href="account.php?btClient=commandes">
+    <span class="client__date-commande"><?php if($commande) echo $commande['DateValidation']; ?></span>
+    <span class="client__magasin-commande"><?php if($commande) echo $commande['NomDepot']; ?></span>
+    <span class="client__prix-commande"><?php if($commande) echo $commande['PrixCommande'].'&nbsp;€'; ?></span>
   </a>
 <?php }

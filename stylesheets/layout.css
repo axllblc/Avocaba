@@ -842,6 +842,12 @@ nav {
   /*size: 30%;*/
 }
 
+.client__commande {
+  display: block;
+  margin: 10px;
+  padding: 5px;
+}
+
 
 /* page de connexion */
 
