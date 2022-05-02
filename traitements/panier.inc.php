@@ -55,8 +55,11 @@ function initialiserPanier (): void {
 function ajouterArticle (int $idArticle): bool {
   initialiserPanier();
 
+  /** Position de l'article dans le panier. */
+  $index = array_search($idArticle, $_SESSION['Panier']['IdArticle']);
+
   // Si l'article n'est pas présent dans le panier
-  if ( !in_array($idArticle, $_SESSION['Panier']['IdArticle']) ) {
+  if ( $index === false ) {
     // L'article à ajouter au panier est recherché dans la base de données.
     @$article = rechercherArticle($idArticle, 'idArticle')[0] ?? NULL;
 
@@ -71,9 +74,6 @@ function ajouterArticle (int $idArticle): bool {
     array_push($_SESSION['Panier']['PhotoVignette'], $article['PhotoVignette']);
     array_push($_SESSION['Panier']['Qte'], 1);
   } else {
-    /** Position de l'article dans le panier. */
-    $index = array_search($idArticle, $_SESSION['Panier']['IdArticle']);
-
     // La quantité de l'article est incrémentée, à condition qu'elle n'excède pas la quantité maximale autorisée.
     $quantite = &$_SESSION['Panier']['Qte'][$index];
     if ($quantite < QUANTITE_MAX)
@@ -94,11 +94,11 @@ function ajouterArticle (int $idArticle): bool {
 function supprimerArticle (int $idArticle): bool {
   initialiserPanier();
 
-  // Si l'article est présent dans le panier, il est supprimé
-  if ( in_array($idArticle, $_SESSION['Panier']['IdArticle']) ) {
-    /** Position de l'article dans le panier. */
-    $index = array_search($idArticle, $_SESSION['Panier']['IdArticle']);
+  /** Position de l'article dans le panier. */
+  $index = array_search($idArticle, $_SESSION['Panier']['IdArticle']);
 
+  // Si l'article est présent dans le panier, il est supprimé
+  if ( $index !== false ) {
     // Suppression de l'article du panier
     array_splice($_SESSION['Panier']['IdArticle'], $index, 1);
     array_splice($_SESSION['Panier']['Nom'], $index, 1);
@@ -106,9 +106,11 @@ function supprimerArticle (int $idArticle): bool {
     array_splice($_SESSION['Panier']['Unite'], $index, 1);
     array_splice($_SESSION['Panier']['PhotoVignette'], $index, 1);
     array_splice($_SESSION['Panier']['Qte'], $index, 1);
-  } else return false;
 
-  return true;
+    return true;
+  }
+
+  return false;
 }
 
 
@@ -123,8 +125,11 @@ function supprimerArticle (int $idArticle): bool {
 function modifierQteArticle (int $idArticle, int $quantite): bool {
   initialiserPanier();
 
+  /** Position de l'article dans le panier. */
+  $index = array_search($idArticle, $_SESSION['Panier']['IdArticle']);
+
   // Si l'article est présent dans le panier, sa quantité est modifiée
-  if ( in_array($idArticle, $_SESSION['Panier']['IdArticle']) ) {
+  if ( $index !== false ) {
 
     if ( $quantite <= 0 ) {
       // Suppression de l'article du panier
@@ -132,9 +137,6 @@ function modifierQteArticle (int $idArticle, int $quantite): bool {
     }
 
     if ( $quantite <= QUANTITE_MAX ) {
-      /** Position de l'article dans le panier. */
-      $index = array_search($idArticle, $_SESSION['Panier']['IdArticle']);
-
       // Modification de la quantité
       $_SESSION['Panier']['Qte'][$index] = $quantite;
       return true;
