@@ -110,3 +110,37 @@ function supprimerArticle (int $idArticle): bool {
 
   return true;
 }
+
+
+/**
+ * Modifier la quantité d'un article dans le panier.
+ * Si la quantité passée en paramètre est nulle, alors l'article est retiré du panier.
+ * @param int $idArticle Identifiant de l'article dont la quantité doit être modifiée.
+ * @param int $quantite Quantité à définir, comprise entre 0 et <code>QUANTITE_MAX</code> (bornes incluses).
+ * @return bool Booléen indiquant le succès ou non de la modification : true si la quantité a été modifiée, false en cas
+ *              d'échec (quantité invalide, article absent du panier).
+ */
+function modifierQteArticle (int $idArticle, int $quantite): bool {
+  initialiserPanier();
+
+  // Si l'article est présent dans le panier, sa quantité est modifiée
+  if ( in_array($idArticle, $_SESSION['Panier']['IdArticle']) ) {
+
+    if ( $quantite === 0 ) {
+      // Suppression de l'article du panier
+      return supprimerArticle($idArticle);
+    }
+
+    if ( $quantite > 0 && $quantite <= QUANTITE_MAX ) {
+      /** Position de l'article dans le panier. */
+      $index = array_search($idArticle, $_SESSION['Panier']['IdArticle']);
+
+      // Modification de la quantité
+      $_SESSION['Panier']['Qte'][$index] = $quantite;
+      return true;
+    }
+
+  }
+
+  return false;
+}
