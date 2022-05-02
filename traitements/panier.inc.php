@@ -32,7 +32,15 @@ const QUANTITE_MAX = 5;
  */
 function initialiserPanier (): void {
   if (!isset($_SESSION)) session_start();
-  if (empty($_SESSION['Panier'])) $_SESSION['Panier'] = array();
+  if (empty($_SESSION['Panier'])) {
+    $_SESSION['Panier'] = array();
+
+    $_SESSION['Panier']['IdArticle'] = array();
+    $_SESSION['Panier']['Nom'] = array();
+    $_SESSION['Panier']['Prix'] = array();
+    $_SESSION['Panier']['PhotoVignette'] = array();
+    $_SESSION['Panier']['Qte'] = array();
+  }
 }
 
 
@@ -47,23 +55,25 @@ function ajouterArticle (int $idArticle): bool {
   initialiserPanier();
 
   // Si l'article n'est pas présent dans le panier
-  if ( !isset($_SESSION['Panier'][$idArticle]) ) {
+  if ( !in_array($idArticle, $_SESSION['Panier']['IdArticle']) ) {
     // L'article à ajouter au panier est recherché dans la base de données.
-    @$article = rechercherArticle($idArticle, 'idArticle')[0];
+    @$article = rechercherArticle($idArticle, 'idArticle')[0] ?? NULL;
 
     // Si l'article recherché est inexistant, il n'est pas ajouté au panier.
     if ( empty($article) ) return false;
 
     // L'article est ajouté au panier, avec une quantité de 1.
-    $_SESSION['Panier'][$idArticle] = array(
-      'Nom' => $article['Nom'],
-      'Prix' => $article['Prix'],
-      'PhotoVignette' => $article['PhotoVignette'],
-      'Qte' => 1
-    );
+    array_push($_SESSION['Panier']['IdArticle'], $idArticle);
+    array_push($_SESSION['Panier']['Nom'], $article['Nom']);
+    array_push($_SESSION['Panier']['Prix'], $article['Prix']);
+    array_push($_SESSION['Panier']['PhotoVignette'], $article['PhotoVignette']);
+    array_push($_SESSION['Panier']['Qte'], 1);
   } else {
+    /** Position de l'article dans le panier. */
+    $index = array_search($idArticle, $_SESSION['Panier']['IdArticle']);
+
     // La quantité de l'article est incrémentée, à condition qu'elle n'excède pas la quantité maximale autorisée.
-    $quantite = &$_SESSION['Panier'][$idArticle]['Qte'];
+    $quantite = &$_SESSION['Panier']['Qte'][$index];
     if ($quantite < QUANTITE_MAX)
       $quantite++;
     else return false;
@@ -71,4 +81,3 @@ function ajouterArticle (int $idArticle): bool {
 
   return true;
 }
-
