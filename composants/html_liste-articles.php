@@ -28,7 +28,7 @@ function htmlListeRayons ($listeArticles): void {
         $nomFournisseur = "non renseigné";
       }?>
       <li class="ls-articles__item" title="<?php echo $article['Nom']; ?>">
-        <a class="ls-articles__description" href="#">
+        <a class="ls-articles__description" href="/avocaba/vues/article.php?IdArticle=<?php echo $article['IdArticle'] ?>">
           <img class="ls-articles__img" src="<?php echo $article['PhotoVignette']; ?>" alt="<?php echo $article['Nom']; ?>">
           <p class="ls-articles__titre-article"><?php echo $article['Nom']; ?></p>
           <p class="ls-articles__producteur">Producteur : <?php if($nomFournisseur) echo $nomFournisseur; ?></p><div class="ls-articles__prix"><?php echo $article['Nom']; ?><img class="ls-articles__cabas" src="/img/placeholder.svg" alt="cabas"></div>

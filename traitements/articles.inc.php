@@ -19,53 +19,58 @@ const REGEX_ID = '/^[\d]{1,15}$/';
 
 const RECHERCHE_ARTICLE_ID_RAYON = '
 SELECT DISTINCT a.IdArticle, a.Nom, a.Prix, a.PrixRelatif, a.Unite, a.Description,
-        a.PhotoVignette, a.ProduitPhare, a.IdRayon, a.SiretProducteur, f.IdVille
+        a.PhotoVignette, a.ProduitPhare, r.IdRayon, a.SiretProducteur, f.IdVille, r.Nom AS NomRayon
 FROM ARTICLES a
+LEFT JOIN RAYONS r USING (IdRayon)
 INNER JOIN FOURNISSEURS f ON a.SiretProducteur = f.Siret
-WHERE IdRayon = ? AND IdVille = ?
+WHERE IdRayon = ? AND (IdVille = ? OR ? = "aucun")
 ';
 
 const RECHERCHE_ARTICLE_NOM_RAYON = '
 SELECT a.IdArticle, a.Nom, a.Prix, a.PrixRelatif, a.Unite, a.Description,
-        a.PhotoVignette, a.ProduitPhare, a.IdRayon, a.SiretProducteur, f.IdVille
+        a.PhotoVignette, a.ProduitPhare, a.IdRayon, a.SiretProducteur, f.IdVille, r.Nom AS NomRayon
 FROM ARTICLES a
 INNER JOIN RAYONS r USING (IdRayon)
 INNER JOIN FOURNISSEURS f ON a.SiretProducteur = f.Siret
-WHERE r.Nom LIKE ? AND IdVille = ?
+WHERE r.Nom LIKE ? AND (IdVille = ? OR ? = "aucun")
 ';
 
 const RECHERCHE_ARTICLE_ID_FOURNISSEUR = '
 SELECT a.IdArticle, a.Nom, a.Prix, a.PrixRelatif, a.Unite, a.Description,
-        a.PhotoVignette, a.ProduitPhare, a.IdRayon, a.SiretProducteur, f.IdVille
+        a.PhotoVignette, a.ProduitPhare, a.IdRayon, a.SiretProducteur, f.IdVille, r.Nom AS NomRayon
 FROM ARTICLES a
+LEFT JOIN RAYONS r USING (IdRayon)
 INNER JOIN FOURNISSEURS f ON a.SiretProducteur = f.Siret
-WHERE SiretProducteur = ? AND IdVille = ?
+WHERE SiretProducteur = ? AND (IdVille = ? OR ? = "aucun")
 ';
 
 const RECHERCHE_ARTICLE_NOM_FOURNISSEUR = '
 SELECT a.IdArticle, a.Nom, a.Prix, a.PrixRelatif, a.Unite, a.Description,
-        a.PhotoVignette, a.ProduitPhare, a.IdRayon, a.SiretProducteur, f.IdVille
+        a.PhotoVignette, a.ProduitPhare, a.IdRayon, a.SiretProducteur, f.IdVille, r.Nom AS NomRayon
 FROM ARTICLES a
+LEFT JOIN RAYONS r USING (IdRayon)
 INNER JOIN FOURNISSEURS f ON a.SiretProducteur = f.Siret
-WHERE f.Nom LIKE ? AND IdVille = ?
+WHERE f.Nom LIKE ? AND (IdVille = ? OR ? = "aucun")
 ';
 
 const RECHERCHE_ARTICLE_ID_ARTICLE = '
 SELECT a.IdArticle, a.Nom, a.Prix, a.PrixRelatif, a.Unite, a.Description,
-        a.PhotoVignette, a.ProduitPhare, a.IdRayon, a.SiretProducteur, f.IdVille
+        a.PhotoVignette, a.ProduitPhare, a.IdRayon, a.SiretProducteur, f.IdVille, r.Nom AS NomRayon
 FROM ARTICLES a
+LEFT JOIN RAYONS r USING (IdRayon)
 INNER JOIN FOURNISSEURS f ON a.SiretProducteur = f.Siret
-WHERE IdArticle = ? AND IdVille = ?
+WHERE IdArticle = ? AND (IdVille = ? OR ? = "aucun")
 ';
 
 const RECHERCHE_ARTICLE_NOM_ARTICLE = '
 SELECT DISTINCT a.IdArticle, a.Nom, a.Prix, a.PrixRelatif, a.Unite, a.Description,
-        a.PhotoVignette, a.ProduitPhare, a.IdRayon, a.SiretProducteur, f.IdVille
+        a.PhotoVignette, a.ProduitPhare, a.IdRayon, a.SiretProducteur, f.IdVille, r.Nom AS NomRayon
 FROM ARTICLES a
+LEFT JOIN RAYONS r USING (IdRayon)
 INNER JOIN FOURNISSEURS f ON a.SiretProducteur = f.Siret
 LEFT JOIN MOTS_CLES_ARTICLES USING (IdArticle)
 LEFT JOIN MOTS_CLES m USING (IdMotCle)
-WHERE (a.Nom LIKE ? OR m.Nom LIKE ?) AND IdVille = ?
+WHERE (a.Nom LIKE ? OR m.Nom LIKE ?) AND (IdVille = ? OR ? = "aucun")
 ';
 
 const RECHERCHE_ARTICLE_NOM = RECHERCHE_ARTICLE_NOM_FOURNISSEUR.' UNION '.RECHERCHE_ARTICLE_NOM_RAYON.' UNION '.RECHERCHE_ARTICLE_NOM_ARTICLE;
@@ -87,7 +92,7 @@ const RECHERCHE_ARTICLE_NOM = RECHERCHE_ARTICLE_NOM_FOURNISSEUR.' UNION '.RECHER
  *               le booléen si produit est phare, l'identifiant du rayon auquel il appartient,
  *               le SIRET du fournisseur
  */
-function rechercherArticle (string|int $critere, string $nature, string|int $IdVille = "IdVille"): array {
+function rechercherArticle (string|int $critere, string $nature, string|int $IdVille = 'aucun'): array {
   if(is_int($IdVille)){
     $IdVille = strval($IdVille);
   }
@@ -102,7 +107,7 @@ function rechercherArticle (string|int $critere, string $nature, string|int $IdV
         $stmt = $link->prepare(RECHERCHE_ARTICLE_ID_ARTICLE);
         checkError($stmt, $link);
 
-        $status = $stmt->bind_param('is', $critere, $IdVille);
+        $status = $stmt->bind_param('iss', $critere, $IdVille, $IdVille);
       }
       else{
         //Cas où le regex n'est pas bon
@@ -120,7 +125,7 @@ function rechercherArticle (string|int $critere, string $nature, string|int $IdV
 
         $critere = '%'.$critere.'%';
 
-        $status = $stmt->bind_param('sss', $critere, $critere, $IdVille);
+        $status = $stmt->bind_param('ssss', $critere, $critere, $IdVille, $IdVille);
       }
       else{
         //Cas où le regex n'est pas bon
@@ -135,7 +140,7 @@ function rechercherArticle (string|int $critere, string $nature, string|int $IdV
         $stmt = $link->prepare(RECHERCHE_ARTICLE_ID_RAYON);
         checkError($stmt, $link);
 
-        $status = $stmt->bind_param('is', $critere, $IdVille);
+        $status = $stmt->bind_param('iss', $critere, $IdVille, $IdVille);
       }
       else{
         //Cas où le regex n'est pas bon
@@ -153,7 +158,7 @@ function rechercherArticle (string|int $critere, string $nature, string|int $IdV
 
         $critere = '%'.$critere.'%';
 
-        $status = $stmt->bind_param('ss', $critere, $IdVille);
+        $status = $stmt->bind_param('sss', $critere, $IdVille, $IdVille);
       }
       else{
         //Cas où le regex n'est pas bon
@@ -168,7 +173,7 @@ function rechercherArticle (string|int $critere, string $nature, string|int $IdV
         $stmt = $link->prepare(RECHERCHE_ARTICLE_ID_FOURNISSEUR);
         checkError($stmt, $link);
 
-        $status = $stmt->bind_param('is', $critere, $IdVille);
+        $status = $stmt->bind_param('iss', $critere, $IdVille, $IdVille);
       }
       else{
         //Cas où le regex n'est pas bon
@@ -185,7 +190,7 @@ function rechercherArticle (string|int $critere, string $nature, string|int $IdV
 
         $critere = '%'.$critere.'%';
 
-        $status = $stmt->bind_param('ss', $critere, $IdVille);
+        $status = $stmt->bind_param('sss', $critere, $IdVille, $IdVille);
       }
       else{
         //Cas où le regex n'est pas bon
@@ -203,7 +208,7 @@ function rechercherArticle (string|int $critere, string $nature, string|int $IdV
 
       $critere = '%'.$critere.'%';
 
-      $status = $stmt->bind_param('sssssss', $critere, $IdVille, $critere, $IdVille, $critere, $critere, $IdVille);
+      $status = $stmt->bind_param('ssssssssss', $critere, $IdVille, $IdVille, $critere, $IdVille, $IdVille, $critere, $critere, $IdVille, $IdVille);
       checkError($status, $link);
     }
     else{
