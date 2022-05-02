@@ -146,3 +146,59 @@ function modifierQteArticle (int $idArticle, int $quantite): bool {
 
   return false;
 }
+
+
+/**
+ * Calculer le montant total du panier.
+ * @return int|float Montant total du panier
+ */
+function montantPanier (): int|float {
+  initialiserPanier();
+
+  $montantPanier = 0;
+
+  foreach ( $_SESSION['Panier']['Prix'] as $key => $prix ) {
+    $montantPanier += $prix * $_SESSION['Panier']['Qte'][$key];
+  }
+
+  return $montantPanier;
+}
+
+
+/**
+ * Calculer le nombre d'articles différents présents dans le panier (chaque article présent dans le panier est compté
+ * une fois).
+ * @return int Nombre d'articles différents présents dans le panier
+ */
+function nbArticles (): int {
+  initialiserPanier();
+
+  return count( $_SESSION['Panier']['IdArticle'] );
+}
+
+
+/**
+ * Calculer le nombre total d'articles présents dans le panier (chaque article présent dans le panier est compté
+ * <i>n</i> fois, où <i>n</i> est la quantité de l'article).
+ * @return int Nombre total d'articles présents dans le panier
+ */
+function nbArticlesTotal (): int {
+  initialiserPanier();
+
+  $nbArticles = 0;
+
+  foreach ($_SESSION['Panier']['Qte'] as $qte) {
+    $nbArticles += $qte;
+  }
+
+  return $nbArticles;
+}
+
+
+/**
+ * Supprimer le panier.
+ * @return void
+ */
+function supprimerPanier (): void {
+  unset($_SESSION['Panier']);
+}
