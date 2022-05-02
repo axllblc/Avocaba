@@ -27,6 +27,19 @@ const PHOTOS = '
   WHERE Siret = ?;
 ';
 
+const PRODUCTEURS_PROCHES_VILLE = '
+  SELECT `Siret`
+  FROM fournisseurs
+  WHERE `IdVille` = ?
+  AND `Siret` != ?;
+';
+
+const VILLE = '
+  SELECT `Nom`
+  FROM `villes`
+  WHERE `IdVille` = ?;
+';
+
 
 class Fournisseur {
   private $_siret;
@@ -105,6 +118,30 @@ class Fournisseur {
   function getPhotoBanniere() {return $this->_photoBanniere;}
   function getIdVille() {return $this->_idVille;}
 
+  function getVille() {
+    // connexion à la base de données
+    $link = dbConnect();
+
+    // Préparation de la requête
+    $stmt = $link->prepare(VILLE);
+    checkError($stmt, $link);
+    $status = $stmt->bind_param('i', $this->_idVille);
+
+    // Exécution de la requête
+    $status = $stmt->execute();
+    checkError($status, $link);
+
+    // Récupération du résultat
+    $result = $stmt->get_result();
+    checkError($result, $link);
+    $resultArray = $result->fetch_all(MYSQLI_ASSOC);
+
+    // Fermeture de la connexion à la base de données
+    $link->close();
+
+    return $resultArray[0]['Nom'];
+  }
+
   /**
    * Obtenir la liste des produits phares du fournisseur
    * @return array liste des identifiants des produits phares
@@ -130,6 +167,9 @@ class Fournisseur {
     // Fermeture de la connexion à la base de données
     $link->close();
     
+    foreach ($resultArray as $key => $value)
+      $resultArray[$key] = $value['IdArticle'];
+
     return $resultArray;
   }
 
@@ -183,6 +223,37 @@ class Fournisseur {
     $link->close();
 
     return $nombre;
+  }
+
+  /**
+   * Obtenir la liste des autres producteurs dans la même ville TODO
+   * @return array liste des sirets des autres fournisseurs
+   */
+  function producteursProches() : array {
+    // connexion à la base de données
+    $link = dbConnect();
+
+    // Préparation de la requête
+    $stmt = $link->prepare(PRODUCTEURS_PROCHES_VILLE);
+    checkError($stmt, $link);
+    $status = $stmt->bind_param('ii', $this->_idVille, $this->_siret);
+
+    // Exécution de la requête
+    $status = $stmt->execute();
+    checkError($status, $link);
+
+    // Récupération du résultat
+    $result = $stmt->get_result();
+    checkError($result, $link);
+    $resultArray = $result->fetch_all(MYSQLI_ASSOC);
+
+    // Fermeture de la connexion à la base de données
+    $link->close();
+
+    foreach ($resultArray as $key => $value)
+      $resultArray[$key] = $value['Siret'];
+
+    return $resultArray;
   }
 }
 ?>

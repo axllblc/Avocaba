@@ -3,6 +3,7 @@
 error_reporting(E_ALL);
 
 require_once '../traitements/fournisseur.inc.php';
+require_once '../traitements/articles.inc.php';
 require_once '../traitements/misc.inc.php';
 require_once '../composants/html_head.php';
 require_once '../composants/html_header.php';
@@ -46,7 +47,7 @@ if (isset($_GET['siret'])) {
   <?php htmlHead($fournisseur->getNom() . ' – Avocaba'); ?>
 
   <body>
-    <?php htmlHeader(); // TODO ?> 
+    <?php htmlHeader(); ?> 
 
     <main class="fournisseur">
       <!-- Bannière du producteur -->
@@ -128,7 +129,7 @@ if (isset($_GET['siret'])) {
         <div class="fournisseur__colonne-droite">
           <h2>Information</h2>
           <p><?php echo $fournisseur->getAdresse(); ?></p>
-          <p>[ville]</p>
+          <p><?php echo $fournisseur->getVille(); ?></p>
           <p><?php echo $fournisseur->getEmail(); ?></p>
           <a href="#"
              title="site web du producteur"><?php echo $fournisseur->getSite(); ?></a>
@@ -138,78 +139,61 @@ if (isset($_GET['siret'])) {
       </div>
 
       <!-- Producteurs phares -->
+      <?php
+      $articles_phares = $fournisseur->produitsPhares();
+      if (count($articles_phares) != 0) {
+      ?>
       <div class="fournisseur__produits-phares">
         <h2 class="fournisseur__h2-produits-phares">Mes produits phares</h2>
         <ul class="fournisseur__table">
+          <?php
+          $i = 0;
+          while ($i < 4 && isset($articles_phares[$i])) {
+            // récupérer article
+            $article = rechercherArticle($articles_phares[$i], 'idArticle')[0];
+            $i++;
+          ?>
           <li class="fournisseur__cellule">
-            <img class="fournisseur__photo" src="/img/placeholder.svg" alt="produit phare 1">
+            <img class="fournisseur__photo" src="<?php echo $article['PhotoVignette']; ?>" alt="produit phare <?php echo $i; ?>">
             <div class="fournisseur__etiquette">
-              <p class="fournisseur__nom-produits-phares">[Produit 1]</p>
-              <p class="fournisseur__prix-produits-phares">[Prix]</p>
+              <p class="fournisseur__nom-produits-phares"><?php echo $article['Nom']; ?></p>
+              <p class="fournisseur__prix-produits-phares"><?php echo $article['Prix']; ?> €</p>
             </div>
           </li>
-          <li class="fournisseur__cellule">
-            <img class="fournisseur__photo" src="/img/placeholder.svg" alt="produit phare 2">
-            <div class="fournisseur__etiquette">
-              <p class="fournisseur__nom-produits-phares">[Produit 2]</p>
-              <p class="fournisseur__prix-produits-phares">[Prix]</p>
-            </div>
-          </li>
-          <li class="fournisseur__cellule">
-            <img class="fournisseur__photo" src="/img/placeholder.svg" alt="produit phare 3">
-            <div class="fournisseur__etiquette">
-              <p class="fournisseur__nom-produits-phares">[Produit 3]</p>
-              <p class="fournisseur__prix-produits-phares">[Prix]</p>
-            </div>
-          </li>
-          <li class="fournisseur__cellule">
-            <img class="fournisseur__photo" src="/img/placeholder.svg" alt="produit phare 4">
-            <div class="fournisseur__etiquette">
-              <p class="fournisseur__nom-produits-phares">[Produit 4]</p>
-              <p class="fournisseur__prix-produits-phares">[Prix]</p>
-            </div>
-          </li>
+          <?php } ?>
         </ul>
         <a class="fournisseur__voir-autres-produits" href="#" title="voir les autres produits phares du producteur">
           Voir mes autres produits
         </a>
       </div>
+      <?php } ?>
 
       <!-- Autres producteurs proches de chez moi -->
+      <?php
+      $producteurs_proches = $fournisseur->producteursProches();
+      if (count($producteurs_proches) != 0) {
+      ?>
       <div class="fournisseur__producteur-proche">
-        <h2 class="fournisseur__h2-producteur-proche">Autres producteurs proches de chez moi</h2>
-        <ul class="fournisseur__table">
-          <li class="fournisseur__cellule">
-            <img class="fournisseur__photo" src="/img/placeholder.svg" alt="producteur proche de chez moi 1">
-            <div class="fournisseur__etiquette">
-              <p class="fournisseur__nom-producteur-proche">[Producteur 1]</p>
-              <p class="fournisseur__localisation-producteur-proche">[Localisation]</p>
-            </div>
-          </li>
-          <li class="fournisseur__cellule">
-            <img class="fournisseur__photo" src="/img/placeholder.svg" alt="producteur proche de chez moi 2">
-            <div class="fournisseur__etiquette">
-              <p class="fournisseur__nom-producteur-proche">[Producteur 2]</p>
-              <p class="fournisseur__localisation-producteur-proches">[Localisation]</p>
-            </div>
-          </li>
-          <li class="fournisseur__cellule">
-            <img class="fournisseur__photo" src="/img/placeholder.svg" alt="producteur proche de chez moi 3">
-            <div class="fournisseur__etiquette">
-              <p class="fournisseur__nom-producteur-proche">[Producteur 3]</p>
-              <p class="fournisseur__localisation-producteur-proche">[Localisation]</p>
-            </div>
-          </li>
-          <li class="fournisseur__cellule">
-            <img class="fournisseur__photo" src="/img/placeholder.svg" alt="producteur proche de chez moi 4">
-            <div class="fournisseur__etiquette">
-              <p class="fournisseur__nom-producteur-proche">[Producteur 4]</p>
-              <p class="fournisseur__localisation-producteur-proche">[Localisation]</p>
-            </div>
-          </li>
-        </ul>
+          <h2 class="fournisseur__h2-producteur-proche">Autres producteurs proches de chez moi</h2>
+          <ul class="fournisseur__table">
+            <?php
+            $i = 0;
+            while ($i < 4 && isset($producteurs_proches[$i])) {
+              // récupérer article
+              $fournisseur_proche = $fournisseur->producteursProches();
+              $i++;
+            ?>
+            <li class="fournisseur__cellule">
+              <img class="fournisseur__photo" src="<?php echo fournisseur_proche->getPhotoProfil(); ?>" alt="producteur proche de chez moi <?php echo $i; ?>">
+              <div class="fournisseur__etiquette">
+                <p class="fournisseur__nom-producteur-proche"><?php echo fournisseur_proche->getNom(); ?></p>
+                <p class="fournisseur__localisation-producteur-proche"><?php echo fournisseur_proche->getVille(); ?></p>
+              </div>
+            </li>
+            <?php } ?>
+          </ul>
       </div>
-
+      <?php } ?>
     </main>
 
     <?php footer(); ?>
