@@ -38,6 +38,7 @@ function initialiserPanier (): void {
     $_SESSION['Panier']['IdArticle'] = array();
     $_SESSION['Panier']['Nom'] = array();
     $_SESSION['Panier']['Prix'] = array();
+    $_SESSION['Panier']['Unite'] = array();
     $_SESSION['Panier']['PhotoVignette'] = array();
     $_SESSION['Panier']['Qte'] = array();
   }
@@ -66,6 +67,7 @@ function ajouterArticle (int $idArticle): bool {
     array_push($_SESSION['Panier']['IdArticle'], $idArticle);
     array_push($_SESSION['Panier']['Nom'], $article['Nom']);
     array_push($_SESSION['Panier']['Prix'], $article['Prix']);
+    array_push($_SESSION['Panier']['Unite'], $article['Unite']);
     array_push($_SESSION['Panier']['PhotoVignette'], $article['PhotoVignette']);
     array_push($_SESSION['Panier']['Qte'], 1);
   } else {
@@ -101,6 +103,7 @@ function supprimerArticle (int $idArticle): bool {
     array_splice($_SESSION['Panier']['IdArticle'], $index, 1);
     array_splice($_SESSION['Panier']['Nom'], $index, 1);
     array_splice($_SESSION['Panier']['Prix'], $index, 1);
+    array_splice($_SESSION['Panier']['Unite'], $index, 1);
     array_splice($_SESSION['Panier']['PhotoVignette'], $index, 1);
     array_splice($_SESSION['Panier']['Qte'], $index, 1);
   } else return false;
