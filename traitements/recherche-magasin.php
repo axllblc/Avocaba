@@ -42,7 +42,7 @@ LIMIT 10;
 ';
 
 const RECHERCHE_ID = '
-SELECT d.`IdDepot`, d.`Nom`, d.`Adresse`, v.`Nom` AS `Ville`, v.`CodePos` AS `CodePostal`
+SELECT d.`IdDepot`, d.`Nom`, d.`Adresse`, v.`Nom` AS `Ville`, v.`CodePos` AS `CodePostal`, d.`IdVille`
 FROM DEPOTS AS d
 INNER JOIN VILLES AS v USING (`IdVille`)
 WHERE d.`IdDepot` = ?

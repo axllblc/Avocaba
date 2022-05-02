@@ -21,21 +21,10 @@ $ok = false;
 session_start();
 // récupération de la recherche (minimum 2 caractères)
 if (isset($_GET['recherche']) and strlen($_GET['recherche']) > 1) {
-  $listeArticles = rechercherArticle($_GET['recherche'], 'nom');
-
-  // On retire les articles dont le founisseur ne vend pas dans le dépôt
+  $IdVille = rechercherMagasin($_SESSION['IdMagasin'], true)[0]['IdVille'];
+  $listeArticles = rechercherArticle($_GET['recherche'], 'nom', $IdVille);
   if ($listeArticles){
-    foreach ($listeArticles as $key => $article) {
-      $siret = $article['SiretProducteur'];
-      $fournisseur = new Fournisseur($siret);
-      $IdVille = rechercherMagasin($_SESSION['IdMagasin']);
-      if($fournisseur->getIdVille() != $IdVille){
-        //unset($listeArticles[$key]);
-      }
-    }
-    if (count($listeArticles)>0){
-      $ok = true;
-    }
+    $ok = true;
   }
 }
 
