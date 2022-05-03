@@ -3,7 +3,7 @@
 error_reporting(E_ALL);
 
 require_once '../traitements/fournisseur.inc.php';
-require_once '../traitements/recherche-magasin.php';
+require_once '../traitements/magasin.inc.php';
 require_once '../traitements/articles.inc.php';
 require_once '../traitements/misc.inc.php';
 require_once '../composants/html_head.php';
@@ -82,7 +82,7 @@ if (isset($_GET['IdArticle'])) {
 
 
         <div class="details-produit__prix">
-          <div class="prix-net"><?php $a['Prix']; ?> €</div>
+          <div class="prix-net"><?php echo $a['Prix']; ?> €</div>
           <div class="prix-s">[Prix]<?php echo $a['PrixRelatif']; ?> €/<?php echo $a['Unite']; ?></div>
         </div>
 

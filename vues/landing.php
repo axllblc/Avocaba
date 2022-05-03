@@ -4,7 +4,7 @@
 
 error_reporting(E_ALL);
 
-require_once '../traitements/recherche-magasin.php';
+require_once '../traitements/magasin.inc.php';
 require_once '../composants/html_head.php';
 require_once '../composants/footer.php';
 

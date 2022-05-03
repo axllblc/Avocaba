@@ -8,7 +8,7 @@ require_once '../composants/html_head.php';
 require_once '../composants/html_header.php';
 require_once '../composants/footer.php';
 require_once '../composants/html_liste-rayons.php';
-require_once '../traitements/recherche-magasin.php';
+require_once '../traitements/magasin.inc.php';
 
 
 
