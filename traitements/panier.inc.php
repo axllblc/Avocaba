@@ -149,6 +149,32 @@ function modifierQteArticle (int $idArticle, int $quantite): bool {
 
 
 /**
+ * Décrémenter la quantité d'un article dans le panier. L'article est retiré du panier si sa quantité devient nulle.
+ * @param int $idArticle Article dont la quantité doit être décrémentée.
+ * @return bool Booléen indiquant le succès ou non de la modification : true si la quantité a été modifiée, false en cas
+ *              d'échec (article absent du panier).
+ */
+function diminuerQteArticle (int $idArticle): bool {
+  initialiserPanier();
+
+  /** Position de l'article dans le panier. */
+  $index = array_search($idArticle, $_SESSION['Panier']['IdArticle']);
+
+  // Si l'article est présent dans le panier
+  if ($index !== false) {
+    // La quantité de l'article est décrémentée.
+    $quantite = &$_SESSION['Panier']['Qte'][$index];
+    if ($quantite > 1) {
+      $quantite--;
+      return true;
+    } else return supprimerArticle($idArticle);
+  }
+
+  return false;
+}
+
+
+/**
  * Calculer le montant total du panier.
  * @return int|float Montant total du panier
  */
