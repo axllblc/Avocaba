@@ -41,6 +41,7 @@ function initialiserPanier (): void {
     $_SESSION['Panier']['Unite'] = array();
     $_SESSION['Panier']['PhotoVignette'] = array();
     $_SESSION['Panier']['Qte'] = array();
+    $_SESSION['Panier']['Verrouillage'] = false;
   }
 }
 
@@ -54,6 +55,9 @@ function initialiserPanier (): void {
  */
 function ajouterArticle (int $idArticle): bool {
   initialiserPanier();
+
+  // Si le panier est verrouillé, l'ajout n'est pas effectué.
+  if ( $_SESSION['Panier']['Verrouillage'] ) return false;
 
   /** Position de l'article dans le panier. */
   $index = array_search($idArticle, $_SESSION['Panier']['IdArticle']);
@@ -94,6 +98,9 @@ function ajouterArticle (int $idArticle): bool {
 function supprimerArticle (int $idArticle): bool {
   initialiserPanier();
 
+  // Si le panier est verrouillé, la suppression n'est pas effectuée.
+  if ( $_SESSION['Panier']['Verrouillage'] ) return false;
+
   /** Position de l'article dans le panier. */
   $index = array_search($idArticle, $_SESSION['Panier']['IdArticle']);
 
@@ -124,6 +131,9 @@ function supprimerArticle (int $idArticle): bool {
  */
 function modifierQteArticle (int $idArticle, int $quantite): bool {
   initialiserPanier();
+
+  // Si le panier est verrouillé, la modification n'est pas effectuée.
+  if ( $_SESSION['Panier']['Verrouillage'] ) return false;
 
   /** Position de l'article dans le panier. */
   $index = array_search($idArticle, $_SESSION['Panier']['IdArticle']);
@@ -156,6 +166,9 @@ function modifierQteArticle (int $idArticle, int $quantite): bool {
  */
 function diminuerQteArticle (int $idArticle): bool {
   initialiserPanier();
+
+  // Si le panier est verrouillé, la modification n'est pas effectuée.
+  if ( $_SESSION['Panier']['Verrouillage'] ) return false;
 
   /** Position de l'article dans le panier. */
   $index = array_search($idArticle, $_SESSION['Panier']['IdArticle']);
