@@ -45,7 +45,7 @@ if (isset($_GET['recherche']) and strlen($_GET['recherche']) > 1) {
   <main>
     <?php
       if ($ok)
-        htmlListeRayons($listeArticles);
+        htmlListeArticles($listeArticles);
       else
         echo "Aucun résultat, veuillez réessayer.";
     ?>

@@ -10,7 +10,7 @@ require_once '../traitements/fournisseur.inc.php';
  * @param array $listeArticles Liste d'articles
  * @return void
  */
-function htmlListeRayons ($listeArticles): void {
+function htmlListeArticles ($listeArticles): void {
 
   if ( count($listeArticles) > 0 ) {
     echo '<ul class="ls-articles" style="background-color: gainsboro;">';
