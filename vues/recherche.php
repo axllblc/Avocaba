@@ -13,13 +13,17 @@ require_once '../composants/html_header.php';
 require_once '../composants/html_liste-articles.php';
 require_once '../composants/footer.php';
 
+
+
 /********************
  * Script principal *
  ********************/
+
 $ok = false;
 $q = "";
 session_start();
-// récupération de la recherche (minimum 2 caractères)
+// Récupération des résultats de la recherche (minimum 2 caractères)
+  // FIXME : Prévoir le cas où il n'y a pas de magasin dans la session
 if (isset($_GET['recherche']) and strlen($_GET['recherche']) > 1) {
   $q = $_GET['recherche'];
   $IdVille = rechercherMagasin($_SESSION['IdMagasin'], true)[0]['IdVille'];
@@ -33,20 +37,19 @@ if (isset($_GET['recherche']) and strlen($_GET['recherche']) > 1) {
 
 <!DOCTYPE html>
 <html lang="fr">
-<?php htmlHead($q . ' – Avocaba'); ?>
 
-  <body>
-    <?php htmlHeader($q); ?>
-    <main>
-      <?php
-        if($ok){
-          htmlListeRayons($listeArticles);
-        }
-        else{
-          echo "Aucun résultat, veuillez réessayer.";
-        }
-      ?>
-    </main>
-    <?php footer(); ?>
-  </body>
+<?php htmlHead('🔍 ' . $q . ' – Avocaba'); ?>
+
+<body>
+  <?php htmlHeader(true, $q); ?>
+  <main>
+    <?php
+      if ($ok)
+        htmlListeRayons($listeArticles);
+      else
+        echo "Aucun résultat, veuillez réessayer.";
+    ?>
+  </main>
+  <?php footer(); ?>
+</body>
 </html>
