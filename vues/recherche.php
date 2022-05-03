@@ -23,12 +23,20 @@ $ok = false;
 $q = "";
 session_start();
 // Récupération des résultats de la recherche (minimum 2 caractères)
-  // FIXME : Prévoir le cas où il n'y a pas de magasin dans la session
 if (isset($_GET['recherche']) and strlen($_GET['recherche']) > 1) {
   $q = $_GET['recherche'];
-  $IdVille = rechercherMagasin($_SESSION['IdMagasin'], true)[0]['IdVille'];
-  $listeArticles = rechercherArticle($_GET['recherche'], 'nom', $IdVille);
-  if ($listeArticles){
+  $idDepot = 'aucun';
+
+  if(isset($_SESSION['IdMagasin'])){
+    // Cas où l'on est connecté à un magasin : on affiche que les articles du magasin
+    $idDepot = $_SESSION['IdMagasin'];
+    $listeArticles = rechercherArticle($q, 'nomArticle', $idDepot);
+  }
+  else{
+    // Pas de magasin renseigné, l'utilisateur peut consulter tout les articles de Avocaba
+    $listeArticles = rechercherArticle($q, 'nomArticle', 'aucun');
+  }
+  if ($listeArticles != null){
     $ok = true;
   }
 }

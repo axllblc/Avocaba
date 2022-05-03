@@ -25,21 +25,19 @@ if (isset($_GET['IdArticle'])) {
   $a = rechercherArticle($_GET['IdArticle'], "idArticle");
   if($a == null){
     // Si l'article n'existe pas, on retourne au magasin
-    //header('Location: /avocaba/vues/magasin.php');
-    var_dump($_GET['IdArticle']);
-    echo "est l'article id ***************";
-    var_dump($a);
-    echo "est l'article array ùùùùùùùùùùùùùùùùù";
+    header('Location: /avocaba/vues/magasin.php');
   }
   $a = $a[0]; // Il n'y a qu'un seul article
   // $f est le producteur/fournisseur de l'article
   $f = new Fournisseur($a['SiretProducteur']);
+
   session_start();
+
   // On récupère le magasin
   $m = rechercherMagasin($_SESSION['IdMagasin'], true)[0];
-  $IdVille = $m['IdVille'];
-  // On regarde si l'article est dispo dans le magasin en quesiton
-  if( $f->getIdVille() == $IdVille ){
+
+  // On vérifie si l'article est disponible dans le magasin/dépot
+  if( count(rechercherArticle($_GET['IdArticle'], "idArticle", $_SESSION['IdMagasin']))>0 ){
     $dispo = true;
   }
   else{
@@ -65,7 +63,7 @@ if (isset($_GET['IdArticle'])) {
     <button class="nav__btn-retour" onclick="history.back();" title="Revenir à la page précédente">Retour</button>
     <div class="nav__sep"><!--Séparateur--></div>
     <a href="/avocaba/vues/magasin.php" title="Accueil du magasin <?php echo $m['Nom']; ?>"><?php echo $m['Nom']; ?></a>
-    <a href="#" title="Rayon <?php echo $a['NomRayon']; ?>"> <?php echo $a['NomRayon']; ?></a>
+    <a href="<?php echo '/avocaba/vues/recherche.php?recherche=' . $a['NomRayon']; ?>" title="Rayon <?php echo $a['NomRayon']; ?>"> <?php echo $a['NomRayon']; ?></a>
   </nav>
   <div class="messageInfo">
     <?php if (!$dispo) echo "L'article n'est pas disponible dans votre magasin."; ?>
@@ -127,7 +125,7 @@ if (isset($_GET['IdArticle'])) {
       <p>Les produits similaires apparaîtront ici</p>
     </div>
 
-    <a class="details-produit__rayon" href="#">Explorer le rayon [Nom du rayon]</a>
+    <a class="details-produit__rayon" href="<?php echo '/avocaba/vues/recherche.php?recherche=' . $a['NomRayon']; ?>">Explorer le rayon <?php echo $a['NomRayon']; ?></a>
   </main>
 
   <?php footer(); ?>

@@ -37,6 +37,6 @@ function htmlListeArticles ($listeArticles): void {
     <?php }
     echo '</ul>';
   } else {
-    echo 'Aucun rayon';
+    echo 'Aucun article';
   }
 }
