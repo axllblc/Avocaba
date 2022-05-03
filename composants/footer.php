@@ -50,7 +50,7 @@ function footer (): void { ?>
         <input type="email" name="email_newsletter" id="email-newsletter" placeholder="Email">
         <input type="submit" value="Je m'abonne">
       </form>
-      <p>Vous pouvez vous désabonner de la newsletter à tout moment. Consultez notre <a href="#">politique de confidentialité</a> pour en savoir plus sur notre utilisation des données.</p>
+      <p>Vous pouvez vous désabonner de la newsletter à tout moment. Consultez notre <a href="#">politique de confidentialité</a> pour en savoir plus sur notre utilisation des données personnelles.</p>
     </div>
     <ul class="pied-de-page__juridique">
       <li class="pied-de-page__item">

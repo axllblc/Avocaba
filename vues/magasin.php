@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 require_once '../composants/html_head.php';
 require_once '../composants/html_header.php';
 require_once '../composants/footer.php';
+require_once '../composants/html_liste-rayons.php';
 require_once '../traitements/recherche-magasin.php';
 
 
@@ -54,8 +55,10 @@ if ( isset($_SESSION['IdMagasin']) ) {
   // Récupérer le magasin ayant pour identifiant celui enregistré dans la session
   @$magasin = rechercherMagasin($_SESSION['IdMagasin'], true)[0];
 
-  // Si le magasin enregistré dans la session n'existe pas, alors une erreur 404 s'affiche ; l'identifiant du magasin
-  // est supprimé de la session
+  /*
+   * Si le magasin enregistré dans la session n'existe pas, alors une erreur 404 s'affiche ; l'identifiant du magasin
+   * est supprimé de la session
+   */
   if (!isset($magasin)) {
     unset($_SESSION['IdMagasin']);
     erreur404();
@@ -96,8 +99,7 @@ if ( isset($_SESSION['IdMagasin']) ) {
 
   <div class="rayons">
     <h2>Rayons</h2>
-    <?php // TODO liste des rayons ?>
-    Ici apparaîtra la liste des rayons
+    <?php htmlListeRayons($_SESSION['IdMagasin']); // TODO : Améliorer le CSS ?>
   </div>
 </main>
 

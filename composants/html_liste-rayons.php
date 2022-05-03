@@ -2,8 +2,7 @@
 
 /* 📂 Liste des rayons */
 
-// TODO créer la vue articles (recherche d'articles)
-// TODO ajouter les images des rayons
+// TODO : ajouter le lien vers la page de résultats
 
 require_once '../traitements/liste-rayons.php';
 
@@ -19,14 +18,16 @@ function htmlListeRayons (int $idMagasin): void {
     echo '<ul class="ls-rayons" style="background-color: gainsboro;">';
 
     foreach ($listeRayons as $rayon) { ?>
+
       <li class="ls-rayons__item"
           title="<?php echo $rayon['Nom'] ?>">
-        <a href="/avocaba/vues/articles.php?rayon=<?php echo $rayon['IdRayon'] ?>">
-          <img src="<?php // TODO à compléter ?>"
+        <a href="<?php echo '/avocaba/vues/articles.php?rayon=' . $rayon['IdRayon']; ?>">
+          <img src="<?php echo '/avocaba/img/rayons/' . $rayon['IdRayon'] . '.png'; ?>"
                alt="<?php echo $rayon['Nom'] ?>">
           <span><?php echo $rayon['Nom'] ?></span>
         </a>
       </li>
+
     <?php }
 
     echo '</ul>';
