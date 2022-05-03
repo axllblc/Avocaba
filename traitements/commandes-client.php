@@ -12,9 +12,9 @@ require_once 'misc.inc.php';
 const RECHERCHE_COMMANDES = '
 SELECT comm.IdCommande, comm.DateRetrait, comm.DateValidation, d.Nom AS NomDepot, SUM(a.Prix*cont.Quantite) AS PrixCommande
 FROM COMMANDES AS comm
-LEFT JOIN CONTENIR AS cont USING (IdCommande)
-LEFT JOIN ARTICLES AS a USING (IdArticle)
-LEFT JOIN DEPOTS  AS d USING (IdDepot)
+INNER JOIN CONTENIR AS cont USING (IdCommande)
+INNER JOIN ARTICLES AS a USING (IdArticle)
+INNER JOIN DEPOTS  AS d USING (IdDepot)
 WHERE comm.IdClient = ?
 GROUP BY comm.IdCommande
 ORDER BY comm.DateValidation DESC
@@ -32,7 +32,7 @@ LIMIT ?;
  * @param $IdClient : identifiant du client
  * @param $nbComm : nombre maximal de commande effectuée du client voulue
  */
-function rechercheCommandes ($IdClient, $nbComm) {
+function rechercheCommandes ($IdClient, $nbComm): bool|array {
   // Connexion à la base de données
   $link = dbConnect();
 
@@ -55,7 +55,9 @@ function rechercheCommandes ($IdClient, $nbComm) {
 
   $resultArray = $result->fetch_all(MYSQLI_ASSOC);
 
-  // Fermeture de la connexion à la base de données
+  // Fermeture de la connexion à la base de données et libération de la mémoire associée
+  $result->close();
+  $stmt->close();
   $link->close();
 
   if (count($resultArray) > 0) {
