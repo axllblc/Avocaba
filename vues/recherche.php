@@ -28,16 +28,16 @@ if (isset($_GET['recherche']) and strlen($_GET['recherche']) > 1) {
   $q = $_GET['recherche'];
   $idDepot = 'aucun';
 
-  if(isset($_SESSION['IdMagasin'])){
+  if (isset($_SESSION['Depot']['IdDepot'])) {
     // Cas où l'on est connecté à un magasin : on affiche que les articles du magasin
-    $idDepot = $_SESSION['IdMagasin'];
+    $idDepot = $_SESSION['Depot']['IdDepot'];
     $listeArticles = rechercherArticle($q, 'nomArticle', $idDepot);
   }
-  else{
+  else {
     // Pas de magasin renseigné, l'utilisateur peut consulter tout les articles de Avocaba
     $listeArticles = rechercherArticle($q, 'nomArticle', 'aucun');
   }
-  if ($listeArticles != null){
+  if ($listeArticles != null) {
     $ok = true;
   }
 }

@@ -68,7 +68,7 @@ if ( !isset($_SESSION['Client']) ){
 <?php htmlHead('Espace Client – Avocaba'); ?>
 
 <body>
-  <?php htmlHeader( isset($_SESSION['IdMagasin']) ); ?>
+  <?php htmlHeader( isset($_SESSION['Depot']['IdDepot']) ); ?>
 
   <main class="client">
     <h1 class="client__titre">Mon compte</h1>
@@ -79,9 +79,10 @@ if ( !isset($_SESSION['Client']) ){
       <button id="client__bt-deconnexion" type="submit" name="btClient" value="deco">Déconnexion</button>
     </form>
     <div class="client__affichage">
-      <?php affichage() ?>
+      <?php affichage(); ?>
     </div>
   </main>
-<?php footer(); ?>
+
+  <?php footer(); ?>
 </body>
 </html>

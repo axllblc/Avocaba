@@ -4,13 +4,26 @@
 
 error_reporting(E_ALL);
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/magasin.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_liste-rayons.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/annonce-accueil.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/error.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/magasin.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/annonce-accueil.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_liste-rayons.php';
+
+
+
+/**************
+ * Constantes *
+ **************/
+
+/** Message affiché en cas de requête invalide */
+const MSG_400 = 'Votre requête n\'est pas valide.';
+
+/** Message affiché en cas de magasin inexistant */
+const MSG_404 =
+  'Le magasin auquel vous tentez d\'accéder n\'existe pas... Retournez à l\'accueil pour retrouver votre chemin !';
 
 
 
@@ -19,43 +32,38 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/magasin.inc.php';
  ********************/
 
 /*
- * Si un identifiant de magasin est passé en paramètre, celui-ci est enregistré dans la session et l'accueil du magasin
- * correspondant est affiché.
- * Sinon, si un identifiant de magasin est enregistré dans la session, alors l'accueil du magasin correspondant est
- * affiché.
- * Sinon (il n'y a pas d'identifiant de magasin passé en paramètre ou enregistré dans la session), l'utilisateur est
- * redirigé vers l'accueil du site (landing page).
- * Dans le cas où l'identifiant de magasin ne correspond pas à un magasin existant (enregistré dans la base de données),
- * une erreur 404 est affichée.
+ * Si un identifiant de dépôt est passé en paramètre, les informations sur le dépôt correspondant sont enregistrées dans
+ * la session (sauf si aucun dépôt ne correspond ; dans ce cas, une erreur 404 est affichée).
+ *
+ * Si l'identifiant de dépôt passé en paramètre est invalide, c'est-à-dire si ce n'est pas une valeur numérique, alors
+ * une erreur 400 (Bad Request) est affichée.
+ *
+ * Si aucun identifiant n'est passé en paramètre et qu'un dépôt est enregistré dans la session, alors l'accueil du
+ * magasin correspondant est affiché.
+ *
+ * Si aucun identifiant n'est passé en paramètre et qu'il n'y a pas de dépôt enregistré dans la session, l'utilisateur
+ * est redirigé vers l'accueil du site (landing page).
+ *
+ * (voir `magasin.inc.php` pour l'enregistrement des informations sur le dépôt dans la session)
  */
 
-// Démarrage ou récupération de la session
-session_start();
+// Si un identifiant de dépôt est passé en paramètre...
+if ( isset($_GET['id']) ) {
+  // Si cet identifiant n'est pas une valeur numérique, une erreur 400 est affichée.
+  if ( !is_numeric($_GET['id']) )      error(400, MSG_400);
 
-// Vérifier qu'un identifiant de magasin est passé en paramètre et, le cas échéant, enregistrer celui-ci dans la session
-if ( isset($_GET['id']) && is_numeric($_GET['id']) )
-  $_SESSION['IdMagasin'] = intval($_GET['id']);
+  // Les informations du dépôt correspondant sont enregistrées dans la session.
+  // En cas d'échec, une erreur 404 est affichée.
+  if ( !selectionDepot($_GET['id']) )  error(404, MSG_404);
+}
 
-// Vérifier qu'un identifiant de magasin est enregistré dans la session
-if ( isset($_SESSION['IdMagasin']) ) {
-  // Récupérer le magasin ayant pour identifiant celui enregistré dans la session
-  @$magasin = rechercherMagasin($_SESSION['IdMagasin'], true)[0];
+if ( !isset($_SESSION) ) session_start();
 
-  /*
-   * Si le magasin enregistré dans la session n'existe pas, alors une erreur 404 s'affiche ; l'identifiant du magasin
-   * est supprimé de la session
-   */
-  if (!isset($magasin)) {
-    unset($_SESSION['IdMagasin']);
-    error(404);
-  }
-} else {
-  // Redirection vers l'accueil
+// Si aucun dépôt n'est enregistré dans la session, l'utilisateur est redirigé vers l'accueil
+if ( !isset($_SESSION['Depot']) ) {
   header('Location: /avocaba');
   exit;
 }
-
-
 
 ?>
 
@@ -63,26 +71,26 @@ if ( isset($_SESSION['IdMagasin']) ) {
 
 <html lang="fr">
 
-<?php htmlHead($magasin['Nom'] . ' – Avocaba'); ?>
+<?php htmlHead($_SESSION['Depot']['Nom'] . ' – Avocaba'); ?>
 
 <body>
-<?php htmlHeader($magasin['IdDepot']); ?>
+<?php htmlHeader($_SESSION['Depot']['IdDepot']); ?>
 
 <div class="magasin">
   <div class="magasin__bienvenue">Bienvenue dans votre magasin</div>
-  <h1 class="magasin__nom"><?php echo $magasin['Nom'] ?></h1>
+  <h1 class="magasin__nom"><?php echo $_SESSION['Depot']['Nom']; ?></h1>
   <address class="magasin__adresse">
-    <?php echo $magasin['Adresse'] . ', ' . $magasin['CodePostal'] . ' ' . $magasin['Ville'] ?>
+    <?php echo $_SESSION['Depot']['Adresse'] . ', ' . $_SESSION['Depot']['CodePostal'] . ' ' . $_SESSION['Depot']['Ville'] ?>
   </address>
   <a class="magasin__switch" href="/avocaba" title="Sélectionner un autre magasin">Changer de magasin</a>
 </div>
 
 <main>
-  <?php annonceAccueil($_SESSION['IdMagasin']); ?>
+  <?php annonceAccueil($_SESSION['Depot']['IdDepot']); ?>
 
   <div class="rayons">
     <h2>Rayons</h2>
-    <?php htmlListeRayons($_SESSION['IdMagasin']); // TODO : Améliorer le CSS ?>
+    <?php htmlListeRayons($_SESSION['Depot']['IdDepot']); // TODO : Améliorer le CSS ?>
   </div>
 </main>
 

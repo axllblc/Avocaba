@@ -1,9 +1,11 @@
 <?php
 
-/* Recherche de magasins */
+/* Recherche de dépôts */
 
 require_once 'db.inc.php';
 require_once 'misc.inc.php';
+
+
 
 /**************
  * Constantes *
@@ -135,4 +137,31 @@ function rechercherMagasin (string|int $query, bool $id = false): array {
   $link->close();
 
   return $resultArray;
+}
+
+
+/**
+ * Enregistrer dans la session les informations sur le dépôt sélectionné par l'utilisateur.
+ * @param int $id Identifiant du dépôt sélectionné par l'utilisateur.
+ * @return bool Booléen indiquant le succès ou non de la mise en session des informations sur le dépôt :
+ *              <code>true</code> en cas de succès ; <code>false</code> en cas d'échec (dépôt inexistant).
+ */
+function selectionDepot (int $id): bool {
+  // Récupérer le dépôt ayant pour identifiant celui passé en paramètre.
+  @$magasin = rechercherMagasin($id, true)[0];
+
+  // Si le dépôt correspondant n'existe pas, la fonction retourne false.
+  if ( !isset($magasin) ) return false;
+
+  // Les informations sur le dépôt sont enregistrées dans la session.
+  if ( !isset($_SESSION) ) session_start();
+
+  $_SESSION['Depot'] = array();
+  $_SESSION['Depot']['IdDepot'] = $magasin['IdDepot'];
+  $_SESSION['Depot']['Nom'] = $magasin['Nom'];
+  $_SESSION['Depot']['Adresse'] = $magasin['Adresse'];
+  $_SESSION['Depot']['Ville'] = $magasin['Ville'];
+  $_SESSION['Depot']['CodePostal'] = $magasin['CodePostal'];
+
+  return true;
 }

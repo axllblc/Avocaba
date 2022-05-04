@@ -36,10 +36,10 @@ if (isset($_GET['IdArticle'])) {
   session_start();
 
   // On récupère le magasin
-  $m = rechercherMagasin($_SESSION['IdMagasin'], true)[0];
+  $m = rechercherMagasin($_SESSION['Depot']['IdDepot'], true)[0];
 
   // On vérifie si l'article est disponible dans le magasin/dépot
-  if( count(rechercherArticle($_GET['IdArticle'], "idArticle", $_SESSION['IdMagasin']))>0 ){
+  if( count(rechercherArticle($_GET['IdArticle'], "idArticle", $_SESSION['Depot']['IdDepot']))>0 ){
     $dispo = true;
   }
   else{
