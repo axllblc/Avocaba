@@ -4,4 +4,4 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/error.php';
 
-error(403);
+error(403, 'accès refusé.');

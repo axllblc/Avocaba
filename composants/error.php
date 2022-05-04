@@ -7,9 +7,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 /**
  * Afficher une page d'erreur. L'appel de cette fonction met fin à l'exécution du script.
  * @param int $status Code HTTP décrivant l'erreur (404 par exemple)
+ * @param string|null $message Message à afficher
  * @return void
  */
-function error (int $status): void {
+function error (int $status, string $message = NULL): void {
   http_response_code($status);
 
   ?>
@@ -21,8 +22,7 @@ function error (int $status): void {
     <p>
       <strong>Erreur <?php echo $status ?></strong>
       <?php
-        if ($status === 403) echo ' : accès refusé.';
-        if ($status === 404) echo ' : la page demandée est introuvable. Elle a peut-être été déplacée ou supprimée.';
+        echo $message ? '&nbsp;: ' . htmlspecialchars($message) : '';
       ?>
     </p>
 

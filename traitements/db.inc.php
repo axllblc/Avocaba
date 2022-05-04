@@ -2,6 +2,8 @@
 
 /* Connexion à la base de données */
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/error.php';
+
 // Ne pas lever d'exception en cas d'erreur (comportement par défaut de PHP < 8.1)
 mysqli_report(MYSQLI_REPORT_OFF);
 
@@ -10,13 +12,13 @@ mysqli_report(MYSQLI_REPORT_OFF);
  * @return bool|mysqli
  */
 function dbConnect (): bool|mysqli {
-    $link = mysqli_connect('localhost', 'Avocaba', 'IPx@tVqM46!-zPyI', 'avocaba');
-    if (!$link) exit('Erreur de connexion à la base de données.');
+  $link = mysqli_connect('localhost', 'Avocaba', 'IPx@tVqM46!-zPyI', 'avocaba');
+  if (!$link) exit('Erreur de connexion à la base de données.');
 
-    $status = $link->set_charset('utf8mb4');
-    checkError($status, $link);
+  $status = $link->set_charset('utf8mb4');
+  checkError($status, $link);
 
-    return $link;
+  return $link;
 }
 
 /**
@@ -26,9 +28,9 @@ function dbConnect (): bool|mysqli {
  * @param mysqli $link Objet mysqli permettant de faire le lien avec la base de données
  * @param string $message Message à afficher en cas d'erreur
  */
-function checkError (mixed $data, mysqli $link, string $message = 'Une erreur s\'est produite.'): void {
-    if (!$data) {
-        $link->close();
-        exit($message);
-    }
+function checkError (mixed $data, mysqli $link, string $message = 'Une erreur interne s\'est produite.'): void {
+  if (!$data) {
+    $link->close();
+    error(500, $message);
+  }
 }
