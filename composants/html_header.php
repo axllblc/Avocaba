@@ -15,7 +15,7 @@
 function htmlHeader (bool $magasin = false, string $query = ''): void { ?>
   <header class="header-magasin">
     <a class="header__logo"
-       href="<?php echo $magasin ? '/avocaba/vues/magasin.php' : '/avocaba' ?>">
+       href="<?= $magasin ? '/avocaba/vues/magasin.php' : '/avocaba' ?>">
       Avocaba
     </a>
 
@@ -27,7 +27,7 @@ function htmlHeader (bool $magasin = false, string $query = ''): void { ?>
     <form class="header__recherche recherche" action="/avocaba/vues/recherche.php" method="get">
       <input class="recherche__input" id="recherche"
              type="search" name="recherche"
-             value="<?php echo $query ?>"
+             value="<?= $query ?>"
              placeholder="Rechercher un produit ou un producteur"
              required>
       <!-- Label permettant de "fabriquer" un bouton de recherche personnalisé -->
@@ -45,7 +45,7 @@ function htmlHeader (bool $magasin = false, string $query = ''): void { ?>
       <span class="header__btn-ic material-icons">account_circle</span>
       <div class="header__btn-text">Mon compte</div>
     </a>
-    <a class="header__btn header__mon-cabas" href="/panier">
+    <a class="header__btn header__mon-cabas" href="/avocaba/vues/panier.php">
       <span class="header__btn-ic material-icons">shopping_basket</span>
       <div class="header__btn-text">Mon cabas</div>
     </a>

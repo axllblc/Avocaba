@@ -63,7 +63,7 @@ function footer (): void { ?>
         <a href="#">Politique de confidentialité</a>
       </li>
       <li class="pied-de-page__item">
-        © <?php echo getdate()['year']; ?>, Avocaba
+        © <?= getdate()['year'] ?>, Avocaba
       </li>
     </ul>
   </footer>

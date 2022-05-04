@@ -14,9 +14,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_liste-rayons.
 
 
 
-/**************
- * Constantes *
- **************/
+// **************
+// * Constantes *
+// **************
 
 /** Message affiché en cas de requête invalide */
 const MSG_400 = 'Votre requête n\'est pas valide.';
@@ -27,9 +27,9 @@ const MSG_404 =
 
 
 
-/********************
- * Script principal *
- ********************/
+// ********************
+// * Script principal *
+// ********************
 
 /*
  * Si un identifiant de dépôt est passé en paramètre, les informations sur le dépôt correspondant sont enregistrées dans
@@ -78,7 +78,7 @@ if ( !isset($_SESSION['Depot']) ) {
 
 <div class="magasin">
   <div class="magasin__bienvenue">Bienvenue dans votre magasin</div>
-  <h1 class="magasin__nom"><?php echo $_SESSION['Depot']['Nom']; ?></h1>
+  <h1 class="magasin__nom"><?= $_SESSION['Depot']['Nom'] ?></h1>
   <address class="magasin__adresse">
     <?php echo $_SESSION['Depot']['Adresse'] . ', ' . $_SESSION['Depot']['CodePostal'] . ' ' . $_SESSION['Depot']['Ville'] ?>
   </address>

@@ -20,11 +20,11 @@ function htmlListeRayons (int $idMagasin): void {
     foreach ($listeRayons as $rayon) { ?>
 
       <li class="ls-rayons__item"
-          title="<?php echo $rayon['Nom'] ?>">
-        <a href="<?php echo '/avocaba/vues/articles.php?rayon=' . $rayon['IdRayon']; ?>">
-          <img src="<?php echo '/avocaba/img/rayons/' . $rayon['IdRayon'] . '.png'; ?>"
-               alt="<?php echo $rayon['Nom'] ?>">
-          <span><?php echo $rayon['Nom'] ?></span>
+          title="<?= $rayon['Nom'] ?>">
+        <a href="<?= '/avocaba/vues/articles.php?rayon=' . $rayon['IdRayon']; ?>">
+          <img src="<?= '/avocaba/img/rayons/' . $rayon['IdRayon'] . '.png'; ?>"
+               alt="<?= $rayon['Nom'] ?>">
+          <span><?= $rayon['Nom'] ?></span>
         </a>
       </li>
 
