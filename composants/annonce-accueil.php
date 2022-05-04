@@ -1,12 +1,18 @@
 <?php
-/** Componsant annonce sur la page d'accueil
- * @param String|int identifiant du dépot actif du client
+
+/* 📣 Annonces sur la page d'accueil */
+
+// TODO : Rendre le composant dynamique
+
+/**
+ * Composant annonce sur la page d'accueil
+ * @param string|int $depot Identifiant du dépôt actif du client
  */
-function annonceAccueil(String|int $depot) : void {
-?>
+function annonceAccueil (string|int $depot) : void { ?>
 <div class="annonce-accueil">
   <div class="annonce-accueil__slideshow-container">
     <div class="annonce-accueil__mySlides annonce-accueil__fade">
+      <?php // TODO : Ajouter un texte alternatif pour les images ?>
       <img src="https://imgs.search.brave.com/ajdNI4vI1cNXIH4eHQiV_0gT7Lh44H_J9qugc5dkFWA/rs:fit:1200:1200:1/g:ce/aHR0cDovL2xlc3ll/dXhncm9nbm9ucy5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MTgvMDgvMzQxM0NF/MjMtNThEMC00QTkx/LUI0OTktNzI3QUVD/NDU4QjJFLmpwZWc" >
     </div>
   </div>

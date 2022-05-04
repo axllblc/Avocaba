@@ -8,6 +8,7 @@ require_once '../composants/html_head.php';
 require_once '../composants/html_header.php';
 require_once '../composants/footer.php';
 require_once '../composants/html_liste-rayons.php';
+require_once '../composants/annonce-accueil.php';
 require_once '../traitements/magasin.inc.php';
 
 
@@ -92,10 +93,7 @@ if ( isset($_SESSION['IdMagasin']) ) {
 </div>
 
 <main>
-  <div class="annonces">
-    <?php // TODO annonces ?>
-    Zone réservée aux annonces (producteurs et produits mis en avant)
-  </div>
+  <?php annonceAccueil($_SESSION['IdMagasin']); ?>
 
   <div class="rayons">
     <h2>Rayons</h2>

@@ -341,7 +341,8 @@ body {
 }
 
 
-/* composant annonce */
+/* Annonces dans l'accueil du magasin */
+
 .annonce-accueil {
   border: solid black 2px;
 }
@@ -351,15 +352,25 @@ body {
   color: black;
 }
 
-.annonce-accueil__slideshow-container {
-  margin: auto;
-  padding-right: 10px;
-}
-
 .annonce-accueil__active {
   background-color: #717171;
 }
 
+  /* Animation */
 .annonce-accueil__fade {
-  margin: 0 auto;
+  animation-name: annonce-accueil__fade;
+  animation-duration: 4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .annonce-accueil__fade {
+    animation: none;
+  }
+}
+
+@keyframes annonce-accueil__fade {
+  0%    {opacity: 0;}
+  12.5% {opacity: 1;}
+  87.5% {opacity: 1;}
+  100%  {opacity: 0;}
 }
