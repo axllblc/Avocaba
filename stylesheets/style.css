@@ -339,3 +339,27 @@ body {
   text-decoration: none;
   border: 1px solid black;
 }
+
+
+/* composant annonce */
+.annonce-accueil {
+  border: solid black 2px;
+}
+
+.annonce-accueil__produits-phares a,  .annonce-accueil__savoir a {
+  text-decoration: none;
+  color: black;
+}
+
+.annonce-accueil__slideshow-container {
+  margin: auto;
+  padding-right: 10px;
+}
+
+.annonce-accueil__active {
+  background-color: #717171;
+}
+
+.annonce-accueil__fade {
+  margin: 0 auto;
+}
