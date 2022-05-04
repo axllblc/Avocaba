@@ -11,12 +11,16 @@ require_once 'misc.inc.php';
 
 // Expressions régulières
 
+/** Expression régulière vérifiée par un code postal */
 const REGEX_CODE_POSTAL = '/^\d{5}$/';
+
+/** Expression régulière vérifiée par un code de département (la Corse est prise en compte) */
 const REGEX_CODE_DEPT = '/^(?>\d{2,3})|(?>2[AB])$/';
 
 
 // Requêtes à préparer
 
+/** Recherche de dépôt par code postal. Cette requête se limite à 10 dépôts. */
 const RECHERCHE_CP = '
 SELECT d.`IdDepot`, d.`Nom`, d.`Adresse`, v.`Nom` AS `Ville`, v.`CodePos` AS `CodePostal`
 FROM DEPOTS AS d
@@ -25,6 +29,7 @@ WHERE v.`CodePos` = ?
 LIMIT 10;
 ';
 
+/** Recherche de dépôt par code de département. Cette requête se limite à 10 dépôts. */
 const RECHERCHE_DEPT = '
 SELECT d.`IdDepot`, d.`Nom`, d.`Adresse`, v.`Nom` AS `Ville`, v.`CodePos` AS `CodePostal`
 FROM DEPOTS AS d
@@ -33,6 +38,7 @@ WHERE v.CodeDep = ?
 LIMIT 10;
 ';
 
+/** Recherche de dépôt par nom de ville. Cette requête se limite à 10 dépôts. */
 const RECHERCHE_VILLE = '
 SELECT d.`IdDepot`, d.`Nom`, d.`Adresse`, v.`Nom` AS `Ville`, v.`CodePos` AS `CodePostal`
 FROM DEPOTS AS d
@@ -41,6 +47,7 @@ WHERE v.`Slug` LIKE ?
 LIMIT 10;
 ';
 
+/** Recherche de dépôt par identifiant. Cette requête ne retourne qu'un seul dépôt. */
 const RECHERCHE_ID = '
 SELECT d.`IdDepot`, d.`Nom`, d.`Adresse`, v.`Nom` AS `Ville`, v.`CodePos` AS `CodePostal`, d.`IdVille`
 FROM DEPOTS AS d
@@ -69,13 +76,17 @@ function rechercherMagasin (string|int $query, bool $id = false): array {
 
   // Préparation de la requête
   if ($id) {
+
+    // Rechercher le dépôt correspondant à l'identifiant passé en paramètre
     $stmt = $link->prepare(RECHERCHE_ID);
     checkError($stmt, $link);
 
     $status = $stmt->bind_param('i', $query);
 
   } else {
+
     if (preg_match(REGEX_CODE_POSTAL, $query)) {
+
       // Rechercher le(s) dépôt(s) présents dans la ville dont on connaît le code postal
       $cp = +$query;
 
@@ -85,6 +96,7 @@ function rechercherMagasin (string|int $query, bool $id = false): array {
       $status = $stmt->bind_param('i', $cp);
 
     } elseif (preg_match(REGEX_CODE_DEPT, $query)) {
+
       // Rechercher le(s) dépôt(s) présents dans un département
       $stmt = $link->prepare(RECHERCHE_DEPT);
       checkError($stmt, $link);
@@ -92,6 +104,7 @@ function rechercherMagasin (string|int $query, bool $id = false): array {
       $status = $stmt->bind_param('s', $query);
 
     } else {
+
       // Rechercher un/des dépôt(s) par nom de ville
       $slug = slugify($query);
 
@@ -101,7 +114,9 @@ function rechercherMagasin (string|int $query, bool $id = false): array {
       $status = $stmt->bind_param('s', $slug);
 
     }
+
   }
+
   checkError($status, $link);
 
   // Exécution de la requête
