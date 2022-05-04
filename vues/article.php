@@ -1,14 +1,16 @@
 <?php
+
 /* 📄 Description d'un produit */
+
 error_reporting(E_ALL);
 
-require_once '../traitements/fournisseur.inc.php';
-require_once '../traitements/magasin.inc.php';
-require_once '../traitements/articles.inc.php';
-require_once '../traitements/misc.inc.php';
-require_once '../composants/html_head.php';
-require_once '../composants/html_header.php';
-require_once '../composants/footer.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/fournisseur.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/magasin.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/misc.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 
 
 /*************
@@ -75,6 +77,7 @@ if (isset($_GET['IdArticle'])) {
       <div class="details-produit__infos">
 
         <div class="details-produit__groupe-nom">
+          <?php // TODO : Afficher le nom du produit ?>
           <h1 class="details-produit__nom"><?php echo mb_substr($a['Description'], 0, 20); ?></h1>
           <div class="details-produit__contenance"><?php echo $a['Unite']; ?></div>
           <a class="details-produit__nom-prod"><?php echo $f->getNom(); ?></a>

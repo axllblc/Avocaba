@@ -4,10 +4,10 @@
 
 error_reporting(E_ALL);
 
-require_once '../../composants/html_head.php';
-require_once '../../traitements/signin.inc.php';
-require_once '../../traitements/verifier-client.php';
-require_once '../../traitements/inscription-client.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/signin.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/verifier-client.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/inscription-client.php';
 
 
 /********************

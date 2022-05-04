@@ -2,7 +2,7 @@
 
 /* Bloc de commande client */
 
-require_once '../../composants/html_head.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 
 /**
  * Afficher la commande

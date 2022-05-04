@@ -4,8 +4,8 @@
 
 error_reporting(E_ALL);
 
-require_once '../../traitements/commandes-client.php';
-require_once '../../composants/bloc-commande.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/commandes-client.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/bloc-commande.php';
 
 
 

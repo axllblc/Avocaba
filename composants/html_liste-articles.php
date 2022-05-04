@@ -1,9 +1,11 @@
 <?php
+
 // TODO: Mieux afficher les images (régler la taille)
+
 /* 📂 Liste des articles */
 
-require_once '../traitements/articles.inc.php';
-require_once '../traitements/fournisseur.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/fournisseur.inc.php';
 
 /**
  * Afficher la liste des articles.

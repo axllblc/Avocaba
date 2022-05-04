@@ -1,17 +1,18 @@
 <?php
+
 /* 🧑‍🌾 Page de résultat de recherche d'articles */
 
 // TODO: Améliorer le rendu du résultat de la recherche : rendre la liste plus responsive, adapter la taille des images, implémenter les boutons d'ajout au panier, améliorer le rendu d'une tuile d'article
 
 error_reporting(E_ALL);
 
-require_once '../traitements/articles.inc.php';
-require_once '../traitements/magasin.inc.php';
-require_once '../traitements/misc.inc.php';
-require_once '../composants/html_head.php';
-require_once '../composants/html_header.php';
-require_once '../composants/html_liste-articles.php';
-require_once '../composants/footer.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/magasin.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/misc.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_liste-articles.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 
 
 

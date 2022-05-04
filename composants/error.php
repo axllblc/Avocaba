@@ -2,7 +2,7 @@
 
 /* ⚠️ Page d'erreur */
 
-require_once '../composants/html_head.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 
 /**
  * Afficher une page d'erreur. L'appel de cette fonction met fin à l'exécution du script.

@@ -4,9 +4,9 @@
 
 error_reporting(E_ALL);
 
-require_once '../../composants/html_head.php';
-require_once '../../composants/html_header.php';
-require_once '../../composants/footer.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 
 /*************
  * Fonctions *

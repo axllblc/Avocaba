@@ -6,7 +6,7 @@
 
 error_reporting(E_ALL);
 
-require_once '../../traitements/modifier-client.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/modifier-client.php';
 
 
 

@@ -4,13 +4,13 @@
 
 error_reporting(E_ALL);
 
-require_once '../composants/html_head.php';
-require_once '../composants/html_header.php';
-require_once '../composants/footer.php';
-require_once '../composants/html_liste-rayons.php';
-require_once '../composants/annonce-accueil.php';
-require_once '../composants/error.php';
-require_once '../traitements/magasin.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_liste-rayons.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/annonce-accueil.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/error.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/magasin.inc.php';
 
 
 
