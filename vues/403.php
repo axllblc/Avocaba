@@ -1,17 +1,7 @@
 <?php
 
-/* ⚠️ Erreur 403 */
+/* ⚠️ Erreur 403 (forbidden) */
 
-?>
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/error.php';
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Erreur 403</title>
-</head>
-<body>
-  <strong>Erreur 403</strong> : Accès refusé.
-</body>
-</html>
+error(403);

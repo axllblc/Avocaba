@@ -9,23 +9,8 @@ require_once '../composants/html_header.php';
 require_once '../composants/footer.php';
 require_once '../composants/html_liste-rayons.php';
 require_once '../composants/annonce-accueil.php';
+require_once '../composants/error.php';
 require_once '../traitements/magasin.inc.php';
-
-
-
-/*************
- * Fonctions *
- *************/
-
-/**
- * Afficher la page d'erreur 404. Cette fonction met fin à l'exécution du script.
- * @return void
- */
-function erreur404 (): void {
-  http_response_code(404);
-  include '404.php';
-  exit;
-}
 
 
 
@@ -62,7 +47,7 @@ if ( isset($_SESSION['IdMagasin']) ) {
    */
   if (!isset($magasin)) {
     unset($_SESSION['IdMagasin']);
-    erreur404();
+    error(404);
   }
 } else {
   // Redirection vers l'accueil
