@@ -161,7 +161,7 @@ function rechercherArticle (string|int $critere, string $nature, string|int $idD
     case 'nomRayon':
       // Rechercher les articles vendus par le rayon (par le nom du rayon)
       $stmtRecherche = $link->prepare(RECHERCHE_ARTICLE_NOM_RAYON);
-      checkError($stmt, $link);
+      checkError($stmtRecherche, $link);
       break;
     case 'idFournisseur':
       $stmtRecherche = $link->prepare(RECHERCHE_ARTICLE_ID_FOURNISSEUR);

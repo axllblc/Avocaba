@@ -79,7 +79,9 @@ class Fournisseur {
     checkError($result, $link);
     $resultArray = $result->fetch_all(MYSQLI_ASSOC);
 
-    // Fermeture de la connexion à la base de données
+    // Fermeture de la connexion à la base de données et libération de la mémoire associée
+    $result->close();
+    $stmt->close();
     $link->close();
 
     // vérification des résultats
@@ -164,7 +166,9 @@ class Fournisseur {
     checkError($result, $link);
     $resultArray = $result->fetch_all(MYSQLI_ASSOC);
 
-    // Fermeture de la connexion à la base de données
+    // Fermeture de la connexion à la base de données et libération de la mémoire associée
+    $result->close();
+    $stmt->close();
     $link->close();
     
     foreach ($resultArray as $key => $value)
@@ -195,7 +199,9 @@ class Fournisseur {
     checkError($result, $link);
     $resultArray = $result->fetch_all(MYSQLI_ASSOC);
 
-    // Fermeture de la connexion à la base de données
+    // Fermeture de la connexion à la base de données et libération de la mémoire associée
+    $result->close();
+    $stmt->close();
     $link->close();
     
     foreach ($resultArray as $key => $value)
@@ -220,6 +226,8 @@ class Fournisseur {
       $nombre = $result->fetch_array()[0];
       $result->free_result();
     }
+
+    // Fermeture de la connexion à la base de données
     $link->close();
 
     return $nombre;
