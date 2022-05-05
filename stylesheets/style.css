@@ -101,6 +101,41 @@ body {
 }
 
 
+/* 📣 Annonces dans l'accueil du magasin */
+
+.annonce-accueil {
+  border: solid black 2px;
+}
+
+.annonce-accueil__produits-phares a,  .annonce-accueil__savoir a {
+  text-decoration: none;
+  color: black;
+}
+
+.annonce-accueil__active {
+  background-color: #717171;
+}
+
+/* Animation */
+.annonce-accueil__fade {
+  animation-name: annonce-accueil__fade;
+  animation-duration: 4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .annonce-accueil__fade {
+    animation: none;
+  }
+}
+
+@keyframes annonce-accueil__fade {
+  0%    {opacity: 0;}
+  12.5% {opacity: 1;}
+  87.5% {opacity: 1;}
+  100%  {opacity: 0;}
+}
+
+
 /* 📂 Liste des rayons */
 
 .ls-rayons__item a {
@@ -338,39 +373,4 @@ body {
   color: black;
   text-decoration: none;
   border: 1px solid black;
-}
-
-
-/* Annonces dans l'accueil du magasin */
-
-.annonce-accueil {
-  border: solid black 2px;
-}
-
-.annonce-accueil__produits-phares a,  .annonce-accueil__savoir a {
-  text-decoration: none;
-  color: black;
-}
-
-.annonce-accueil__active {
-  background-color: #717171;
-}
-
-  /* Animation */
-.annonce-accueil__fade {
-  animation-name: annonce-accueil__fade;
-  animation-duration: 4s;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .annonce-accueil__fade {
-    animation: none;
-  }
-}
-
-@keyframes annonce-accueil__fade {
-  0%    {opacity: 0;}
-  12.5% {opacity: 1;}
-  87.5% {opacity: 1;}
-  100%  {opacity: 0;}
 }
