@@ -27,6 +27,7 @@ nav {
 /* ⬆️ En-tête du magasin */
 
 .header-magasin {
+  z-index: 1;
   position: sticky;
   top: 0;
   padding: 15px;
@@ -719,6 +720,7 @@ nav {
 /* ⬇️ Pied de page du site */
 
 .pied-de-page {
+  z-index: 1;
   display: grid;
   grid-template-areas: "pied-de-page__avocaba   pied-de-page__a-propos  pied-de-page__services  pied-de-page__newsletter"
                        "pied-de-page__juridique pied-de-page__juridique pied-de-page__juridique pied-de-page__juridique ";
