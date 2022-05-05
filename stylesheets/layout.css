@@ -487,46 +487,53 @@ nav {
 
 /* 🧺 Panier / Cabas */
 
-.cabas__section_articles{
-  grid-area: cabas__section_articles;
-  margin-left: 12%;
+.panier {
+  flex: 1;
 }
-.cabas__recapitulatif {
-  grid-area: cabas__recapitulatif;
+
+.panier__section_articles{
+  grid-area: panier__section_articles;
+}
+
+.panier__recapitulatif {
+  grid-area: panier__recapitulatif;
   position: fixed;
   right: 10%;
   background-color: white;
 }
 
-.cabas {
+.panier {
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 2fr 1fr;
-  grid-template-areas: "cabas__section_articles cabas__recapitulatif";
+  grid-template-areas: "panier__section_articles panier__recapitulatif";
 }
 
-.cabas__img_article {
-  grid-area: cabas__img_article;
+.panier__img-article {
+  grid-area: panier__img-article;
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
 }
 
-.cabas__texte_article {
-  grid-area: cabas__texte_article;
+.panier__nom-article {
+  grid-area: panier__nom-article;
 }
 
-.cabas__prix_article {
-  grid-area: cabas__prix_article;
+.panier__prix-article {
+  grid-area: panier__prix-article;
 }
 
-.cabas__section_nb_article {
-  grid-area: cabas__section_nb_article;
+.panier__selection-qte {
+  grid-area: panier__selection-qte;
   padding: 5px;
 }
 
-.cabas__article {
+.panier__article {
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 2fr 1fr 1fr;
-  grid-template-areas: "cabas__img_article cabas__texte_article cabas__prix_article cabas__section_nb_article";
+  grid-template-areas: "panier__img-article panier__nom-article panier__prix-article panier__selection-qte";
   margin-bottom: 15px;
 }
 

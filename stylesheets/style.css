@@ -163,7 +163,7 @@ body {
 
 /* 🧺 Panier / Cabas */
 
-.cabas__valider_panier{
+.panier__valider_panier{
   border: 1px solid black;
   padding: 4px;
   background-color: lightgray;
