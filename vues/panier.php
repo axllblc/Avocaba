@@ -15,24 +15,14 @@ initialiserPanier();
 
 
 
-// **************
-// * Constantes *
-// **************
-
-// Actions
-
-const DIMINUER     = 'dec';
-const AUGMENTER    = 'inc';
-const MODIFIER     = 'set';
-const RETIRER      = 'rem';
-const VIDER_PANIER = 'emp';
-
-
-
 // *************
 // * Fonctions *
 // *************
 
+/**
+ * Liste de choix pour le jour du retrait de la commande.
+ * @return void
+ */
 function choixJoursRetrait (): void {
   $now = getdate();
 
@@ -80,7 +70,7 @@ function affichagePanier (): void {
 
       <div class="panier__selection-qte">
         <input type="hidden" name="idArticle" value="<?= $id ?>">
-        <a href="<?= '?action=' . DIMINUER . '&id=' . $id ?>"
+        <a href="<?= '?actionPanier=' . DIMINUER . '&id=' . $id ?>"
            title="Diminuer la quantité"
            aria-label="<?= 'Diminuer la quantité de ' . $nom ?>">
           -
@@ -89,12 +79,12 @@ function affichagePanier (): void {
                min="0" max="5" value="<?= $_SESSION['Panier']['Qte'][$key] ?>"
                title="Définir la quantité"
                aria-label="<?= 'Modifier la quantité de ' . $nom ?>">
-        <a href="<?= '?action=' . AUGMENTER . '&id=' . $id ?>"
+        <a href="<?= '?actionPanier=' . AUGMENTER . '&id=' . $id ?>"
            title="Augmenter la quantité"
            aria-label="<?= 'Augmenter la quantité de ' . $nom ?>">
           +
         </a>
-        <a href="<?= '?action=' . RETIRER . '&id=' . $id ?>"
+        <a href="<?= '?actionPanier=' . RETIRER . '&id=' . $id ?>"
            title="Retirer l'article du panier"
            aria-label="<?= 'Retirer ' . $nom . ' du cabas' ?>">
           Retirer
@@ -132,43 +122,8 @@ $status = false;
 // ********************
 
 // Opérations sur le panier
-
-if ( !empty($_GET['action']) ) {
-  switch ($_GET['action']) {
-    case DIMINUER:
-      if ( !empty($_GET['id']) && is_numeric($_GET['id']) )
-        $status = diminuerQteArticle($_GET['id']);
-      break;
-    case AUGMENTER:
-      if ( !empty($_GET['id']) && is_numeric($_GET['id']) )
-        $status = ajouterArticle($_GET['id']);
-      break;
-    case MODIFIER:
-      if (    !empty($_GET['id'])    && is_numeric($_GET['id'])
-           && !empty($_GET['value']) && is_numeric($_GET['value']) )
-        $status = modifierQteArticle($_GET['id'], $_GET['value']);
-      break;
-    case RETIRER:
-      if ( !empty($_GET['id']) && is_numeric($_GET['id']) )
-        $status = supprimerArticle($_GET['id']);
-      break;
-    case VIDER_PANIER:
-      supprimerPanier();
-      $status = true;
-      break;
-  }
-
-  /*
-   * Si la modification de l'état du panier a fonctionné, l'utilisateur est redirigé vers la même page, afin de
-   * supprimer les paramètres passés dans l'URL.
-   * Cela permet d'éviter des modifications répétées de l'état du panier si l'utilisateur navigue avec les boutons
-   * [Précédent] et [Suivant] du navigateur.
-   */
-  if ($status) {
-    header('Location: panier.php');
-    exit;
-  }
-} else $status = true;
+// Vérifier la présence du paramètre $_GET['actionPanier'] dans la requête et modifier l'état du panier.
+$status = actionPanier();
 
 
 // Un test
@@ -235,7 +190,7 @@ if ( !empty($_GET['action']) ) {
     <div>Date et heure de retrait : <b>Lundi 12 juin entre 8h et 10h</b></div>
     <!-- -->
     <a class="panier__valider_panier" href="paiement.php">Valider mon cabas</a><br>
-    <a href="<?= '?action=' . VIDER_PANIER ?>">Vider mon cabas</a>
+    <a href="<?= '?actionPanier=' . VIDER_PANIER ?>">Vider mon cabas</a>
   </form>
   <?php } ?>
 
