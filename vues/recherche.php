@@ -15,6 +15,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_liste-articles.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 
+initialiserPanier();
+
 
 
 /********************
@@ -35,7 +37,7 @@ if (isset($_GET['recherche']) and strlen($_GET['recherche']) > 1) {
     $listeArticles = rechercherArticle($q, 'nomArticle', $idDepot);
   }
   else {
-    // Pas de magasin renseigné, l'utilisateur peut consulter tout les articles de Avocaba
+    // Pas de magasin renseigné, l'utilisateur peut consulter tous les articles de Avocaba
     $listeArticles = rechercherArticle($q, 'nomArticle', 'aucun');
   }
   if ($listeArticles != null) {
@@ -43,7 +45,7 @@ if (isset($_GET['recherche']) and strlen($_GET['recherche']) > 1) {
   }
 }
 
-// Récupération des résultats si il y a eu une recherche par rayon
+// Récupération des résultats s'il y a eu une recherche par rayon
 if( isset($_GET['rayon']) ){
   $idRayon = $_GET['rayon'];
   $q = nomRayon($idRayon);
