@@ -4,6 +4,10 @@ body {
   font-family: sans-serif;
 }
 
+::selection {
+  background-color: rgba(0, 250, 154, 0.5);
+}
+
 
 /* Section de navigation */
 
@@ -14,6 +18,23 @@ body {
 .nav__sep {
   border-left: 2px solid gray;
 }
+
+
+/* Styles généraux */
+
+  /* Liens */
+a {
+  text-decoration: underline solid #bfbfbf 2px;
+  color: #404040;
+  transition-duration: 250ms;
+  transition-property: color, text-decoration-color;
+}
+
+a:hover {
+  color: #00be74;
+  text-decoration-color: #b0ffe0;
+}
+
 
 
 /* ⬆️ En-tête */
@@ -105,15 +126,6 @@ body {
 
 .annonce-accueil {
   border: solid black 2px;
-}
-
-.annonce-accueil__produits-phares a,  .annonce-accueil__savoir a {
-  text-decoration: none;
-  color: black;
-}
-
-.annonce-accueil__savoir a {
-  font-weight: bold;
 }
 
 .annonce-accueil__active {
@@ -319,11 +331,6 @@ input.selection-qte__set {
   font-weight: bold;
   font-size: 1.5em;
   text-transform: uppercase;
-}
-
-.pied-de-page a {
-  text-decoration: underline solid #bfbfbf 2px;
-  color: #404040;
 }
 
 .pied-de-page__newsletter {
