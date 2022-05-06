@@ -21,7 +21,7 @@ function htmlQteArticle (int $id, int $qte, string $nom = 'cet article'): void {
     <a href="<?= URL_TRAITEMENT_PANIER . '?actionPanier=' . AUGMENTER . '&id=' . $id ?>"
        title="Ajouter au cabas"
        aria-label="<?= 'Ajouter ' . $nom . ' au cabas' ?>">
-      +
+      <span class="material-icons">add_circle</span>
     </a>
   <?php } else { ?>
     <div class="panier__selection-qte">
@@ -30,7 +30,7 @@ function htmlQteArticle (int $id, int $qte, string $nom = 'cet article'): void {
          title="Diminuer la quantité"
          aria-label="<?= 'Diminuer la quantité de ' . $nom ?>"
          class="selection-qte__dec">
-        -
+        <span class="material-icons">remove</span>
       </a>
       <input type="number" name="qte" class="selection-qte__set"
              data-id="<?= $id ?>" data-qte="<?= $qte ?>"
@@ -41,7 +41,7 @@ function htmlQteArticle (int $id, int $qte, string $nom = 'cet article'): void {
          title="Augmenter la quantité"
          aria-label="<?= 'Augmenter la quantité de ' . $nom ?>"
          class="selection-qte__inc">
-        +
+        <span class="material-icons">add</span>
       </a>
       <a href="<?= URL_TRAITEMENT_PANIER . '?actionPanier=' . RETIRER . '&id=' . $id ?>"
          title="Retirer l'article du panier"

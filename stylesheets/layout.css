@@ -643,6 +643,11 @@ input.selection-qte__set {
   border: none;
 }
 
+.selection-qte__rem {
+  width: 100%;
+  text-align: center;
+}
+
 
 
 /* 💳 Paiement */
