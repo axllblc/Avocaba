@@ -10,36 +10,28 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/misc.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/error.php';
+
+session_start();
 
 
-/*************
- * Fonctions *
- *************/
 
-/**
-* Afficher la page d'erreur 404. Cette fonction met fin à l'exécution du script.
-* @return void
-*/
-function erreur404() : void {
-  http_response_code(404);
-  include '404.php';
-  exit;
-}
+// ********************
+// * Script principal *
+// ********************
 
+// Récupération du siret du fournisseur en GET
 
-/********************
- * Script principal *
- ********************/
-
-// récupération du siret du fournisseur en GET
 if (isset($_GET['siret'])) {
   try {
     $fournisseur = new Fournisseur($_GET['siret']);
   } catch (Exception $e) {
-    erreur404();
+    error(404);
+    exit;
   }
 } else {
-  erreur404();
+  error(404);
+  exit;
 }
   
 ?>
@@ -49,7 +41,7 @@ if (isset($_GET['siret'])) {
   <?php htmlHead($fournisseur->getNom() . ' – Avocaba'); ?>
 
   <body>
-    <?php htmlHeader(); ?> 
+    <?php htmlHeader( !empty($_SESSION['Magasin']) ); ?>
 
     <main class="fournisseur">
       <!-- Bannière du producteur -->
@@ -186,10 +178,10 @@ if (isset($_GET['siret'])) {
               $i++;
             ?>
             <li class="fournisseur__cellule">
-              <img class="fournisseur__photo" src="<?php echo fournisseur_proche->getPhotoProfil(); ?>" alt="producteur proche de chez moi <?php echo $i; ?>">
+              <img class="fournisseur__photo" src="<?php echo $fournisseur_proche->getPhotoProfil(); ?>" alt="producteur proche de chez moi <?php echo $i; ?>">
               <div class="fournisseur__etiquette">
-                <p class="fournisseur__nom-producteur-proche"><?php echo fournisseur_proche->getNom(); ?></p>
-                <p class="fournisseur__localisation-producteur-proche"><?php echo fournisseur_proche->getVille(); ?></p>
+                <p class="fournisseur__nom-producteur-proche"><?php echo $fournisseur_proche->getNom(); ?></p>
+                <p class="fournisseur__localisation-producteur-proche"><?php echo $fournisseur_proche->getVille(); ?></p>
               </div>
             </li>
             <?php } ?>
