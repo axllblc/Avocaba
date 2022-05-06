@@ -41,7 +41,7 @@ if (isset($_GET['siret'])) {
   <?php htmlHead($fournisseur->getNom() . ' – Avocaba'); ?>
 
   <body>
-    <?php htmlHeader( !empty($_SESSION['Depot']) ); ?>
+    <?php htmlHeader(!empty($_SESSION['Depot'])); ?>
 
     <main class="fournisseur">
       <!-- Bannière du producteur -->
@@ -171,8 +171,9 @@ if (isset($_GET['siret'])) {
 
       <!-- Autres producteurs proches de chez moi -->
       <?php
-      $producteurs_proches = $fournisseur->producteursProches();
-      if (count($producteurs_proches) != 0) {
+      if (isset($_SESSION['Depot'])) {
+        $producteurs_proches = Fournisseur::fournisseurSurDepot($_SESSION['Depot']['IdDepot']);
+        if (count($producteurs_proches) != 0) {
       ?>
       <div class="fournisseur__producteur-proche">
           <h2 class="fournisseur__h2-producteur-proche">Autres producteurs proches de chez moi</h2>
@@ -180,8 +181,8 @@ if (isset($_GET['siret'])) {
             <?php
             $i = 0;
             while ($i < 4 && isset($producteurs_proches[$i])) {
-              // récupérer article
-              $fournisseur_proche = $fournisseur->producteursProches();
+              // récupérer le fournisseur
+              $fournisseur_proche = new Fournisseur($producteurs_proches[$i]);
               $i++;
             ?>
             <li class="fournisseur__cellule">
@@ -194,7 +195,7 @@ if (isset($_GET['siret'])) {
             <?php } ?>
           </ul>
       </div>
-      <?php } ?>
+      <?php } } ?>
     </main>
 
     <?php footer(); ?>

@@ -310,10 +310,7 @@ class Fournisseur {
     $stmt->close();
     $link->close();
 
-    foreach ($resultArray as $key => $value)
-      $resultArray[$key] = $value['IdDepot'];
-
-    return $resultArray;
+    return $resultArray[0]['IdDepot'];
   }
 
   /**
