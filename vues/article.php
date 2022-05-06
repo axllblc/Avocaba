@@ -39,15 +39,17 @@ if (isset($_GET['IdArticle'])) {
 
   session_start();
 
-  // On récupère le magasin $m
-  $m = rechercherMagasin($_SESSION['Depot']['IdDepot'], true)[0];
+  // $dispo indique si l'article est ajoutable au panier du client
+  $dispo = false;
 
-  // On vérifie si l'article est disponible dans le magasin/dépot
-  if( count(rechercherArticle($_GET['IdArticle'], "idArticle", $_SESSION['Depot']['IdDepot']))>0 ){
-    $dispo = true;
-  }
-  else{
-    $dispo = false;
+  if(isset($_SESSION['Depot']['IdDepot'])){
+    // On récupère le nom du magasin $magasin
+    $magasin = rechercherMagasin($_SESSION['Depot']['IdDepot'], true)[0]['Nom'];
+
+    // On vérifie si l'article est disponible dans le magasin/dépot
+    if( count(rechercherArticle($_GET['IdArticle'], "idArticle", $_SESSION['Depot']['IdDepot']))>0 ){
+      $dispo = true;
+    }
   }
 } else {
   // Si aucun article renseigné, on redirige vers le magasin d'où provient le client
@@ -65,15 +67,18 @@ if (isset($_GET['IdArticle'])) {
 <body>
 
   <?php htmlHeader($a['Nom']); ?>
+
   <nav>
     <button class="nav__btn-retour" onclick="history.back();" title="Revenir à la page précédente">Retour</button>
     <div class="nav__sep"><!--Séparateur--></div>
-    <a href="/avocaba/vues/magasin.php" title="Accueil du magasin <?php echo $m['Nom']; ?>"><?php echo $m['Nom']; ?></a>
+    <?php if(isset($magasin)) echo '
+    <a href="/avocaba/vues/magasin.php" title="Accueil du magasin ' . $magasin . '">' . $magasin . '</a>
     <div class="nav__sep"><!--Séparateur--></div>
+    '; ?>
     <a href="<?php echo '/avocaba/vues/recherche.php?rayon=' . $a['IdRayon']; ?>" title="Rayon <?php echo $a['NomRayon']; ?>"> <?php echo $a['NomRayon']; ?></a>
   </nav>
   <div class="messageInfo">
-    <?php if (!$dispo) echo "L'article n'est pas disponible dans votre magasin."; ?>
+    <p> <?php if (!$dispo) echo "L'article n'est pas disponible dans votre magasin."; ?> </p>
   </div>
 
   <main class="details-produit">
@@ -93,10 +98,12 @@ if (isset($_GET['IdArticle'])) {
           <div class="prix-s"><?php echo $a['PrixRelatif']; ?> €/kg ou L</div>
         </div>
 
-        <div class="details-produit__btn-panier">
+        <?php if($dispo) echo '
+          <div class="details-produit__btn-panier">
           <button>Ajouter au cabas</button>
           <!--Améliorations à venir-->
-        </div>
+          </div>';
+        ?>
 
         <label class="details-produit__btn-favori">
           <span class="material-icons">star_border</span>
