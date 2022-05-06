@@ -18,11 +18,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_liste-rayons.
 // * Constantes *
 // **************
 
-/** Message affiché en cas de requête invalide */
-const MSG_400 = 'Votre requête n\'est pas valide.';
-
 /** Message affiché en cas de magasin inexistant */
-const MSG_404 =
+const ERR_DEPOT_INEXISTANT =
   'Le magasin auquel vous tentez d\'accéder n\'existe pas... Retournez à l\'accueil pour retrouver votre chemin !';
 
 
@@ -50,11 +47,11 @@ const MSG_404 =
 // Si un identifiant de dépôt est passé en paramètre...
 if ( isset($_GET['id']) ) {
   // Si cet identifiant n'est pas une valeur numérique, une erreur 400 est affichée.
-  if ( !is_numeric($_GET['id']) )      error(400, MSG_400);
+  if ( !is_numeric($_GET['id']) )      error(400);
 
   // Les informations du dépôt correspondant sont enregistrées dans la session.
   // En cas d'échec, une erreur 404 est affichée.
-  if ( !selectionDepot($_GET['id']) )  error(404, MSG_404);
+  if ( !selectionDepot($_GET['id']) )  error(404, ERR_DEPOT_INEXISTANT);
 }
 
 if ( !isset($_SESSION) ) session_start();
