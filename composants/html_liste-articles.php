@@ -6,6 +6,11 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/fournisseur.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_qte-article.php';
+
+// Pour actualiser le panier à chaque ajout d'articles
+actionPanier();
 
 /**
  * Afficher la liste des articles.
@@ -33,7 +38,10 @@ function htmlListeArticles ($listeArticles): void {
         <a class="ls-articles__description" href="/avocaba/vues/article.php?IdArticle=<?php echo $article['IdArticle'] ?>">
           <img class="ls-articles__img" src="<?php echo $article['PhotoVignette']; ?>" alt="<?php echo $article['Nom']; ?>">
           <p class="ls-articles__titre-article"><?php echo $article['Nom']; ?></p>
-          <p class="ls-articles__producteur">Producteur : <?php if($nomFournisseur) echo $nomFournisseur; ?></p><div class="ls-articles__prix"><?php echo $article['Nom']; ?><img class="ls-articles__cabas" src="/img/placeholder.svg" alt="cabas"></div>
+          <p class="ls-articles__producteur">Producteur : <?php if($nomFournisseur) echo $nomFournisseur; ?></p>
+          <div class="ls-articles__prix"><?php echo $article['Nom']; ?>
+            <?php htmlQteArticle($article['IdArticle'], getQteArticle($article['IdArticle']), $article['Nom']);?>
+          </div>
         </a>
       </li>
     <?php }

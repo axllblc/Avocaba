@@ -23,7 +23,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 
 $ok = false;
 $q = "";
-session_start();
+
+// La session est déjà lancé depuis html_liste-articles
+
 // Récupération des résultats si il y a eu une recherche textuel (minimum 2 caractères)
 if (isset($_GET['recherche']) and strlen($_GET['recherche']) > 1) {
   $q = $_GET['recherche'];

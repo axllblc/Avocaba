@@ -7,10 +7,12 @@ error_reporting(E_ALL);
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/fournisseur.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/magasin.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/panier.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/ville.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/misc.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_qte-article.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 
 
@@ -21,6 +23,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 /********************
  * Script principal *
  ********************/
+
+// On met à jour le panier si action de l'utilisateur
+initialiserPanier();
+actionPanier();
 
 // Récupération des informations liées à l'article
 if (isset($_GET['IdArticle'])) {
@@ -36,8 +42,6 @@ if (isset($_GET['IdArticle'])) {
 
   // $v est la ville du fournisseur
   $v = ville($f->getIdVille());
-
-  session_start();
 
   // $dispo indique si l'article est ajoutable au panier du client
   $dispo = false;
@@ -98,12 +102,11 @@ if (isset($_GET['IdArticle'])) {
           <div class="prix-s"><?php echo $a['PrixRelatif']; ?> €/kg ou L</div>
         </div>
 
-        <?php if($dispo) echo '
-          <div class="details-produit__btn-panier">
-          <button>Ajouter au cabas</button>
-          <!--Améliorations à venir-->
-          </div>';
+        <div class="details-produit__btn-panier">
+        <?php if($dispo)
+          htmlQteArticle($a['IdArticle'], getQteArticle($a['IdArticle']), $a['Nom']);
         ?>
+        </div>
 
         <label class="details-produit__btn-favori">
           <span class="material-icons">star_border</span>
