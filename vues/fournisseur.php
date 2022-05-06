@@ -55,7 +55,14 @@ if (isset($_GET['siret'])) {
         </div>
         <div class="fournisseur__photo-profil" style="background-image: url('<?php echo $fournisseur->getPhotoProfil(); ?>');"></div>
         <h1 class="fournisseur__nom"><?php echo $fournisseur->getNom(); ?></h1>
-        <p class="fournisseur__domaine">[Domaine]</p> <!-- TODO à dégager -->
+        <p class="fournisseur__domaine">
+          <?php 
+          $domaines = $fournisseur->getDomaines();
+          for ($i=0; $i < (count($domaines)-1); $i++)
+            echo $domaines[$i].', ';
+          echo $domaines[count($domaines)-1].'.';
+          ?>
+        </p>
         
         <div class="fournisseur__favori">
           &#9733;

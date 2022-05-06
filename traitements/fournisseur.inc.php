@@ -52,6 +52,12 @@ const FOURNISSEUR_SUR_DEPOT = '
   WHERE IdDepot = ?;
 ';
 
+const DOMAINE_FOURNISSEUR = '
+  SELECT DISTINCT r.Nom as "Nom"
+  FROM rayons as r INNER JOIN articles as a
+  WHERE a.SiretProducteur = ?;
+';
+
 
 class Fournisseur {
   private $_siret;
@@ -338,7 +344,43 @@ class Fournisseur {
     $stmt->close();
     $link->close();
 
-    return $resultArray[0]['SiretProducteur'];
+    foreach ($resultArray as $key => $value)
+      $resultArray[$key] = $value['SiretProducteur'];
+
+    return $resultArray;
+  }
+
+  /**
+   * Obtenir la liste des noms des domaines du fournisseur
+   * @return array liste des domaines
+   */
+  function getDomaines() : Array {
+    // connexion à la base de données
+    $link = dbConnect();
+
+    // Préparation de la requête
+    $stmt = $link->prepare(DOMAINE_FOURNISSEUR);
+    checkError($stmt, $link);
+    $status = $stmt->bind_param('i', $this->_siret);
+
+    // Exécution de la requête
+    $status = $stmt->execute();
+    checkError($status, $link);
+
+    // Récupération du résultat
+    $result = $stmt->get_result();
+    checkError($result, $link);
+    $resultArray = $result->fetch_all(MYSQLI_ASSOC);
+
+    // Fermeture de la connexion à la base de données et libération de la mémoire associée
+    $result->close();
+    $stmt->close();
+    $link->close();
+
+    foreach ($resultArray as $key => $value)
+      $resultArray[$key] = $value['Nom'];
+
+    return $resultArray;
   }
 }
 ?>
