@@ -41,7 +41,7 @@ LIMIT 10;
 ';
 
 /** Recherche de dépôt par nom de ville. Cette requête se limite à 10 dépôts. */
-const RECHERCHE_VILLE = '
+const RECHERCHE_DEPOT_VILLE = '
 SELECT d.`IdDepot`, d.`Nom`, d.`Adresse`, v.`Nom` AS `Ville`, v.`CodePos` AS `CodePostal`
 FROM DEPOTS AS d
 INNER JOIN VILLES AS v USING (`IdVille`)
@@ -110,7 +110,7 @@ function rechercherMagasin (string|int $query, bool $id = false): array {
       // Rechercher un/des dépôt(s) par nom de ville
       $slug = slugify($query);
 
-      $stmt = $link->prepare(RECHERCHE_VILLE);
+      $stmt = $link->prepare(RECHERCHE_DEPOT_VILLE);
       checkError($stmt, $link);
 
       $status = $stmt->bind_param('s', $slug);
