@@ -5,6 +5,7 @@
 error_reporting(E_ALL);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/panier.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/date.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
@@ -31,6 +32,23 @@ const VIDER_PANIER = 'emp';
 // *************
 // * Fonctions *
 // *************
+
+function choixJoursRetrait (): void {
+  $now = getdate();
+
+  for ($i = 1; $i <= 7; $i++) {
+    $date = getdate($now[0] + $i * 86400);
+
+    // Si la date n'est pas un dimanche (jour de fermeture)
+    if ( $date['wday'] !== 0 ) {
+      $dateVal = $date['year'] . '-' . $date['mon'] . '-' . $date['mday'];
+      $dateAff = JOURS[$date['wday']] . ' ' . $date['mday'] . ' ' . MOIS[$date['mon']] . ' ' . $date['year'];
+
+      echo '<option value="' . $dateVal . '">' . $dateAff . '</option>';
+    }
+  }
+}
+
 
 /**
  * Afficher le contenu du panier.
@@ -104,7 +122,8 @@ $affichageNbArticles =
   ( $nbArticles > 0 ) ?
     ( $nbArticles === 1 ? 'Un article' : "$nbArticles articles" ) : '';
 
-$status   = false;
+/** Booléen indiquant le succès ou non de la modification de l'état du panier */
+$status = false;
 
 
 
@@ -192,19 +211,15 @@ if ( !empty($_GET['action']) ) {
   </div>
 
   <?php if ($nbArticles > 0) { ?>
-  <div class="panier__recapitulatif">
+  <form class="panier__recapitulatif" action="paiement.php" method="get">
     <h2>Date et heure de retrait</h2>
     <!-- TODO : Rendre le sélecteur de créneau dynamique -->
-    <button type="button" name="recapitulatif__bouton_creneau">Choisir un créneau</button>
     <div id="panier__creneau">
-      <!--Voir maquette pour respecter le style du choix du créneau!-->
-      <select class="panier__creneau_jour" name="choix_jour" size="3">
-        <option value="lundi 12">lundi 12</option>
-        <option value="mardi 13">mardi 13</option>
-        <option value="mercredi 14">mercredi 14</option>
-        <option value="jeudi 14">jeudi 14</option>
+      <!-- Choisir un créneau -->
+      <select class="panier__creneau_jour" name="choix_jour" title="Date de retrait">
+        <?php choixJoursRetrait(); ?>
       </select>
-      <select class="panier_creneau_heure" name="choix_jour" size="3">
+      <select class="panier_creneau_heure" name="choix_jour" title="Heure de retrait (plage de deux heures)">
         <option value="8">8h-10h</option>
         <option value="10">10h-12h</option>
         <option value="12">12h-14h</option>
@@ -216,11 +231,12 @@ if ( !empty($_GET['action']) ) {
     <h2>Récapitulatif</h2>
     <div id="panier__montant-total">Total&nbsp;: <b><?= montantPanier() . '&nbsp;€' ?></b></div>
     <div><?= $affichageNbArticles?></div>
+    <!-- TODO : Mise à jour automatique -->
     <div>Date et heure de retrait : <b>Lundi 12 juin entre 8h et 10h</b></div>
     <!-- -->
-    <a class="panier__valider_panier" href="/avocaba/vues/paiement.php">Valider mon cabas</a><br>
+    <a class="panier__valider_panier" href="paiement.php">Valider mon cabas</a><br>
     <a href="<?= '?action=' . VIDER_PANIER ?>">Vider mon cabas</a>
-  </div>
+  </form>
   <?php } ?>
 
 </main>
