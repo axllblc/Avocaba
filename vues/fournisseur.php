@@ -41,7 +41,7 @@ if (isset($_GET['siret'])) {
   <?php htmlHead($fournisseur->getNom() . ' – Avocaba'); ?>
 
   <body>
-    <?php htmlHeader( !empty($_SESSION['Magasin']) ); ?>
+    <?php htmlHeader( !empty($_SESSION['Depot']) ); ?>
 
     <main class="fournisseur">
       <!-- Bannière du producteur -->
