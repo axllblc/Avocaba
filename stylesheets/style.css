@@ -202,6 +202,17 @@ body {
 
 /* 🧺 Panier / Cabas */
 
+.panier__recapitulatif {
+  background-color: whitesmoke;
+  box-shadow: rgba(0, 0, 0, .1) 0 5px 10px;
+  border-radius: 10px;
+}
+
+.panier__article {
+  border: solid 2px gainsboro;
+  border-radius: 5px;
+}
+
 .panier__valider_panier{
   border: 1px solid black;
   padding: 4px;
