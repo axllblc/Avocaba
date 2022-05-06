@@ -292,9 +292,8 @@ function actionPanier (): bool {
           $status = ajouterArticle($_GET['id']);
         break;
       case MODIFIER:
-        if (    !empty($_GET['id'])    && is_numeric($_GET['id'])
-             && !empty($_GET['value']) && is_numeric($_GET['value']) )
-          $status = modifierQteArticle($_GET['id'], $_GET['value']);
+        if ( is_numeric($_GET['id']) && is_numeric($_GET['qte']) )
+          $status = modifierQteArticle($_GET['id'], $_GET['qte']);
         break;
       case RETIRER:
         if ( !empty($_GET['id']) && is_numeric($_GET['id']) )

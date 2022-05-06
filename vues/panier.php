@@ -177,6 +177,8 @@ $status = actionPanier();
 
 <?php footer(); ?>
 
+<script src="/avocaba/js/panier.js"></script>
+
 </body>
 </html>
 

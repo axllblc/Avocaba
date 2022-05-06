@@ -29,7 +29,8 @@ function htmlQteArticle (int $id, int $qte, string $nom = 'cet article'): void {
          aria-label="<?= 'Diminuer la quantité de ' . $nom ?>">
         -
       </a>
-      <input type="number" name="qte" class="panier__input-qte" data-id="<?= $id ?>"
+      <input type="number" name="qte" class="panier__input-qte"
+             data-id="<?= $id ?>" data-qte="<?= $qte ?>"
              min="0" max="5" value="<?= $qte ?>"
              title="Définir la quantité"
              aria-label="<?= 'Modifier la quantité de ' . $nom ?>">

@@ -146,5 +146,7 @@ if (isset($_GET['IdArticle'])) {
   </main>
 
   <?php footer(); ?>
+
+  <script src="/avocaba/js/panier.js"></script>
 </body>
 </html>
