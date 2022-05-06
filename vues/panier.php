@@ -9,6 +9,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/date.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_qte-article.php';
 
 // Le panier est initialisé. À cette occasion, la session est initialisée.
 initialiserPanier();
@@ -54,6 +55,7 @@ function affichagePanier (): void {
     $prix  = $_SESSION['Panier']['Prix'][$key];
     $photoVignette = !empty($_SESSION['Panier']['PhotoVignette'][$key]) ?
                      $_SESSION['Panier']['PhotoVignette'][$key] : '/avocaba/img/article-placeholder.png';
+    $qte = $_SESSION['Panier']['Qte'][$key];
 
     ?>
     <article class="panier__article">
@@ -68,28 +70,7 @@ function affichagePanier (): void {
         <?= $prix . '&nbsp;€' ?>
       </div>
 
-      <div class="panier__selection-qte">
-        <input type="hidden" name="idArticle" value="<?= $id ?>">
-        <a href="<?= '?actionPanier=' . DIMINUER . '&id=' . $id ?>"
-           title="Diminuer la quantité"
-           aria-label="<?= 'Diminuer la quantité de ' . $nom ?>">
-          -
-        </a>
-        <input type="number" name="qte" class="panier__input-qte" data-id="<?= $id ?>"
-               min="0" max="5" value="<?= $_SESSION['Panier']['Qte'][$key] ?>"
-               title="Définir la quantité"
-               aria-label="<?= 'Modifier la quantité de ' . $nom ?>">
-        <a href="<?= '?actionPanier=' . AUGMENTER . '&id=' . $id ?>"
-           title="Augmenter la quantité"
-           aria-label="<?= 'Augmenter la quantité de ' . $nom ?>">
-          +
-        </a>
-        <a href="<?= '?actionPanier=' . RETIRER . '&id=' . $id ?>"
-           title="Retirer l'article du panier"
-           aria-label="<?= 'Retirer ' . $nom . ' du cabas' ?>">
-          Retirer
-        </a>
-      </div>
+      <?php htmlQteArticle($id, $qte, $nom); ?>
 
     </article>
   <?php }
@@ -167,10 +148,9 @@ $status = actionPanier();
 
   <?php if ($nbArticles > 0) { ?>
   <form class="panier__recapitulatif" action="paiement.php" method="get">
+
     <h2>Date et heure de retrait</h2>
-    <!-- TODO : Rendre le sélecteur de créneau dynamique -->
     <div id="panier__creneau">
-      <!-- Choisir un créneau -->
       <select class="panier__creneau_jour" name="choix_jour" title="Date de retrait">
         <?php choixJoursRetrait(); ?>
       </select>
@@ -182,15 +162,14 @@ $status = actionPanier();
         <option value="18">18h-20h</option>
       </select>
     </div>
-    <!-- -->
+
     <h2>Récapitulatif</h2>
     <div id="panier__montant-total">Total&nbsp;: <b><?= montantPanier() . '&nbsp;€' ?></b></div>
     <div><?= $affichageNbArticles?></div>
-    <!-- TODO : Mise à jour automatique -->
-    <div>Date et heure de retrait : <b>Lundi 12 juin entre 8h et 10h</b></div>
     <!-- -->
     <a class="panier__valider_panier" href="paiement.php">Valider mon cabas</a><br>
     <a href="<?= '?actionPanier=' . VIDER_PANIER ?>">Vider mon cabas</a>
+
   </form>
   <?php } ?>
 
