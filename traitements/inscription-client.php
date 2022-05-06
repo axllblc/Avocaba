@@ -86,10 +86,10 @@ function inscrireClient ($nom, $prenom, $email, $motDePasse): bool {
 
 /**
  * Vérifier la présence ou non d'une adresse e-mail dans la base de données.
- * @param $email
- * @return bool
+ * @param string $email Email à vérifier
+ * @return bool true si l'email est absente de la base de donnée, false sinon
  */
-function emailAbsente ($email): bool {
+function emailAbsente (string $email): bool {
   $link = dbConnect();
 
   $result = NULL;
