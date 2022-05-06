@@ -40,6 +40,18 @@ const VILLE = '
   WHERE `IdVille` = ?;
 ';
 
+const DEPOT = '
+  SELECT DISTINCT IdDepot
+  FROM articles as a INNER JOIN stocker as s
+  WHERE SiretProducteur = ?;
+';
+
+const FOURNISSEUR_SUR_DEPOT = '
+  SELECT DISTINCT SiretProducteur
+  FROM articles INNER JOIN stocker
+  WHERE IdDepot = ?;
+';
+
 
 class Fournisseur {
   private $_siret;
@@ -138,7 +150,9 @@ class Fournisseur {
     checkError($result, $link);
     $resultArray = $result->fetch_all(MYSQLI_ASSOC);
 
-    // Fermeture de la connexion à la base de données
+    // Fermeture de la connexion à la base de données et libération de la mémoire associée
+    $result->close();
+    $stmt->close();
     $link->close();
 
     return $resultArray[0]['Nom'];
@@ -226,8 +240,6 @@ class Fournisseur {
       $nombre = $result->fetch_array()[0];
       $result->free_result();
     }
-
-    // Fermeture de la connexion à la base de données
     $link->close();
 
     return $nombre;
@@ -255,13 +267,78 @@ class Fournisseur {
     checkError($result, $link);
     $resultArray = $result->fetch_all(MYSQLI_ASSOC);
 
-    // Fermeture de la connexion à la base de données
+    // Fermeture de la connexion à la base de données et libération de la mémoire associée
+    $result->close();
+    $stmt->close();
     $link->close();
 
     foreach ($resultArray as $key => $value)
       $resultArray[$key] = $value['Siret'];
 
     return $resultArray;
+  }
+
+  /**
+   * Connaitre tous les dépots où le producteur se trouve
+   */
+  function getDepot() : Array {
+    // connexion à la base de données
+    $link = dbConnect();
+
+    // Préparation de la requête
+    $stmt = $link->prepare(DEPOT);
+    checkError($stmt, $link);
+    $status = $stmt->bind_param('i', $this->_siret);
+
+    // Exécution de la requête
+    $status = $stmt->execute();
+    checkError($status, $link);
+
+    // Récupération du résultat
+    $result = $stmt->get_result();
+    checkError($result, $link);
+    $resultArray = $result->fetch_all(MYSQLI_ASSOC);
+
+    // Fermeture de la connexion à la base de données et libération de la mémoire associée
+    $result->close();
+    $stmt->close();
+    $link->close();
+
+    foreach ($resultArray as $key => $value)
+      $resultArray[$key] = $value['IdDepot'];
+
+    return $resultArray;
+  }
+
+  /**
+   * Obtenir la liste des fournisseurs présent sur le dépot
+   * @param int|string idDepot identifiant du dépot
+   * @return array liste des fournisseurs trouvés
+   */
+  static function fournisseurSurDepot(int|String $idDepot) : Array {
+    // connexion à la base de données
+    $link = dbConnect();
+
+    // Préparation de la requête
+    $stmt = $link->prepare(FOURNISSEUR_SUR_DEPOT);
+    checkError($stmt, $link);
+    $status = $stmt->bind_param('i', $idDepot);
+
+    // Exécution de la requête
+    $status = $stmt->execute();
+    checkError($status, $link);
+
+    // Récupération du résultat
+    $result = $stmt->get_result();
+    checkError($result, $link);
+    $resultArray = $result->fetch_all(MYSQLI_ASSOC);
+
+    // Fermeture de la connexion à la base de données et libération de la mémoire associée
+    $result->close();
+    $stmt->close();
+    $link->close();
+
+    return $resultArray[0]['SiretProducteur'];
   }
 }
 ?>
