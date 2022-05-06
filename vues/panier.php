@@ -128,9 +128,9 @@ $status = actionPanier();
 <nav>
   <button class="nav__btn-retour" onclick="history.back();" title="Revenir à la page précédente">Retour</button>
   <div class="nav__sep"><!--Séparateur--></div>
-  <span>Mon cabas</span>
+  <a href="magasin.php"><?= $_SESSION['Depot']['Nom'] ?? 'Accueil du magasin' ?></a>
   <div class="nav__sep"><!--Séparateur--></div>
-  <a href="magasin.php"><?= $_SESSION['Depot']['Nom'] ?></a>
+  <span>Mon cabas</span>
 </nav>
 
 <main class="panier">
