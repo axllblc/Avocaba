@@ -24,9 +24,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 $ok = false;
 $q = "";
 
-// La session est déjà lancé depuis html_liste-articles
-
-// Récupération des résultats si il y a eu une recherche textuel (minimum 2 caractères)
+// Récupération des résultats s'il y a eu une recherche textuelle (minimum 2 caractères)
 if (isset($_GET['recherche']) and strlen($_GET['recherche']) > 1) {
   $q = $_GET['recherche'];
   $idDepot = 'aucun';
@@ -75,7 +73,9 @@ if( isset($_GET['rayon']) ){
 <?php htmlHead('🔍 ' . $q . ' – Avocaba'); ?>
 
 <body>
+
   <?php htmlHeader(true, $q); ?>
+
   <main>
     <?php
       if ($ok)
@@ -84,6 +84,10 @@ if( isset($_GET['rayon']) ){
         echo "Aucun résultat, veuillez réessayer.";
     ?>
   </main>
+
   <?php footer(); ?>
+
+  <script src="/avocaba/js/panier.js"></script>
+
 </body>
 </html>

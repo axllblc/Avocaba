@@ -16,20 +16,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_qte-article.p
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 
 
-/*************
- * Fonctions *
- *************/
 
-/********************
- * Script principal *
- ********************/
-
-// On met à jour le panier si action de l'utilisateur
-initialiserPanier();
-actionPanier();
+// ********************
+// * Script principal *
+// ********************
 
 // Récupération des informations liées à l'article
-if (isset($_GET['IdArticle'])) {
+if ( isset($_GET['IdArticle']) ) {
   // $a est l'article qui sera affiché
   $a = rechercherArticle($_GET['IdArticle'], "idArticle");
   if($a == null){

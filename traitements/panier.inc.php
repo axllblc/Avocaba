@@ -5,6 +5,8 @@
 require_once 'articles.inc.php';
 
 /*
+ * Le fichier `panier.inc.php` (celui-ci !) contient les fonctions de gestion du panier, tandis que `panier.main.php`
+ * contient le script permettant au client de gérer son panier au moyen d'une requête GET.
  * Le contenu du panier est enregistré dans $_SESSION['Panier'].
  */
 
@@ -23,6 +25,8 @@ const AUGMENTER    = 'inc';
 const MODIFIER     = 'set';
 const RETIRER      = 'rem';
 const VIDER_PANIER = 'emp';
+
+const URL_TRAITEMENT_PANIER = '/avocaba/traitements/panier.main.php';
 
 
 
@@ -266,56 +270,4 @@ function nbArticlesTotal (): int {
  */
 function supprimerPanier (): void {
   unset($_SESSION['Panier']);
-}
-
-
-
-// Actions sur le panier
-
-/**
- * Vérifier la présence du paramètre <code>$_GET['actionPanier']</code> dans la requête et modifier l'état du panier.
- * @return bool Booléen indiquant le succès ou non de la modification de l'état du panier
- */
-function actionPanier (): bool {
-  initialiserPanier();
-
-  $status = false;
-
-  if ( !empty($_GET['actionPanier']) ) {
-    switch ($_GET['actionPanier']) {
-      case DIMINUER:
-        if ( !empty($_GET['id']) && is_numeric($_GET['id']) )
-          $status = diminuerQteArticle($_GET['id']);
-        break;
-      case AUGMENTER:
-        if ( !empty($_GET['id']) && is_numeric($_GET['id']) )
-          $status = ajouterArticle($_GET['id']);
-        break;
-      case MODIFIER:
-        if ( is_numeric($_GET['id']) && is_numeric($_GET['qte']) )
-          $status = modifierQteArticle($_GET['id'], $_GET['qte']);
-        break;
-      case RETIRER:
-        if ( !empty($_GET['id']) && is_numeric($_GET['id']) )
-          $status = supprimerArticle($_GET['id']);
-        break;
-      case VIDER_PANIER:
-        supprimerPanier();
-        $status = true;
-        break;
-    }
-
-    /*
-     * Si la modification de l'état du panier a fonctionné, l'utilisateur est redirigé vers la même page, afin de
-     * supprimer les paramètres passés dans l'URL.
-     * Cela permet d'éviter des modifications répétées de l'état du panier si l'utilisateur navigue avec les boutons
-     * [Précédent] et [Suivant] du navigateur.
-     */
-    if ($status) {
-      header('Location: ?');
-      exit;
-    }
-  } else $status = true;
-
-  return $status;
 }

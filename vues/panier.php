@@ -93,26 +93,11 @@ $affichageNbArticles =
   ( $nbArticles > 0 ) ?
     ( $nbArticles === 1 ? 'Un article' : "$nbArticles articles" ) : '';
 
-/** Booléen indiquant le succès ou non de la modification de l'état du panier */
-$status = false;
-
 
 
 // ********************
 // * Script principal *
 // ********************
-
-// Opérations sur le panier
-// Vérifier la présence du paramètre $_GET['actionPanier'] dans la requête et modifier l'état du panier.
-$status = actionPanier();
-
-
-// Un test
-//ajouterArticle(1);
-//ajouterArticle(2);
-//ajouterArticle(454);
-//modifierQteArticle(1, 5);
-//var_dump($_SESSION);
 
 ?>
 
@@ -137,7 +122,6 @@ $status = actionPanier();
 
   <div class="panier__section_articles">
     <h1 class="panier__titre">Mon cabas</h1>
-    <?= !$status ? '⚠️ Impossible de modifier le contenu du panier.' : '' ?>
     <?php
       if ($nbArticles > 0)
         affichagePanier();
@@ -168,7 +152,7 @@ $status = actionPanier();
     <div><?= $affichageNbArticles?></div>
     <!-- -->
     <a class="panier__valider_panier" href="paiement.php">Valider mon cabas</a><br>
-    <a href="<?= '?actionPanier=' . VIDER_PANIER ?>">Vider mon cabas</a>
+    <a href="<?= URL_TRAITEMENT_PANIER . '?actionPanier=' . VIDER_PANIER ?>">Vider mon cabas</a>
 
   </form>
   <?php } ?>

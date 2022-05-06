@@ -9,8 +9,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/fournisseur.inc.p
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_qte-article.php';
 
-// Pour actualiser le panier à chaque ajout d'articles
-actionPanier();
+
 
 /**
  * Afficher la liste des articles.
