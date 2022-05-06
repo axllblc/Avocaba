@@ -21,7 +21,7 @@ function htmlListeRayons (int $idMagasin): void {
 
       <li class="ls-rayons__item"
           title="<?= $rayon['Nom'] ?>">
-        <a href="<?= '/avocaba/vues/articles.php?rayon=' . $rayon['IdRayon']; ?>">
+        <a href="<?= '/avocaba/vues/recherche.php?rayon=' . $rayon['IdRayon']; ?>">
           <img src="<?= '/avocaba/img/rayons/' . $rayon['IdRayon'] . '.png'; ?>"
                alt="<?= $rayon['Nom'] ?>">
           <span><?= $rayon['Nom'] ?></span>
@@ -35,4 +35,3 @@ function htmlListeRayons (int $idMagasin): void {
     echo 'Aucun rayon';
   }
 }
-

@@ -7,6 +7,7 @@
 error_reporting(E_ALL);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/nom-rayon.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/magasin.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/misc.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
@@ -23,7 +24,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 $ok = false;
 $q = "";
 session_start();
-// Récupération des résultats de la recherche (minimum 2 caractères)
+// Récupération des résultats si il y a eu une recherche textuel (minimum 2 caractères)
 if (isset($_GET['recherche']) and strlen($_GET['recherche']) > 1) {
   $q = $_GET['recherche'];
   $idDepot = 'aucun';
@@ -39,6 +40,28 @@ if (isset($_GET['recherche']) and strlen($_GET['recherche']) > 1) {
   }
   if ($listeArticles != null) {
     $ok = true;
+  }
+}
+
+// Récupération des résultats si il y a eu une recherche par rayon
+if( isset($_GET['rayon']) ){
+  $idRayon = $_GET['rayon'];
+  $q = nomRayon($idRayon);
+  if($q){
+    // Si le rayon existe bien
+    if (isset($_SESSION['Depot']['IdDepot'])) {
+      // Cas où l'on est connecté à un magasin : on affiche que les articles du magasin
+      $idDepot = $_SESSION['Depot']['IdDepot'];
+      $listeArticles = rechercherArticle($idRayon, 'idRayon', $idDepot);
+    }
+    else {
+      // Pas de magasin renseigné, l'utilisateur peut consulter tout les articles de Avocaba
+      $listeArticles = rechercherArticle($idRayon, 'idRayon', 'aucun');
+    }
+    if ($listeArticles != null) {
+      $ok = true;
+    }
+
   }
 }
 

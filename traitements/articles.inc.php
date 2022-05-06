@@ -151,10 +151,12 @@ function rechercherArticle (string|int $critere, string $nature, string|int $idD
       checkError($stmtRecherche, $link);
       break;
     case 'nomArticle':
+      // Rechercher les articles selon leur nom
       $stmtRecherche = $link->prepare(RECHERCHE_ARTICLE_NOM_ARTICLE);
       checkError($stmtRecherche, $link);
       break;
     case 'idRayon':
+      // Rechercher les articles selon l'identifiant du rayon auquel il appartient
       $stmtRecherche = $link->prepare(RECHERCHE_ARTICLE_ID_RAYON);
       checkError($stmtRecherche, $link);
       break;
@@ -164,6 +166,7 @@ function rechercherArticle (string|int $critere, string $nature, string|int $idD
       checkError($stmtRecherche, $link);
       break;
     case 'idFournisseur':
+      // Rechercher l'article vendu par un fournisseur (identifiant)
       $stmtRecherche = $link->prepare(RECHERCHE_ARTICLE_ID_FOURNISSEUR);
       checkError($stmtRecherche, $link);
       break;
