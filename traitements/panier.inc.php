@@ -195,6 +195,25 @@ function diminuerQteArticle (int $idArticle): bool {
 
 
 /**
+ * Obtenir la quantité d'un article dans le panier.
+ * @param int $idArticle Article dont on souhaite connaître la quantité.
+ * @return int Quantité de l'article. Vaut 0 si l'article est absent du panier.
+ */
+function getQteArticle (int $idArticle): int {
+  initialiserPanier();
+
+  /** Position de l'article dans le panier. */
+  $index = array_search($idArticle, $_SESSION['Panier']['IdArticle']);
+
+  if ($index !== false) {
+    return $_SESSION['Panier']['Qte'][$index];
+  }
+
+  return 0;
+}
+
+
+/**
  * Calculer le montant total du panier.
  * @return int|float Montant total du panier
  */
