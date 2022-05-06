@@ -94,12 +94,12 @@ if (isset($_GET['siret'])) {
                 document.getElementById("photo-<?php echo $i ?>"),
               <?php } ?>];
 
-              var index = 0;
+              let index = 0;
 
-              chevron_right.addEventListener("click", (e) => {
+              chevron_right.addEventListener("click", () => {
                 photos[index].style.display = "none";
                   index+=1;
-                  if(index == photos.length) {
+                  if(index === photos.length) {
                       index=0;
                       photos[index].style.display = "block";
                   } else {
@@ -107,10 +107,10 @@ if (isset($_GET['siret'])) {
                   }
               })
 
-              chevron_left.addEventListener("click", (e) => {
+              chevron_left.addEventListener("click", () => {
                 photos[index].style.display = "none";
                   index-=1;
-                  if(index == -1) {
+                  if(index === -1) {
                       index=photos.length-1;
                       photos[index].style.display = "block";
                   } else {
@@ -132,7 +132,7 @@ if (isset($_GET['siret'])) {
         </div>
       </div>
 
-      <!-- Producteurs phares -->
+      <!-- Produits phares -->
       <?php
       $articles_phares = $fournisseur->produitsPhares();
       if (count($articles_phares) != 0) {
