@@ -28,22 +28,25 @@ function htmlQteArticle (int $id, int $qte, string $nom = 'cet article'): void {
       <input type="hidden" name="idArticle" value="<?= $id ?>">
       <a href="<?= URL_TRAITEMENT_PANIER . '?actionPanier=' . DIMINUER . '&id=' . $id ?>"
          title="Diminuer la quantité"
-         aria-label="<?= 'Diminuer la quantité de ' . $nom ?>">
+         aria-label="<?= 'Diminuer la quantité de ' . $nom ?>"
+         class="selection-qte__dec">
         -
       </a>
-      <input type="number" name="qte" class="panier__input-qte"
+      <input type="number" name="qte" class="selection-qte__set"
              data-id="<?= $id ?>" data-qte="<?= $qte ?>"
              min="0" max="5" value="<?= $qte ?>"
              title="Définir la quantité"
              aria-label="<?= 'Modifier la quantité de ' . $nom ?>">
       <a href="<?= URL_TRAITEMENT_PANIER . '?actionPanier=' . AUGMENTER . '&id=' . $id ?>"
          title="Augmenter la quantité"
-         aria-label="<?= 'Augmenter la quantité de ' . $nom ?>">
+         aria-label="<?= 'Augmenter la quantité de ' . $nom ?>"
+         class="selection-qte__inc">
         +
       </a>
       <a href="<?= URL_TRAITEMENT_PANIER . '?actionPanier=' . RETIRER . '&id=' . $id ?>"
          title="Retirer l'article du panier"
-         aria-label="<?= 'Retirer ' . $nom . ' du cabas' ?>">
+         aria-label="<?= 'Retirer ' . $nom . ' du cabas' ?>"
+         class="selection-qte__rem">
         Retirer
       </a>
     </div>

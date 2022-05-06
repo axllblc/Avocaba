@@ -221,6 +221,12 @@ body {
   color: black;
 }
 
+  /* Sélecteur de quantité */
+input.selection-qte__set {
+  font-size: 1em;
+  font-weight: bold;
+}
+
 
 /* 💳 Paiement */
 

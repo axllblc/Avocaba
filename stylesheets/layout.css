@@ -594,18 +594,9 @@ nav {
   object-fit: contain;
 }
 
-.panier__nom-article {
-  grid-area: panier__nom-article;
-}
-
-.panier__prix-article {
-  grid-area: panier__prix-article;
-}
-
-.panier__selection-qte {
-  grid-area: panier__selection-qte;
-  padding: 5px;
-}
+.panier__nom-article           { grid-area: panier__nom-article;   }
+.panier__prix-article          { grid-area: panier__prix-article;  }
+.panier .panier__selection-qte { grid-area: panier__selection-qte; }
 
 @media screen and (max-width: 1100px) {
   .panier {
@@ -622,6 +613,34 @@ nav {
     justify-content: center;
     justify-items: center;
   }
+}
+
+  /* Sélecteur de quantité */
+
+.panier__selection-qte {
+  display: grid;
+  grid-template: 1fr 1fr / auto 1fr auto;
+  grid-template-areas: "selection-qte__dec   selection-qte__set   selection-qte__inc"
+                       "selection-qte__rem   selection-qte__rem   selection-qte__rem";
+  gap: 5px;
+  justify-items: center;
+  align-items: center;
+}
+
+.panier__selection-qte > * {
+  display: block;
+}
+
+.selection-qte__dec { grid-area: selection-qte__dec; }
+.selection-qte__set { grid-area: selection-qte__set; }
+.selection-qte__inc { grid-area: selection-qte__inc; }
+.selection-qte__rem { grid-area: selection-qte__rem; }
+
+input.selection-qte__set {
+  min-width: 1em;
+  width: 2em;
+  margin-left: 1em;
+  border: none;
 }
 
 
