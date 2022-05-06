@@ -399,6 +399,12 @@ nav {
   padding: 0;
 }
 
+.ls-articles__img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
 .ls-articles {
   display: flex;
   flex-direction: row;
@@ -637,25 +643,25 @@ nav {
     grid-template-columns: 1fr 3fr 11fr 1fr;
     grid-template-rows: 3fr 1fr 1fr 1fr;
   }
-  
+
   .fournisseur__banniere {
     grid-area: 1 / 1 / 3 / 5;
   }
-  
+
   .fournisseur__photo-profil {
     grid-area: 2 / 2 / 5 / 3;
     width: 100%;
   }
-  
+
   .fournisseur__nom {
     grid-area: 3 / 3 / 4 / 4;
   }
-  
-  
+
+
   .fournisseur__domaine {
     grid-area: 4 / 3 / 5 / 4;
   }
-  
+
   .fournisseur__favori {
     grid-area: 3 / 4 / 5 / 5;
     padding-right: 10px;
@@ -665,11 +671,11 @@ nav {
     display: grid;
     grid-template-columns: 8fr 20px 5fr;
   }
-  
+
   .fournisseur__colonne-droite {
     grid-column: 3;
   }
-  
+
   .fournisseur__colonne-gauche {
     grid-column: 1;
   }

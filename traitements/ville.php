@@ -51,7 +51,7 @@ function ville (int $idVille): array|bool {
   // Fermeture de la connexion à la base de données
   $link->close();
   if(count($resultArray)>0){
-    return $resultArray;
+    return $resultArray[0];
   }
   else{
     return false;

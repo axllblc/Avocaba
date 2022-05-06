@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/fournisseur.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/magasin.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/ville.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/misc.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
@@ -33,9 +34,12 @@ if (isset($_GET['IdArticle'])) {
   // $f est le producteur/fournisseur de l'article
   $f = new Fournisseur($a['SiretProducteur']);
 
+  // $v est la ville du fournisseur
+  $v = ville($f->getIdVille());
+
   session_start();
 
-  // On récupère le magasin
+  // On récupère le magasin $m
   $m = rechercherMagasin($_SESSION['Depot']['IdDepot'], true)[0];
 
   // On vérifie si l'article est disponible dans le magasin/dépot
@@ -65,7 +69,8 @@ if (isset($_GET['IdArticle'])) {
     <button class="nav__btn-retour" onclick="history.back();" title="Revenir à la page précédente">Retour</button>
     <div class="nav__sep"><!--Séparateur--></div>
     <a href="/avocaba/vues/magasin.php" title="Accueil du magasin <?php echo $m['Nom']; ?>"><?php echo $m['Nom']; ?></a>
-    <a href="<?php echo '/avocaba/vues/recherche.php?recherche=' . $a['NomRayon']; ?>" title="Rayon <?php echo $a['NomRayon']; ?>"> <?php echo $a['NomRayon']; ?></a>
+    <div class="nav__sep"><!--Séparateur--></div>
+    <a href="<?php echo '/avocaba/vues/recherche.php?rayon=' . $a['IdRayon']; ?>" title="Rayon <?php echo $a['NomRayon']; ?>"> <?php echo $a['NomRayon']; ?></a>
   </nav>
   <div class="messageInfo">
     <?php if (!$dispo) echo "L'article n'est pas disponible dans votre magasin."; ?>
@@ -77,8 +82,7 @@ if (isset($_GET['IdArticle'])) {
       <div class="details-produit__infos">
 
         <div class="details-produit__groupe-nom">
-          <?php // TODO : Afficher le nom du produit ?>
-          <h1 class="details-produit__nom"><?php echo mb_substr($a['Description'], 0, 20); ?></h1>
+          <h1 class="details-produit__nom"><?php echo $a['Nom']; ?></h1>
           <div class="details-produit__contenance"><?php echo $a['Unite']; ?></div>
           <a class="details-produit__nom-prod"><?php echo $f->getNom(); ?></a>
         </div>
@@ -86,7 +90,7 @@ if (isset($_GET['IdArticle'])) {
 
         <div class="details-produit__prix">
           <div class="prix-net"><?php echo $a['Prix']; ?> €</div>
-          <div class="prix-s">[Prix]<?php echo $a['PrixRelatif']; ?> €/<?php echo $a['Unite']; ?></div>
+          <div class="prix-s"><?php echo $a['PrixRelatif']; ?> €/kg ou L</div>
         </div>
 
         <div class="details-produit__btn-panier">
@@ -109,7 +113,7 @@ if (isset($_GET['IdArticle'])) {
 
     <div class="details-produit__description">
       <h2>Description du produit</h2>
-      <p><?php echo $a['Description']; ?></p>
+      <p><?php echo lineBreakChange($a['Description']); ?></p>
     </div>
 
     <h2>Le producteur</h2>
@@ -117,8 +121,8 @@ if (isset($_GET['IdArticle'])) {
       <img class="details-produit__img-producteur" src="<?php echo $f->getPhotoProfil(); ?>" alt="Image du producteur">
       <div class="details-produit__infos-producteur">
         <h3><?php echo $f->getNom();?></h3>
-        <address><?php echo $f->getAdresse(); ?></address>
-        <p><?php echo $f->getDescription(); ?></p>
+        <address><?php echo $f->getAdresse() . ", " . $v['CodePos'] . " " . $v['Nom']; ?></address>
+        <p><?php echo lineBreakChange($f->getDescription(), true); ?></p>
         <a href="/avocaba/vues/fournisseur.php?siret=<?php echo $f->getSiret(); ?>">Lire la suite</a>
       </div>
     </div>
@@ -128,7 +132,7 @@ if (isset($_GET['IdArticle'])) {
       <p>Les produits similaires apparaîtront ici</p>
     </div>
 
-    <a class="details-produit__rayon" href="<?php echo '/avocaba/vues/recherche.php?recherche=' . $a['NomRayon']; ?>">Explorer le rayon <?php echo $a['NomRayon']; ?></a>
+    <a class="details-produit__rayon" href="<?php echo '/avocaba/vues/recherche.php?rayon=' . $a['IdRayon']; ?>">Explorer le rayon <?php echo $a['NomRayon']; ?></a>
   </main>
 
   <?php footer(); ?>
