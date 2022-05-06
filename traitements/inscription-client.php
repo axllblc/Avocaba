@@ -8,9 +8,9 @@ require_once 'verifier-client.php';
 
 
 
-/**************
- * Constantes *
- **************/
+// **************
+// * Constantes *
+// **************
 
 // Expressions régulières (email et mot de passe déjà définie dans connexion client)
 
@@ -34,9 +34,9 @@ VALUES (?, ?, ?, ?);
 
 
 
-/*************
- * Fonctions *
- *************/
+// *************
+// * Fonctions *
+// *************
 
 /**
  * Inscrire un client.
@@ -46,7 +46,7 @@ VALUES (?, ?, ?, ?);
  * @param $motDePasse
  * @return bool
  */
-function inscrireClient ($nom, $prenom, $email, $motDePasse) {
+function inscrireClient ($nom, $prenom, $email, $motDePasse): bool {
   $link = dbConnect();
 
   $result = NULL;
@@ -68,12 +68,17 @@ function inscrireClient ($nom, $prenom, $email, $motDePasse) {
     checkError($status, $link);
 
     //On renvoie le booléen selon la réussite de l'inscription
-    if(verifierClient($email, $motDePasse)){
+    if (verifierClient($email, $motDePasse)) {
+      // Fermeture de la connexion à la base de données
       $link->close();
+
       return true;
     }
   }
+
+  // Fermeture de la connexion à la base de données
   $link->close();
+
   return false;
 }
 
@@ -84,7 +89,7 @@ function inscrireClient ($nom, $prenom, $email, $motDePasse) {
  * @param $email
  * @return bool
  */
-function emailAbsente ($email) {
+function emailAbsente ($email): bool {
   $link = dbConnect();
 
   $result = NULL;
@@ -96,6 +101,7 @@ function emailAbsente ($email) {
     checkError($stmt, $link);
 
     $status = $stmt->bind_param('s',$email);
+    checkError($status, $link);
 
     // Exécution de la requête
     $status = $stmt->execute();
@@ -104,6 +110,7 @@ function emailAbsente ($email) {
     $result = $stmt->get_result();
     $resultArray = $result->fetch_all(MYSQLI_ASSOC);
 
+    // Fermeture de la connexion à la base de données
     $link->close();
 
     // On renvoie le booléen selon la présence ou nom de l'email dans la base de données
@@ -114,6 +121,8 @@ function emailAbsente ($email) {
       return false;
     }
   }
+
   $link->close();
-  return false; // cas où une erreur est lancée, on ne veut
+
+  return false; // Cas où une erreur est lancée
 }
