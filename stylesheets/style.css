@@ -112,6 +112,10 @@ body {
   color: black;
 }
 
+.annonce-accueil__savoir a {
+  font-weight: bold;
+}
+
 .annonce-accueil__active {
   background-color: #717171;
 }

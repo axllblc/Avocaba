@@ -2,19 +2,32 @@
 
 /* 📣 Annonces sur la page d'accueil */
 
-// TODO : Rendre le composant dynamique
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/fournisseur.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';
 
 /**
  * Composant annonce sur la page d'accueil
  * @param string|int $depot Identifiant du dépôt actif du client
  */
-function annonceAccueil (string|int $depot) : void { ?>
+function annonceAccueil(string|int $depot) : void { 
+  // récupération des fournisseurs sur le dépôt du client
+  $fournisseurs = Fournisseur::fournisseurSurDepot($depot);
+
+  // choix aléatoire d'un fournisseur
+  $siret_fournisseur = $fournisseurs[rand(0, count($fournisseurs)-1)];
+  $fournisseur = new Fournisseur($siret_fournisseur);
+?>
 <div class="annonce-accueil">
   <div class="annonce-accueil__slideshow-container">
+    <?php 
+    $photos = $fournisseur->photoFournisseur();
+    foreach ($photos as $key => $value) {
+    ?>
     <div class="annonce-accueil__mySlides annonce-accueil__fade">
-      <?php // TODO : Ajouter un texte alternatif pour les images ?>
-      <img src="https://imgs.search.brave.com/ajdNI4vI1cNXIH4eHQiV_0gT7Lh44H_J9qugc5dkFWA/rs:fit:1200:1200:1/g:ce/aHR0cDovL2xlc3ll/dXhncm9nbm9ucy5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MTgvMDgvMzQxM0NF/MjMtNThEMC00QTkx/LUI0OTktNzI3QUVD/NDU4QjJFLmpwZWc" >
+      <img src="<?php echo $value; ?>" 
+           alt="photo <?php echo $fournisseur->getNom(); echo ' '.$key; ?>">
     </div>
+    <?php } ?>
   </div>
 
   <script>
@@ -36,19 +49,26 @@ function annonceAccueil (string|int $depot) : void { ?>
   </script>
   
   <div class="annonce-accueil__droite">
-    <h2 class="annonce-accueil__decouvrir">Venez découvrir [nom du producteur]</h2>
+    <h2 class="annonce-accueil__decouvrir">Venez découvrir <?php echo $fournisseur->getNom(); ?></h2>
     <p class="annonce-accueil__produits-phares">
-      <a href="#">[produit 1]</a>, 
-      <a href="#">[produit 2]</a>, 
-      <a href="#">[produit 3]</a>, 
-      <a href="#">[produit 4]</a>, 
-      <a href="#">[produit 5]</a>, 
-      <a href="#">[produit 6]</a>...
+      <?php 
+      $produits_phares = $fournisseur->produitsPhares();
+      $i = 0;
+      while ($i < count($produits_phares)-1) {
+        $produit = rechercherArticle($produits_phares[$i], 'idArticle')[0];
+      ?>
+      <a href="/avocaba/vues/article.php?IdArticle=<?php echo $produit['IdArticle']; ?>"><?php echo $produit['Nom']; ?></a>, 
+      <?php 
+        $i++; 
+      } 
+      $produit = rechercherArticle($produits_phares[$i], 'idArticle')[0];
+      ?>
+      <a href="/avocaba/vues/article.php?IdArticle=<?php echo $produit['IdArticle']; ?>"><?php echo $produit['Nom']; ?></a>...
     </p>
   </div>
   <div class="annonce-accueil__savoir">
     <div>
-      <a href="#">En savoir plus</a>
+      <a href="/avocaba/vues/fournisseur.php?siret=<?php echo $fournisseur->getSiret(); ?>">En savoir plus</a>
     </div>
   </div>
 </div>
