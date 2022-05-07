@@ -15,7 +15,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 const ERR_MSG = array(
   400 => 'Votre requête n\'est pas valide.',
   403 => 'Accès refusé.',
-  404 => 'La page demandée est introuvable. Elle a peut-être été déplacée ou supprimée.'
+  404 => 'La page demandée est introuvable. Elle a peut-être été déplacée ou supprimée.',
+  500 => 'Une erreur interne s\'est produite'
 );
 
 
