@@ -58,12 +58,14 @@ session_start();
 
 if ( !isset($_SESSION['Client']) ){
 
-  // On enregistre l'adresse à rediriger si l'utilisateur arrive sur va arriser sur la page de connexion depuis une page du site
+  // On enregistre l'adresse à rediriger si l'utilisateur arrive sur la page de connexion depuis une page du site
   if(isset($_SERVER['HTTP_REFERER']) and (!str_contains($_SERVER['HTTP_REFERER'], 'signin.php') or !str_contains($_SERVER['HTTP_REFERER'], 'signup.php'))){
     $_SESSION['HTTP-TO-REFER'] = $_SERVER['HTTP_REFERER'];
   }
   header('Location: signin.php');
 }
+
+$section = $_GET['btClient'] ?? '';
 
 ?>
 <!DOCTYPE html>
@@ -77,9 +79,15 @@ if ( !isset($_SESSION['Client']) ){
   <main class="client">
     <h1 class="client__titre">Mon compte</h1>
     <form class="client__onglet" action="account.php" method="GET">
-      <button id="client__bt-general" type="submit" name="btClient" value="accueil">Général</button>
-      <button id="client__bt-commandes" type="submit" name="btClient" value="commandes">Mes commandes</button>
-      <button id="client__bt-info-perso" type="submit" name="btClient" value="infos">Mes informations personnelles</button>
+      <button id="client__bt-general"
+              class="<?= ($section === 'accueil' || $section === '')  ? 'client__bt-selection' : '' ?>"
+              type="submit" name="btClient" value="accueil">Général</button>
+      <button id="client__bt-commandes"
+              class="<?= $section === 'commandes' ? 'client__bt-selection' : '' ?>"
+              type="submit" name="btClient" value="commandes">Mes commandes</button>
+      <button id="client__bt-info-perso"
+              class="<?= $section === 'infos' ? 'client__bt-selection' : '' ?>"
+              type="submit" name="btClient" value="infos">Mes informations personnelles</button>
       <button id="client__bt-deconnexion" type="submit" name="btClient" value="deco">Déconnexion</button>
     </form>
     <div class="client__affichage">

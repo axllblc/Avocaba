@@ -951,55 +951,65 @@ input.selection-qte__set {
 
 .client {
   display: grid;
-  grid-template-rows: 1fr 4fr auto;
-  grid-template-columns: 2fr 7fr;
-  grid-template-areas: "client__titre client__titre"
+  grid-template-rows: auto auto;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "client__titre  client__titre            "
                        "client__onglet client__affichage-general";
-}
-.client__titre{
-  grid-area: client__titre;
+  gap: 20px;
 }
 
-.client__affichage-general{
-  margin-left: 12%;
-  grid-area: client__affichage-general;
-}
+.client__titre             { grid-area: client__titre;             }
+.client__affichage-general { grid-area: client__affichage-general; }
 
-.client__onglet{
+.client__onglet {
   grid-area: client__onglet;
-  display: grid;
-  grid-template-rows: repeat(4, 1fr) auto;
-  grid-template-areas: "client__bt-general"
-                       "client__bt-commandes"
-                       "client__bt-info-perso"
-                       "client__bt-deconnexion";
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-#client__bt-general{
-  grid-area: client__bt-general;
+@media (max-width: 768px) {
+  .client {
+    grid-template: repeat(3, auto) / auto;
+    grid-template-areas: "client__titre            "
+                         "client__onglet           "
+                         "client__affichage-general";
+  }
+
+  .client__onglet {
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+    font-size: 0.9em;
+  }
 }
 
-#client__bt-commandes{
-  grid-area: client__bt-commandes;
+.client__affichage h2 {
+  margin-top: 0;
 }
 
-#client__bt-info-perso{
-  grid-area: client__bt-info-perso;
+.client__affichage {
+  max-width: 1000px;
+  width: 100%;
+  justify-self: center;
 }
 
-#client__bt-deconnexion{
-  grid-area: client__bt-deconnexion;
+.client__data {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-/* TODO à corriger */
-#client__bt-general #client__bt-commandes #client__bt-info-perso #client__bt-deconnexion{
-  /*size: 30%;*/
+.client__data label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .client__commande {
   display: block;
-  margin: 10px;
-  padding: 5px;
+  margin: 15px 0;
+  padding: 15px;
 }
 
 
