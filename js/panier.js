@@ -2,7 +2,7 @@
 
 // Mettre à jour la quantité d'un article lorsque l'utilisateur saisit une quantité dans un des champs prévus à cet effet
 
-let qteInputElts = document.getElementsByClassName('panier__input-qte');
+let qteInputElts = document.getElementsByClassName('selection-qte__set');
 
 for (let i = 0; i < qteInputElts.length; i++) {
   qteInputElts[i].addEventListener('change', (e) => {
