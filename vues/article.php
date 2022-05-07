@@ -101,7 +101,10 @@ if ( isset($_GET['IdArticle']) ) {
         <div class="details-produit__groupe-nom">
           <h1 class="details-produit__nom"><?= $a['Nom'] ?></h1>
           <div class="details-produit__contenance"><?= $a['Unite'] ?></div>
-          <a class="details-produit__nom-prod"><?= $f->getNom() ?></a>
+          <a class="details-produit__nom-prod"
+             href="<?= '/avocaba/vues/fournisseur.php?siret=' . $f->getSiret() ?>">
+            <?= $f->getNom() ?>
+          </a>
           <?= !$dispo ? '<div>Cet article n\'est pas disponible dans votre magasin.</div>' : '' ?>
         </div>
 
@@ -147,7 +150,7 @@ if ( isset($_GET['IdArticle']) ) {
           <?= ( !empty($adresse) ? $adresse . ', ' : '' ) . $v['CodePos'] . ' ' . $v['Nom'] ?>
         </address>
         <p><?= lineBreakChange($f->getDescription(), true) ?></p>
-        <a href="/avocaba/vues/fournisseur.php?siret=<?= $f->getSiret() ?>">Lire la suite</a>
+        <a href="<?= '/avocaba/vues/fournisseur.php?siret=' . $f->getSiret() ?>">Lire la suite</a>
       </div>
     </div>
 
