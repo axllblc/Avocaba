@@ -49,6 +49,8 @@ if ( isset($_GET['IdArticle']) ) {
 
   // Photo de profil du fournisseur
   @$photoProfil = $f->getPhotoProfil();
+  // Adresse du fournisseur
+  @$adresse = $f->getAdresse();
 
   if(isset($_SESSION['Depot']['IdDepot'])){
     // On récupère le nom du magasin $magasin
@@ -141,7 +143,9 @@ if ( isset($_GET['IdArticle']) ) {
            alt="Image du producteur">
       <div class="details-produit__infos-producteur">
         <h3><?= $f->getNom() ?></h3>
-        <address><?= $f->getAdresse() . ", " . $v['CodePos'] . " " . $v['Nom'] ?></address>
+        <address>
+          <?= ( !empty($adresse) ? $adresse . ', ' : '' ) . $v['CodePos'] . ' ' . $v['Nom'] ?>
+        </address>
         <p><?= lineBreakChange($f->getDescription(), true) ?></p>
         <a href="/avocaba/vues/fournisseur.php?siret=<?= $f->getSiret() ?>">Lire la suite</a>
       </div>
