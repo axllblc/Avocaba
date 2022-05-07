@@ -134,23 +134,27 @@ if ( isset($_GET['IdArticle']) ) {
     </div>
     <!-- Fin de la partie supérieure -->
 
+    <?php if ( !empty($a['Description']) ) { ?>
     <div class="details-produit__description">
       <h2>Description du produit</h2>
       <p><?= lineBreakChange($a['Description']) ?></p>
     </div>
+    <?php } ?>
 
     <h2>Le producteur</h2>
-    <div class="details-produit__producteur">
+    <div class="details-produit__producteur tile">
       <img class="details-produit__img-producteur"
            src="<?= !empty($photoProfil) ? $photoProfil : '/avocaba/img/farmer.png' ?>"
            alt="Image du producteur">
       <div class="details-produit__infos-producteur">
-        <h3><?= $f->getNom() ?></h3>
+        <h3>
+          <a href="<?= '/avocaba/vues/fournisseur.php?siret=' . $f->getSiret() ?>"><?= $f->getNom() ?></a>
+        </h3>
         <address>
           <?= ( !empty($adresse) ? $adresse . ', ' : '' ) . $v['CodePos'] . ' ' . $v['Nom'] ?>
         </address>
         <p><?= lineBreakChange($f->getDescription(), true) ?></p>
-        <a href="<?= '/avocaba/vues/fournisseur.php?siret=' . $f->getSiret() ?>">Lire la suite</a>
+        <a href="<?= '/avocaba/vues/fournisseur.php?siret=' . $f->getSiret() ?>">En savoir plus</a>
       </div>
     </div>
 
