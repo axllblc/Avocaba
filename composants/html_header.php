@@ -19,10 +19,11 @@ function htmlHeader (bool $magasin = false, string $query = ''): void { ?>
       Avocaba
     </a>
 
-    <div class="header__btn header__rayons">
+    <a class="header__btn header__rayons"
+       href="<?= $magasin ? '/avocaba/vues/magasin.php?lr' : '/avocaba' ?>">
       <span class="header__btn-ic material-icons">menu</span>
       <div class="header__btn-text">Rayons</div>
-    </div>
+    </a>
 
     <form class="header__recherche recherche" action="/avocaba/vues/recherche.php" method="get">
       <input class="recherche__input" id="recherche"

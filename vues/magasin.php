@@ -87,7 +87,7 @@ if ( !isset($_SESSION['Depot']) ) {
 </div>
 
 <main>
-  <?php annonceAccueil($_SESSION['Depot']['IdDepot']); ?>
+  <?php if ( !isset($_GET['lr']) ) annonceAccueil($_SESSION['Depot']['IdDepot']); ?>
 
   <div class="rayons">
     <h2>Rayons</h2>
