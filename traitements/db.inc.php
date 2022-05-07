@@ -13,7 +13,7 @@ mysqli_report(MYSQLI_REPORT_OFF);
  */
 function dbConnect (): bool|mysqli {
   $link = mysqli_connect('localhost', 'Avocaba', 'IPx@tVqM46!-zPyI', 'avocaba');
-  if (!$link) exit('Erreur de connexion à la base de données.');
+  if (!$link) error(500, 'Erreur de connexion à la base de données.');
 
   $status = $link->set_charset('utf8mb4');
   checkError($status, $link);
