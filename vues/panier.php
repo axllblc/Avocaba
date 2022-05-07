@@ -14,8 +14,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_qte-article.p
 // Le panier est initialisé. À cette occasion, la session est initialisée.
 initialiserPanier();
 
-
-
 // *************
 // * Fonctions *
 // *************
@@ -131,14 +129,14 @@ $affichageNbArticles =
   </div>
 
   <?php if ($nbArticles > 0) { ?>
-  <form class="panier__recapitulatif" action="paiement.php" method="get">
+  <form class="panier__recapitulatif" action="paiement.php" method="post">
 
     <h2>Date et heure de retrait</h2>
     <div id="panier__creneau">
       <select class="panier__creneau_jour" name="choix_jour" title="Date de retrait">
         <?php choixJoursRetrait(); ?>
       </select>
-      <select class="panier_creneau_heure" name="choix_jour" title="Heure de retrait (plage de deux heures)">
+      <select class="panier_creneau_heure" name="choix_heure" title="Heure de retrait (plage de deux heures)">
         <option value="8">8h-10h</option>
         <option value="10">10h-12h</option>
         <option value="12">12h-14h</option>
@@ -150,8 +148,8 @@ $affichageNbArticles =
     <h2>Récapitulatif</h2>
     <div id="panier__montant-total">Total&nbsp;: <b><?= montantPanier() . '&nbsp;€' ?></b></div>
     <div><?= $affichageNbArticles?></div>
-    <!-- -->
-    <a class="panier__valider_panier" href="paiement.php">Valider mon cabas</a><br>
+
+    <button type="submit" class="panier__valider_panier" name="validerPanier">Valider mon cabas</button><br>
     <a href="<?= URL_TRAITEMENT_PANIER . '?actionPanier=' . VIDER_PANIER ?>">Vider mon cabas</a>
 
   </form>
@@ -165,4 +163,3 @@ $affichageNbArticles =
 
 </body>
 </html>
-
