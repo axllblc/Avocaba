@@ -545,7 +545,7 @@ nav {
   display: grid;
   grid-template: auto / auto 1fr;
   grid-template-areas: "details-produit__img-producteur details-produit__infos-producteur";
-  gap: 15px;
+  gap: 25px;
   padding: 20px;
   align-items: center;
 }
@@ -557,6 +557,24 @@ nav {
   margin-top: 0;
 }
 
+.details-produit__infos-producteur p {
+  text-align: justify;
+}
+
+.details-produit__img-producteur {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .details-produit__img-producteur {
+    width: 50px;
+    height: 50px;
+    align-self: start;
+  }
+}
+
   /* Rayon */
 
 .details-produit__rayon {
@@ -566,6 +584,7 @@ nav {
   margin: auto;
   padding: 10px;
 }
+
 
 
 /* 🧺 Panier / Cabas */

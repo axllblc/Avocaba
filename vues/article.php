@@ -47,6 +47,9 @@ if ( isset($_GET['IdArticle']) ) {
   // $dispo indique si l'article est peut être ajouté au panier du client
   $dispo = false;
 
+  // Photo de profil du fournisseur
+  @$photoProfil = $f->getPhotoProfil();
+
   if(isset($_SESSION['Depot']['IdDepot'])){
     // On récupère le nom du magasin $magasin
     $magasin = rechercherMagasin($_SESSION['Depot']['IdDepot'], true)[0]['Nom'];
@@ -133,7 +136,9 @@ if ( isset($_GET['IdArticle']) ) {
 
     <h2>Le producteur</h2>
     <div class="details-produit__producteur">
-      <img class="details-produit__img-producteur" src="<?php echo $f->getPhotoProfil(); ?>" alt="Image du producteur">
+      <img class="details-produit__img-producteur"
+           src="<?= !empty($photoProfil) ? $photoProfil : '/avocaba/img/farmer.png' ?>"
+           alt="Image du producteur">
       <div class="details-produit__infos-producteur">
         <h3><?= $f->getNom() ?></h3>
         <address><?= $f->getAdresse() . ", " . $v['CodePos'] . " " . $v['Nom'] ?></address>

@@ -200,6 +200,16 @@ a.ls-articles__item-content {
 
 /* 📄 Détails d'un produit */
 
+.details-produit__img-producteur {
+  border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  .details-produit__img-producteur {
+    border-radius: 10px;
+  }
+}
+
 /* Provisoire */
 .details-produit__rayon {
   border: 2px solid black;
