@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/fournisseur.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/misc.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/ville.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
@@ -33,12 +34,20 @@ if (isset($_GET['siret'])) {
   error(404);
   exit;
 }
+
+$nom = $fournisseur->getNom();
+$photoBanniere = $fournisseur->getPhotoBanniere();
+$photoProfil = $fournisseur->getPhotoProfil();
+$adresse = $fournisseur->getAdresse();
+$codePostal = ville($fournisseur->getIdVille())['CodePos'];
+$email = $fournisseur->getEmail();
+$siteWeb = $fournisseur->getSite();
   
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-  <?php htmlHead($fournisseur->getNom() . ' – Avocaba'); ?>
+  <?php htmlHead($nom . ' – Avocaba'); ?>
 
   <body>
     <?php htmlHeader(!empty($_SESSION['Depot'])); ?>
@@ -47,14 +56,18 @@ if (isset($_GET['siret'])) {
       <!-- Bannière du producteur -->
       <div class="fournisseur__en-tete">
         <div class="fournisseur__banniere"
-             style="background-image: url('<?php echo $fournisseur->getPhotoBanniere(); ?>');">
+             style="background-image: url(<?=
+               !empty($photoBanniere) ? $photoBanniere : '/avocaba/img/background.jpg'
+             ?>);" >
           <!-- logos des médias -->
           <div class="fournisseur__banniere-media">
             Logo des médias
           </div>
         </div>
-        <div class="fournisseur__photo-profil" style="background-image: url('<?php echo $fournisseur->getPhotoProfil(); ?>');"></div>
-        <h1 class="fournisseur__nom"><?php echo $fournisseur->getNom(); ?></h1>
+        <img src="<?= !empty($photoProfil) ? $photoProfil : '/avocaba/img/farmer.png' ?>"
+             alt="<?= $nom ?>"
+             class="fournisseur__photo-profil">
+        <h1 class="fournisseur__nom"><?= $nom; ?></h1>
         <p class="fournisseur__domaine">
           <?php 
           $domaines = $fournisseur->getDomaines();
@@ -93,7 +106,7 @@ if (isset($_GET['siret'])) {
             <div class="fournisseur__chevron">
               <span class="material-icons" id="fournisseur__chevron-right">chevron_right</span>
             </div>
-            <script>  
+            <script>
               const chevron_left = document.getElementById("fournisseur__chevron-left");
               const chevron_right = document.getElementById("fournisseur__chevron-right");
 
@@ -128,12 +141,23 @@ if (isset($_GET['siret'])) {
           </div>
         </div>
         <div class="fournisseur__colonne-droite">
-          <h2>Information</h2>
-          <p><?php echo $fournisseur->getAdresse(); ?></p>
-          <p><?php echo $fournisseur->getVille(); ?></p>
-          <p><?php echo $fournisseur->getEmail(); ?></p>
-          <a href="#"
-             title="site web du producteur"><?php echo $fournisseur->getSite(); ?></a>
+          <h2>Informations</h2>
+          <address class="fournisseur__infos">
+            <div>
+              <?= (!empty($adresse) ? $adresse . ', ' : '') . $codePostal . ' ' . $fournisseur->getVille(); ?>
+            </div>
+
+            <?php if ( !empty($email) ) { ?>
+            <a href="<?= 'mailto:' . $email ?>"
+               title="Adresse e-mail du producteur"><?= $email ?></a>
+            <?php } ?>
+
+            <?php if ( !empty($siteWeb) ) { ?>
+            <a href="<?= $siteWeb ?>"
+               title="Site web du producteur"><?= $siteWeb ?></a>
+            <?php } ?>
+          </address>
+
           <!-- Carte temporaire -->
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6222.185358365255!2d2.141973084391871!3d47.928802557131064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6de6a4e5b93cc26f!2sBoulangerie%20GM!5e0!3m2!1sfr!2sfr!4v1646519078967!5m2!1sfr!2sfr" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>

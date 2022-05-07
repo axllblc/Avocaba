@@ -723,8 +723,8 @@ input.selection-qte__set {
 /* 🧑‍🌾 Page d'un fournisseur */
 
 .fournisseur__en-tete {
-  width: 100%;
   display: grid;
+  gap: 10px;
 }
 
 @media screen and (min-width: 768px) {
@@ -741,12 +741,13 @@ input.selection-qte__set {
   .fournisseur__photo-profil {
     grid-area: 2 / 2 / 5 / 3;
     width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .fournisseur__nom {
     grid-area: 3 / 3 / 4 / 4;
   }
-
 
   .fournisseur__domaine {
     grid-area: 4 / 3 / 5 / 4;
@@ -812,6 +813,13 @@ input.selection-qte__set {
     grid-template-rows: repeat(2, 1fr);
     gap: 5px;
   }
+}
+
+.fournisseur__infos {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 10px;
 }
 
 .fournisseur__colonne-droite iframe {
