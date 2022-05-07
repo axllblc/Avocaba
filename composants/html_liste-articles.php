@@ -33,7 +33,10 @@ function htmlListeArticles ($listeArticles): void {
       <li class="ls-articles__item tile" title="<?= $article['Nom']; ?>">
         <a href="<?= '/avocaba/vues/article.php?IdArticle=' . $article['IdArticle'] ?>"
            class="ls-articles__item-content">
-          <img class="ls-articles__img" src="<?= $article['PhotoVignette'] ?>" alt="<?= $article['Nom'] ?>">
+          <img class="ls-articles__img"
+               src="<?= !empty($article['PhotoVignette']) ?
+                 $article['PhotoVignette'] : ('/avocaba/img/article-placeholder.png' ) ?>"
+               alt="<?= $article['Nom'] ?>">
           <div class="ls-articles__item-info">
             <div class="ls-articles__nom"><?= $article['Nom']; ?></div>
             <div class="ls-articles__fournisseur"><?= 'Fournisseur&nbsp;: ' . $nomFournisseur ?></div>
