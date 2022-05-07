@@ -494,7 +494,9 @@ nav {
     /* Carrousel */
 
 .details-produit__carrousel img {
+  width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 
     /* Infos */
