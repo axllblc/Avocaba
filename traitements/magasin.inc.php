@@ -177,7 +177,7 @@ function enregistrerDernierDepot (int $idClient, int $idDepot): void {
 }
 
 
-// Mise en session
+// Sélection du dépôt et mise en session
 
 /**
  * Enregistrer dans la session les informations sur le dépôt sélectionné par l'utilisateur.

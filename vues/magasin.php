@@ -52,6 +52,10 @@ if ( isset($_GET['id']) ) {
   // Les informations du dépôt correspondant sont enregistrées dans la session.
   // En cas d'échec, une erreur 404 est affichée.
   if ( !selectionDepot($_GET['id']) )  error(404, ERR_DEPOT_INEXISTANT);
+
+  // Si l'utilisateur est connecté, le dépôt qu'il a sélectionné est enregistré en tant que dernier dépôt fréquenté
+  if ( isset($_SESSION['Client']) )
+    enregistrerDernierDepot($_SESSION['Client']['IdClient'], $_GET['id']);
 }
 
 if ( !isset($_SESSION) ) session_start();
