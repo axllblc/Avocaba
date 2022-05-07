@@ -15,6 +15,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/verifier-client.p
  * Script principal *
  ********************/
 
+session_start();
+
 // Recherche de l'utilisateur : Réception de données
 
 if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) ) {

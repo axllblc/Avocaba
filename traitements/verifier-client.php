@@ -18,14 +18,14 @@ const REGEX_MOTDEPASSE = '/^([0-9a-zA-Z._#-]){8,16}$/';
 // Requêtes à préparer
 
 const RECHERCHE_CLIENT = '
-SELECT c.IdClient, c.`Nom`, c.`Prenom`, c.`Email`, c.`IdDepot`, c.`MotDePasse`
+SELECT c.IdClient, c.`Nom`, c.`Prenom`, c.`Email`, c.`IdDepot` AS DernierDepot, c.`MotDePasse`
 FROM CLIENTS AS c
 WHERE c.`Email` = ?
 LIMIT 1;
 ';
 
 const RECUPERE_CLIENT = '
-SELECT c.IdClient, c.`Nom`, c.`Prenom`, c.`Email`, c.`IdDepot`
+SELECT c.IdClient, c.`Nom`, c.`Prenom`, c.`Email`, c.`IdDepot` AS DernierDepot
 FROM CLIENTS AS c
 WHERE c.`Email` = ?
 LIMIT 1;

@@ -49,15 +49,19 @@ function affichage () {
     }
 }
 
-
-
 /********************
  * Script principal *
  ********************/
 
 // Si l'utilisateur n'est pas connecté, il est redirigé vers la page de connexion.
 session_start();
+
 if ( !isset($_SESSION['Client']) ){
+
+  // On enregistre l'adresse à rediriger si l'utilisateur arrive sur va arriser sur la page de connexion depuis une page du site
+  if(isset($_SERVER['HTTP_REFERER']) and (!str_contains($_SERVER['HTTP_REFERER'], 'signin.php') or !str_contains($_SERVER['HTTP_REFERER'], 'signup.php'))){
+    $_SESSION['HTTP-TO-REFER'] = $_SERVER['HTTP_REFERER'];
+  }
   header('Location: signin.php');
 }
 
