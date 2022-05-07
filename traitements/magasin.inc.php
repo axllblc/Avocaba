@@ -2,14 +2,14 @@
 
 /* Recherche de dépôts */
 
-require_once 'db.inc.php';
-require_once 'misc.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/db.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/misc.inc.php';
 
 
 
-/**************
- * Constantes *
- **************/
+// **************
+// * Constantes *
+// **************
 
 // Expressions régulières
 
@@ -20,7 +20,7 @@ const REGEX_CODE_POSTAL = '/^\d{5}$/';
 const REGEX_CODE_DEPT = '/^(?>\d{2,3})|(?>2[AB])$/';
 
 
-// Requêtes à préparer
+// Requêtes à préparer : recherche de dépôt
 
 /** Recherche de dépôt par code postal. Cette requête se limite à 10 dépôts. */
 const RECHERCHE_CP = '
@@ -59,10 +59,22 @@ LIMIT 1;
 ';
 
 
+// Requête à préparer : enregistrement du dernier dépôt fréquenté par l'utilisateur
 
-/*************
- * Fonctions *
- *************/
+/** Enregistrement du dernier dépôt fréquenté par l'utilisateur. */
+const ENREGISTREMENT_DERNIER_DEPOT = '
+UPDATE CLIENTS
+SET `IdDepot` = ?
+WHERE `IdClient` = ?;
+';
+
+
+
+// *************
+// * Fonctions *
+// *************
+
+// Requêtes vers la base de données
 
 /**
  * Rechercher un dépôt.
@@ -139,6 +151,33 @@ function rechercherMagasin (string|int $query, bool $id = false): array {
   return $resultArray;
 }
 
+
+/**
+ * Enregistrer le dernier dépôt fréquenté par l'utilisateur, lorsqu'il est connecté.
+ * @param int $idClient Identifiant du client.
+ * @param int $idDepot Identifiant du dernier dépôt fréquenté par ce client.
+ * @return void
+ */
+function enregistrerDernierDepot (int $idClient, int $idDepot): void {
+  $link = dbConnect();
+
+  // Préparation de la requête de mise à jour
+  $stmt = $link->prepare(ENREGISTREMENT_DERNIER_DEPOT);
+  checkError($stmt, $link);
+
+  $status = $stmt->bind_param('ii', $idDepot, $idClient);
+  checkError($status, $link);
+
+  // Exécution de la requête de mise à jour
+  $status = $stmt->execute();
+  checkError($status, $link);
+
+  // Fermeture de la connexion à la base de données
+  $link->close();
+}
+
+
+// Mise en session
 
 /**
  * Enregistrer dans la session les informations sur le dépôt sélectionné par l'utilisateur.
