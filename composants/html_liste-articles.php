@@ -30,7 +30,7 @@ function htmlListeArticles ($listeArticles): void {
       }
 
       ?>
-      <li class="ls-articles__item" title="<?= $article['Nom']; ?>">
+      <li class="ls-articles__item tile" title="<?= $article['Nom']; ?>">
         <a href="<?= '/avocaba/vues/article.php?IdArticle=' . $article['IdArticle'] ?>"
            class="ls-articles__item-content">
           <img class="ls-articles__img" src="<?= $article['PhotoVignette'] ?>" alt="<?= $article['Nom'] ?>">

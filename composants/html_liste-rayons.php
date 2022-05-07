@@ -15,11 +15,11 @@ function htmlListeRayons (int $idMagasin): void {
   $listeRayons = listeRayons($idMagasin);
 
   if ( count($listeRayons) > 0 ) {
-    echo '<ul class="ls-rayons" style="background-color: gainsboro;">';
+    echo '<ul class="ls-rayons">';
 
     foreach ($listeRayons as $rayon) { ?>
 
-      <li class="ls-rayons__item"
+      <li class="ls-rayons__item tile"
           title="<?= $rayon['Nom'] ?>">
         <a href="<?= '/avocaba/vues/recherche.php?rayon=' . $rayon['IdRayon']; ?>">
           <img src="<?= '/avocaba/img/rayons/' . $rayon['IdRayon'] . '.png'; ?>"

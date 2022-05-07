@@ -20,9 +20,8 @@ body {
 }
 
 
-/* Styles généraux */
+/* Liens */
 
-  /* Liens */
 a {
   text-decoration: underline solid #bfbfbf 2px;
   color: #404040;
@@ -33,6 +32,21 @@ a {
 a:hover {
   color: #00be74;
   text-decoration-color: #b0ffe0;
+}
+
+
+/* Tuiles */
+
+.tile {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 5px 10px;
+  transition-duration: 250ms;
+  transition-property: box-shadow;
+}
+
+.tile:hover {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 10px 15px;
 }
 
 
@@ -164,8 +178,6 @@ a:hover {
 .ls-rayons__item a {
   color: black;
   text-decoration: none;
-
-  border: 1px solid black; /* Provisoire */
 }
 
 .ls-rayons__item span {
@@ -174,19 +186,6 @@ a:hover {
 
 
 /* 📂 Liste des articles */
-
-.ls-articles__item {
-  background-color: whitesmoke;
-  border-radius: 10px;
-  list-style: none;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 5px 10px;
-  transition-duration: 250ms;
-  transition-property: box-shadow;
-}
-
-.ls-articles__item:hover {
-  box-shadow: rgba(0, 0, 0, 0.1) 0 10px 15px;
-}
 
 a.ls-articles__item-content {
   color: inherit;
