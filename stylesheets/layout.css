@@ -521,7 +521,15 @@ nav {
   margin-top: 0;
 }
 
-      /* Bouton "Ajouter aux favoris" */
+.details-produit__groupe-nom > *, .details-produit__prix > * {
+  margin: 10px 0;
+}
+
+.details-produit__btn-panier {
+  margin: auto;
+}
+
+  /* Bouton "Ajouter aux favoris" */
 
 .details-produit__btn-favori span {
   font-size: 2em;
@@ -657,6 +665,10 @@ input.selection-qte__set {
 .selection-qte__rem {
   width: 100%;
   text-align: center;
+}
+
+.selection-qte__add span {
+  font-size: 2em;
 }
 
 

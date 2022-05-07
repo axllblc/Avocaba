@@ -20,10 +20,13 @@ function htmlQteArticle (int $id, int $qte, string $nom = 'cet article'): void {
   if ($qte === 0) { ?>
     <a href="<?= URL_TRAITEMENT_PANIER . '?actionPanier=' . AUGMENTER . '&id=' . $id ?>"
        title="Ajouter au cabas"
-       aria-label="<?= 'Ajouter ' . $nom . ' au cabas' ?>">
-      <span class="material-icons">add_circle</span>
+       aria-label="<?= 'Ajouter ' . $nom . ' au cabas' ?>"
+       class="selection-qte__add">
+      <span class="material-icons">shopping_basket</span>
     </a>
-  <?php } else { ?>
+  <?php }
+
+  else { ?>
     <div class="panier__selection-qte">
       <input type="hidden" name="idArticle" value="<?= $id ?>">
       <a href="<?= URL_TRAITEMENT_PANIER . '?actionPanier=' . DIMINUER . '&id=' . $id ?>"
