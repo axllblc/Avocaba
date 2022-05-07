@@ -19,33 +19,34 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_qte-article.p
 function htmlListeArticles ($listeArticles): void {
 
   if ( count($listeArticles) > 0 ) {
-    echo '<ul class="ls-articles" style="background-color: gainsboro;">';
+    echo '<ul class="ls-articles">';
 
     foreach ($listeArticles as $article) {
       try {
         $fournisseur = new Fournisseur($article['SiretProducteur']);
-        if(is_object($fournisseur)){
-          $nomFournisseur = $fournisseur->getNom();
-        }
-        else{
-          $nomFournisseur = "non renseigné";
-        }
+        $nomFournisseur = $fournisseur->getNom();
       } catch (Exception $e) {
-        $nomFournisseur = "non renseigné";
-      }?>
-      <li class="ls-articles__item" title="<?php echo $article['Nom']; ?>">
-        <a class="ls-articles__description" href="/avocaba/vues/article.php?IdArticle=<?php echo $article['IdArticle'] ?>">
-          <img class="ls-articles__img" src="<?php echo $article['PhotoVignette']; ?>" alt="<?php echo $article['Nom']; ?>">
-          <p class="ls-articles__titre-article"><?php echo $article['Nom']; ?></p>
-          <p class="ls-articles__producteur">Producteur : <?php if($nomFournisseur) echo $nomFournisseur; ?></p>
-          <div class="ls-articles__prix"><?php echo $article['Nom']; ?>
-            <?php htmlQteArticle($article['IdArticle'], getQteArticle($article['IdArticle']), $article['Nom']);?>
+        $nomFournisseur = 'non renseigné';
+      }
+
+      ?>
+      <li class="ls-articles__item" title="<?= $article['Nom']; ?>">
+        <a href="<?= '/avocaba/vues/article.php?IdArticle=' . $article['IdArticle'] ?>"
+           class="ls-articles__item-content">
+          <img class="ls-articles__img" src="<?= $article['PhotoVignette'] ?>" alt="<?= $article['Nom'] ?>">
+          <div class="ls-articles__item-info">
+            <div class="ls-articles__nom"><?= $article['Nom']; ?></div>
+            <div class="ls-articles__fournisseur"><?= 'Fournisseur&nbsp;: ' . $nomFournisseur ?></div>
+            <div class="ls-articles__prix"><?= $article['Unite'] . ' · ' . $article['Prix'] . '&nbsp;€' ?></div>
           </div>
         </a>
+        <?php htmlQteArticle($article['IdArticle'], getQteArticle($article['IdArticle']), $article['Nom']);?>
       </li>
-    <?php }
+    <?php
+
+    }
+
     echo '</ul>';
-  } else {
+  } else
     echo 'Aucun article';
-  }
 }
