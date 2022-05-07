@@ -15,8 +15,13 @@ function annonceAccueil(string|int $depot) : void {
 
   // choix aléatoire d'un fournisseur
   $siret_fournisseur = $fournisseurs[rand(0, count($fournisseurs)-1)];
-  $fournisseur = new Fournisseur($siret_fournisseur);
-?>
+  try {
+    $fournisseur = new Fournisseur($siret_fournisseur);
+  } catch (Exception $e) {
+    return;
+  }
+
+  ?>
 <div class="annonce-accueil">
   <div class="annonce-accueil__slideshow-container">
     <?php 
@@ -51,6 +56,7 @@ function annonceAccueil(string|int $depot) : void {
   <div class="annonce-accueil__droite">
     <h2 class="annonce-accueil__decouvrir">Venez découvrir <?php echo $fournisseur->getNom(); ?></h2>
     <p class="annonce-accueil__produits-phares">
+      Découvrez les produits proposés par <b><?php echo $fournisseur->getNom(); ?></b>&nbsp;:
       <?php 
       $produits_phares = $fournisseur->produitsPhares();
       $i = 0;
@@ -63,13 +69,12 @@ function annonceAccueil(string|int $depot) : void {
       } 
       $produit = rechercherArticle($produits_phares[$i], 'idArticle')[0];
       ?>
-      <a href="/avocaba/vues/article.php?IdArticle=<?php echo $produit['IdArticle']; ?>"><?php echo $produit['Nom']; ?></a>...
+      <a href="/avocaba/vues/article.php?IdArticle=<?php echo $produit['IdArticle']; ?>"><?php echo $produit['Nom']; ?></a>,
+      et bien plus encore...
     </p>
   </div>
-  <div class="annonce-accueil__savoir">
-    <div>
-      <a href="/avocaba/vues/fournisseur.php?siret=<?php echo $fournisseur->getSiret(); ?>">En savoir plus</a>
-    </div>
+  <div class="annonce-accueil__plus">
+    <a href="/avocaba/vues/fournisseur.php?siret=<?php echo $fournisseur->getSiret(); ?>">En savoir plus</a>
   </div>
 </div>
 <?php } ?>
