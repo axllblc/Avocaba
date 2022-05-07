@@ -62,7 +62,7 @@ function affichagePanier (): void {
            src="<?= $photoVignette ?>"
            alt="<?= $nom ?>">
       <h3 class="panier__nom-article">
-        <?= $nom . ' (' . $unite . ')' ?>
+        <a href="<?= '/avocaba/vues/article.php?IdArticle=' . $id ?>"><?= $nom . ' (' . $unite . ')' ?></a>
       </h3>
       <div class="panier__prix-article">
         <?= $prix . '&nbsp;€' ?>
