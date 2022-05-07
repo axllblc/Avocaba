@@ -37,7 +37,7 @@ function htmlHeader (bool $magasin = false, string $query = ''): void { ?>
       </label>
     </form>
 
-    <a class="header__btn header__mes-produits" href="/mes-produits">
+    <a class="header__btn header__mes-produits" href="/avocaba/vues/mes-produits.php">
       <span class="header__btn-ic material-icons">summarize</span>
       <div class="header__btn-text">Mes produits</div>
     </a>
