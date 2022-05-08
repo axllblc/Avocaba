@@ -47,7 +47,7 @@ function footer (): void { ?>
       <p>Inscrivez-vous à notre newsletter pour recevoir l’actualité des produits de votre région et diverses offres.</p>
       <?php // TODO modifier l'URL de la page de traitement ?>
       <form class="pied-de-page__newsletter-form" action="#">
-        <input type="email" name="email_newsletter" id="email-newsletter" placeholder="Email">
+        <input type="email" name="email_newsletter" id="email-newsletter" placeholder="Email" autocomplete="email">
         <input type="submit" value="Je m'abonne">
       </form>
       <p>Vous pouvez vous désabonner de la newsletter à tout moment. Consultez notre <a href="#">politique de confidentialité</a> pour en savoir plus sur notre utilisation des données personnelles.</p>
