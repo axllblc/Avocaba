@@ -416,7 +416,7 @@ input.selection-qte__set {
 
 /* Bouton favoris */
 .bouton-favoris span {
-  font-size: 3em;
+  font-size: 50px;
 }
 
 .bouton-favoris .star {
