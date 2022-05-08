@@ -89,15 +89,15 @@ if ( !empty($_GET['recherche']) ) {
   <div class="landing__milieu">
     <h2>Commandez vos produits régionaux, où vous voulez, quand vous voulez !</h2>
     <p>Avocaba est le premier <em>click-and-collect</em> en circuit-court. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores, quae architecto? Modi sed inventore magni esse, at dignissimos consectetur quasi perspiciatis atque dolore omnis. Cumque officia delectus nisi nam. Perspiciatis!</p>
-    <a href="/avocaba/vues/a-propos" class="landing__btn btn btn--filled">En savoir plus</a>
+    <a href="/avocaba/vues/a-propos" class="landing__btn btn btn--large btn--filled">En savoir plus</a>
 
     <h2>Comment ça marche ?</h2>
     <div class="landing__fonctionnement">Infographie</div>
-    <a href="/avocaba/vues/a-propos" class="landing__btn btn">En savoir plus</a>
+    <a href="/avocaba/vues/a-propos" class="landing__btn btn btn--large">En savoir plus</a>
 
     <h2>Pourquoi Avocaba ?</h2>
     <div class="landing__avantages">Infographie</div>
-    <a href="/avocaba/vues/a-propos/engagements" class="landing__btn btn">Découvrez nos engagements</a>
+    <a href="/avocaba/vues/a-propos/engagements" class="landing__btn btn btn--large">Découvrez nos engagements</a>
   </div>
 
   <div class="landing__bas">

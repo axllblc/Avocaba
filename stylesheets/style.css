@@ -73,6 +73,19 @@ a:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+.ic-btn {
+  color: #404040;
+  border-radius: 50%;
+  text-decoration: none;
+  transition-property: color, background-color;
+  transition-duration: 250ms;
+}
+
+.ic-btn:hover {
+  color: #00be74;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 
 /* Tuiles */
 
@@ -111,10 +124,6 @@ a:hover {
 .landing__milieu {
   background-color: white;
   color: black;
-}
-
-.landing__btn {
-  padding: 10px 20px;
 }
 
 /* Provisoire */
