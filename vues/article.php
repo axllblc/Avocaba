@@ -13,6 +13,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/misc.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_qte-article.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_liste-articles.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/error.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/bouton-favoris.php';
@@ -48,6 +49,7 @@ if ( isset($_GET['IdArticle']) ) {
   // $dispo indique si l'article est peut être ajouté au panier du client
   $dispo = false;
 
+
   // Photo de profil du fournisseur
   @$photoProfil = $f->getPhotoProfil();
   // Adresse du fournisseur
@@ -57,12 +59,20 @@ if ( isset($_GET['IdArticle']) ) {
     // On récupère le nom du magasin $magasin
     $magasin = rechercherMagasin($_SESSION['Depot']['IdDepot'], true)[0]['Nom'];
 
+      // On récupère les articles ) l'article similaires (même rayon et dispo dans le magasin)
+      $listeArticles = array_slice(rechercherArticle($a['IdRayon'], 'idRayon', $_SESSION['Depot']['IdDepot']), 0, 4);
+
     // On vérifie si l'article est disponible dans le dépôt
     if( count(rechercherArticle($_GET['IdArticle'], "idArticle", $_SESSION['Depot']['IdDepot']))>0 ){
       $dispo = true;
     }
   }
-} else {
+  else{
+    // On récupère les articles similaires (même rayon)
+    $listeArticles = array_slice(rechercherArticle($a['IdRayon'], 'idRayon'), 0, 4);
+  }
+}
+else {
   // Si aucun article renseigné, on redirige vers le magasin d'où provient le client
   header('Location: /avocaba/vues/magasin.php');
   exit;
@@ -161,7 +171,7 @@ if ( isset($_GET['IdArticle']) ) {
 
     <div class="details-produit__produits-similaires">
       <h2>Découvrez aussi</h2>
-      <p>Les produits similaires apparaîtront ici</p>
+      <?php htmlListeArticles($listeArticles); ?>
     </div>
 
     <a class="details-produit__rayon btn btn--large" href="<?= '/avocaba/vues/recherche.php?rayon=' . $a['IdRayon'] ?>">
