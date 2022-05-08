@@ -2,6 +2,8 @@
 
 body {
   margin: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
 }
 
 main {
@@ -1024,114 +1026,54 @@ input.selection-qte__set {
 }
 
 
-/* page de connexion */
 
-#connexion_formulaire {
-  width: auto;
-  margin: 10% 200px 200px;
+/* 🔒 Pages d'authentification */
+
+.authentification {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.connexion_connecter {
-  width:auto;
-  padding: 30px;
+.authentification__form {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  gap: 15px;
+  box-sizing: border-box;
+  max-width: 350px;
 }
 
-#connexion_formulaire h1{
-  text-align: center;
+.authentification__form .nav__btn-retour {
+  margin-right: auto;
+}
+
+.authentification__form h1 {
   margin: 0 auto;
-  padding-bottom: 10px;
 }
 
-#connexion__bouton__connecter {
-  height: 30px;
-  width: 100px;
-  font-size: 11pt;
+.authentification__err {
+  padding: 10px;
+}
+
+.authentification__form label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.authentification__footer {
   text-align: center;
 }
 
-#connexion_bouton_mdp, #connexion_bouton_inscription {
-  padding: 5pt;
-  border-radius: 5px;
+label.authentification__row {
+  flex-direction: row;
 }
 
-/* page d'inscription */
+  /* Page d'inscription */
 
-#inscription_formulaire {
-  width: auto;
-  margin: 10% 200px 200px;
-}
-
-.inscription_inscrire {
-  width:auto;
-  padding: 30px;
-}
-
-#inscription_formulaire h1{
-  text-align: center;
-  margin: 0 auto;
-  padding-bottom: 10px;
-}
-
-#inscription_bouton_inscrire {
-  height: 30px;
-  width: 140px;
-  font-size: 11pt;
-  text-align: center;
-}
-
-#inscription_bouton_connexion {
-  padding: 5pt;
-  border-radius: 5px;
-}
-
-#inscription_facultatif {
-  font-size: 10pt;
-}
-
-/* réinitialisation du mot de passe */
-
-#reinitialise_formulaire {
-  width: auto;
-  margin: 10% 200px 200px;
-}
-
-.reinitialise_reinitialiser {
-  width:auto;
-  padding: 30px;
-}
-
-#reinitialise_formulaire h1 {
-  text-align: center;
-  margin: 0 auto;
-  padding-bottom: 10px;
-}
-
-#reinitialise_bouton_envoyer {
-  padding: 5pt;
-  border-radius: 5px;
-}
-
-/* message réinitialisation du mot de passe */
-
-#message_affiche {
-  width: auto;
-  margin: 10% 200px 200px;
-}
-
-.message_mdp {
-  width:auto;
-  padding: 30px;
-}
-
-.message_mdp h1 {
-  text-align: center;
-  margin: 0 auto;
-  padding-bottom: 10px;
-}
-
-#message_mdp_bouton_accueil {
-  padding: 5pt;
-  border-radius: 5px;
+.inscription {
+  max-width: 600px;
 }
 
 

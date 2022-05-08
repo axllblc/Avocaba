@@ -10,30 +10,37 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/verifier-client.p
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/inscription-client.php';
 
 
-/********************
- * Script principal *
- ********************/
+
+// ********************
+// * Script principal *
+// ********************
 
 // Inscription client : Réception de données
 
-if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) and !empty($_POST['nom']) and !empty($_POST['prenom']) and !empty($_POST['accepterCondi'])) {
+if ( !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passwordBis'])
+     && !empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['accept'])) {
   $email = $_POST['email'];
-  $motdepasse = $_POST['motdepasse'];
+  $password = $_POST['password'];
+  $passwordBis = $_POST['passwordBis'];
 
-  $client = verifierClient($_POST['email'], $_POST['motdepasse']);
+  if ( $password === $passwordBis ) {
+    $client = verifierClient($_POST['email'], $_POST['password']);
 
-  $inscrire = inscrireClient($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['motdepasse']);
+    $inscrire = inscrireClient($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['password']);
 
-  if ($inscrire) {
-    // Si l'inscription est un succès, on peut établir la mise en session et le rediriger vers l'espace client
-    $client = verifierClient($email, $motdepasse);
+    if ($inscrire) {
+      // Si l'inscription est un succès, on peut établir la mise en session et le rediriger vers l'espace client
+      $client = verifierClient($email, $password);
 
-    sessionClient($client);
-  }
-  else{
-    //Message à afficher en cas d'adresse e-mail déjà utilisée
-    $message = "cette adresse email est déjà utilisée, veuillez réessayer";
-  }
+      sessionClient($client);
+    }
+    else {
+      // Message à afficher en cas d'adresse e-mail déjà utilisée
+      $message = 'Cette adresse email est déjà utilisée, veuillez réessayer.';
+    }
+  } else
+    $message = 'Les mots de passe saisis ne correspondent pas. Veuillez réessayer.';
+
 }
 
 ?>
@@ -43,31 +50,59 @@ if ( !empty($_POST['email']) and !empty($_POST['motdepasse']) and !empty($_POST[
 
 <?php htmlHead('S\'inscrire – Avocaba'); ?>
 
-<body>
-  <main class="inscription">
-    <div id="inscription_formulaire">
-      <form class="inscription_inscrire" action="signup.php" method="post">
-        <button class="nav__btn-retour" onclick="history.back();" title="Revenir à la page précédente">Retour</button>
-        <h1 id="inscription__titre">Créer votre compte</h1>
-        <label for="prenom">Prénom</label><br>
-        <input type="text" name="prenom" id="prenom" minlength="2" size="40" pattern="[a-zA-Z -]{2,30}" required><br>
-        <label for="nom">Nom</label><br>
-        <input type="text" name="nom" id="nom" minlength="2" size="40" pattern="[a-zA-Z -]{2,30}" required><br>
-        <label for="email">Adresse email</label><br>
-        <input type="text" name="email" id="email"  pattern="^[a-zA-Z1-9-\.]+@[a-zA-Z1-9-]+\.[a-zA-Z]{2,6}$" required><br>
-        <label for="motdepasse">Mot de passe</label><br>
-        <input type="password" name="motdepasse" id="motdepasse" minlength="8" maxlength="16" pattern="([0-9a-zA-Z._#-]){8,16}" required><br>
-        <input type="checkbox" name="accepterCondi" id="check1" required>
-        <label for="check1">En créant votre compte, vous acceptez nos conditions d'utilisation et nos conditions de vente.</label><br>
-        <input type="checkbox" name="accepterComm" id="check2">
-        <label for="check2">Vous acceptez de recevoir les communications commerciales et bons plans par email de la part d'Avocaba. <span id="inscription_facultatif">(facultatif)</span></label><br><br>
-        <input type="submit" id="inscription_bouton_inscrire" name="creercompte" value="Créer mon compte" title="Cliquez ici pour valider et créer votre compte"><br><br>
-        <hr>
-        <?php if (isset($message)) echo "<strong>$message</strong>"; // Si l'utilisateur a déjà rentré de mauvaises infos, on lui indique qu'il doit réessayer?>
-        <p>Vous avez déjà un compte ?</p>
-        <span id="inscription_bouton_connexion"><a style="text-decoration:none;" href="signin.php" title="Vous avez déjà un compte, cliquez ici pour vous connecter">Se connecter</a></span>
-      </form>
+<body class="authentification">
+  <form class="authentification__form inscription" action="signup.php" method="post">
+    <button class="nav__btn-retour btn" onclick="history.back();" title="Revenir à la page précédente">Retour</button>
+
+    <h1 id="authentification__titre">Créer votre compte</h1>
+
+    <?= !empty($message) ? "<div class='authentification__err'>$message</div>" : '' ?>
+
+    <label>
+      Prénom
+      <input type="text" name="prenom" id="prenom"
+             minlength="2" maxlength="30" pattern="[a-zA-Z -]{2,30}" required>
+    </label>
+    <label>
+      Nom
+      <input type="text" name="nom" id="nom"
+             minlength="2" maxlength="30" pattern="[a-zA-Z -]{2,30}" required>
+    </label>
+    <label>
+      Adresse email
+      <input type="email" name="email" id="email" required>
+    </label>
+    <label>
+      Mot de passe
+      <input type="password" name="password" id="password"
+             minlength="8" maxlength="16" pattern="([0-9a-zA-Z._#-]){8,16}" required>
+    </label>
+    <label>
+      Confirmer le mot de passe
+      <input type="password" name="passwordBis" id="passwordBis"
+             minlength="8" maxlength="16" pattern="([0-9a-zA-Z._#-]){8,16}" required>
+    </label>
+    <label class="authentification__row">
+      <input type="checkbox" name="accept" id="accept" required>
+      <span>
+        En créant votre compte, vous acceptez nos <a href="#">conditions d'utilisation</a> et nos <a href="#">conditions de vente</a>.
+      </span>
+    </label>
+    <label class="authentification__row">
+      <input type="checkbox" name="communications" id="communications">
+      <span>
+        Vous acceptez de recevoir des communications commerciales et bons plans par email de la part d'Avocaba.
+        <small>Facultatif</small>
+    </label>
+
+    <input type="submit" class="btn btn--filled" name="signup" value="Créer mon compte"
+           title="Valider et créer votre compte">
+
+    <hr>
+
+    <div class="authentification__footer">
+      Vous avez déjà un compte&nbsp;? <a href="signin.php" title="Se connecter">Connectez-vous</a>.
     </div>
-  </main>
+  </form>
 </body>
 </html>

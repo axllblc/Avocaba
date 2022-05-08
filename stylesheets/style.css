@@ -353,58 +353,41 @@ input.selection-qte__set {
 }
 
 
-/* 🔒 Page de connexion */
 
-.connexion_connecter {
-  border: 1px solid black;
+/* 🔒 Pages d'authentification */
+
+.authentification__form hr {
+  width: 100px;
+  border: none;
+  border-top: solid 2px gainsboro;
 }
 
-#connexion_bouton_mdp, #connexion_bouton_inscription {
-  border: 1px solid grey;
-  background-color: #E9E9ED;
-  color: black;
-  font-size: 11pt;
+.authentification__form small {
+  color: grey;
 }
 
-/* 🔒 Page d'inscription */
-
-.inscription_inscrire {
-  border: 1px solid black;
+.authentification__err {
+  background-color: lightgoldenrodyellow;
+  border: solid 2px gold;
+  border-radius: 5px;
 }
 
-#inscription_bouton_connexion {
-  border: 1px solid grey;
-  background-color: #E9E9ED;
-  color: black;
-  font-size: 11pt;
+@media screen and (min-width: 426px) and (min-height: 500px) {
+  .authentification {
+    background-color: mediumspringgreen;
+    background-image: url('/avocaba/img/background.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .authentification__form {
+    box-shadow: rgba(0, 0, 0, 0.2) 0 10px 15px;
+    border-radius: 10px;
+    background-color: white;
+  }
 }
 
-/* 🔒 Réinitialisation du mot de passe */
 
-.reinitialise_reinitialiser {
-  border: 1px solid black;
-}
-
-#reinitialise_bouton_envoyer {
-  border: 1px solid grey;
-  background-color: #E9E9ED;
-  color: black;
-  font-size: 11pt;
-  text-decoration:none;
-}
-
-/* 🔒 Message réinitialisation du mot de passe */
-
-.message_mdp {
-  border: 1px solid black;
-}
-
-#message_mdp_bouton_accueil {
-  border: 1px solid grey;
-  background-color: #E9E9ED;
-  color: black;
-  font-size: 11pt;
-}
 
 /* Espace client */
 
@@ -414,7 +397,9 @@ input.selection-qte__set {
 }
 
 
+
 /* Bouton favoris */
+
 .bouton-favoris span {
   font-size: 50px;
 }
@@ -423,7 +408,10 @@ input.selection-qte__set {
   color: #FFC300;
 }
 
+
+
 /* Mes produits */
+
 .mes-produits__cellule-image {
   text-align: center;
 }
