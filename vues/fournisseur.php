@@ -12,6 +12,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/error.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/bouton-favoris.php';
 
 session_start();
 
@@ -78,7 +79,7 @@ $siteWeb = $fournisseur->getSite();
         </p>
         
         <div class="fournisseur__favori">
-          &#9733;
+          <?php boutonFavoris('fournisseurs', $fournisseur->getSiret()); ?>
         </div>
       </div>
 

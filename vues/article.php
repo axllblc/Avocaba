@@ -15,6 +15,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_qte-article.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/error.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/bouton-favoris.php';
 
 initialiserPanier();
 
@@ -121,7 +122,7 @@ if ( isset($_GET['IdArticle']) ) {
         </div>
 
         <label class="details-produit__btn-favori">
-          <span class="material-icons">star_border</span>
+          <?php boutonFavoris('articles', $_GET['IdArticle']); ?>
           <button>Ajouter aux favoris</button>
         </label>
       </div>
