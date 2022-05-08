@@ -7,9 +7,11 @@
 require_once 'db.inc.php';
 require_once 'misc.inc.php';
 
-/**************
- * Constantes *
- **************/
+
+
+// **************
+// * Constantes *
+// **************
 
 // Expressions régulières
 
@@ -19,7 +21,7 @@ const REGEX_ID = '/^[\d]{1,15}$/';
 
 // Requêtes à préparer
 
-// Les déclarations de variables
+  // Déclarations de variables
 const VARIABLE_CRITERE = '
 SET @critere = ?;
 ';
@@ -28,7 +30,7 @@ const VARIABLE_DEPOT = '
 SET @idDepot = ?;
 ';
 
-//Les projections
+  // Requêtes
 const RECHERCHE_ARTICLE_ID_RAYON = '
 SELECT DISTINCT a.IdArticle, a.Nom, a.Prix, a.PrixRelatif, a.Unite, a.Description,
         a.PhotoVignette, a.ProduitPhare, r.IdRayon, a.SiretProducteur, r.Nom AS NomRayon
@@ -89,11 +91,14 @@ WHERE (a.Nom LIKE @critere OR m.Nom LIKE @critere) AND (s.IdDepot = @idDepot OR 
 
 const RECHERCHE_ARTICLE_NOM = RECHERCHE_ARTICLE_NOM_FOURNISSEUR.' UNION '.RECHERCHE_ARTICLE_NOM_RAYON.' UNION '.RECHERCHE_ARTICLE_NOM_ARTICLE;
 
-//Pour utiliser la même collation
+  // Pour utiliser la même collation
 const COLLATION = "SET character_set_server = 'utf8mb4_general_ci';";
-/*************
- * Fonctions *
- *************/
+
+
+
+// *************
+// * Fonctions *
+// *************
 
 /**
  * Rechercher un/des articles.
@@ -204,5 +209,3 @@ function rechercherArticle (string|int $critere, string $nature, string|int $idD
 
   return $resultArray;
 }
-
-// exemple : var_dump(rechercherArticle(1, "idArticle"));
