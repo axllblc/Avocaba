@@ -187,7 +187,7 @@ $siteWeb = $fournisseur->getSite();
           </li>
           <?php } ?>
         </ul>
-        <a class="fournisseur__voir-autres-produits" href="#" title="voir les autres produits phares du producteur">
+        <a class="fournisseur__voir-autres-produits btn btn--large" href="#" title="voir les autres produits phares du producteur">
           Voir mes autres produits
         </a>
       </div>

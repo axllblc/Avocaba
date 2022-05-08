@@ -852,7 +852,6 @@ input.selection-qte__set {
 }
 
 .fournisseur__voir-autres-produits {
-  display: block;
   width: max-content;
   margin: 0 auto;
 }

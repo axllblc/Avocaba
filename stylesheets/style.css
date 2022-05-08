@@ -73,6 +73,10 @@ a:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+.btn--large {
+  font-size: 1.1em;
+}
+
 .ic-btn {
   color: #404040;
   border-radius: 50%;
@@ -318,22 +322,6 @@ input.selection-qte__set {
 
 .fournisseur__etiquette {
   border-top: solid gray 1px;
-}
-
-.fournisseur__voir-autres-produits {
-  color: black;
-  background-color: white;
-  border: solid black 1px;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 2px;
-  font-size: 1.5em;
-  padding: 5px 10px;
-}
-
-.fournisseur__voir-autres-produits:hover {
-  color: white;
-  background-color: black;
 }
 
 
