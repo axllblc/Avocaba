@@ -14,7 +14,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_qte-article.p
 // Le panier est initialisé. À cette occasion, la session est initialisée.
 initialiserPanier();
 
-
+// On vide le panier si le client n'est plus rattaché à un magasin
+if(!isset($_SESSION['Depot'])){
+  supprimerPanier();
+}
 
 // *************
 // * Fonctions *
