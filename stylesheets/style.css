@@ -245,6 +245,7 @@ a.ls-articles__item-content {
 input.selection-qte__set {
   font-size: 1em;
   font-weight: bold;
+  background-color: transparent;
 }
 
 
