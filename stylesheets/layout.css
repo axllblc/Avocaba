@@ -1133,3 +1133,13 @@ input.selection-qte__set {
   padding: 5pt;
   border-radius: 5px;
 }
+
+
+/* Mes produits */
+.mes-produits__tableaux {
+  margin: 0 auto;
+  border-spacing: 15px 2px;
+}
+.mes-produits__produit img {
+  height: 150px;
+}

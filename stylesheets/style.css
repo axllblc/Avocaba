@@ -422,3 +422,12 @@ input.selection-qte__set {
 .bouton-favoris .star {
   color: #FFC300;
 }
+
+/* Mes produits */
+.mes-produits__cellule-image {
+  text-align: center;
+}
+
+.mes-produit__delete {
+  font-size: 40px;
+}
