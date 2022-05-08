@@ -27,7 +27,8 @@ function htmlHeader (bool $magasin = false, string $query = ''): void { ?>
       <input class="recherche__input" id="recherche"
              type="search" name="recherche"
              value="<?= $query ?>"
-             placeholder="Rechercher un produit ou un producteur"
+             placeholder="Rechercher un produit"
+             aria-label="Rechercher un produit"
              required>
       <!-- Label permettant de "fabriquer" un bouton de recherche personnalisé -->
       <label class="recherche__btn">

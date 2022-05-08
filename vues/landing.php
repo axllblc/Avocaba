@@ -67,6 +67,7 @@ if ( !empty($_GET['recherche']) ) {
       <input class="recherche__input"
              type="search" name="recherche" id="recherche"
              placeholder="Ville, code postal ou numéro de département"
+             title="Rechercher un magasin par ville, code postal ou numéro de département"
              value="<?php echo $_GET['recherche'] ?? '' ?>"
              required maxlength="50">
 
