@@ -67,26 +67,31 @@ if ( !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['pas
     <label>
       Prénom
       <input type="text" name="prenom" id="prenom"
-             minlength="2" maxlength="30" pattern="[a-zA-Z -]{2,30}" required>
+             minlength="2" maxlength="30" pattern="[a-zA-Z -]{2,30}" 
+             autocomplete="given-name" required>
     </label>
     <label>
       Nom
       <input type="text" name="nom" id="nom"
-             minlength="2" maxlength="30" pattern="[a-zA-Z -]{2,30}" required>
+             minlength="2" maxlength="30" pattern="[a-zA-Z -]{2,30}" 
+             autocomplete="family-name" required>
     </label>
     <label>
       Adresse email
-      <input type="email" name="email" id="email" required>
+      <input type="email" name="email" id="email" 
+             autocomplete="email" required>
     </label>
     <label>
       Mot de passe
       <input type="password" name="password" id="password"
-             minlength="8" maxlength="16" pattern="([0-9a-zA-Z._#-]){8,16}" required>
+             minlength="8" maxlength="16" pattern="([0-9a-zA-Z._#-]){8,16}" 
+             autocomplete="new-password" required>
     </label>
     <label>
       Confirmer le mot de passe
       <input type="password" name="passwordBis" id="passwordBis"
-             minlength="8" maxlength="16" pattern="([0-9a-zA-Z._#-]){8,16}" required>
+             minlength="8" maxlength="16" pattern="([0-9a-zA-Z._#-]){8,16}" 
+             autocomplete="new-password" required>
     </label>
     <label class="authentification__row">
       <input type="checkbox" name="accept" id="accept" required>
