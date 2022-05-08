@@ -34,11 +34,11 @@ if (isset($_POST['retour'])) {
 }
 
 // On vérifie que le client est connecté
-if(!isset($_SESSION['Client'])){
+if (!isset($_SESSION['Client'])) {
   $_SESSION['Panier']['Verrouillage'] = false;
   header('Location: espace-client/account.php');
 }
-elseif(isset($_SESSION['Panier']) and count($_SESSION['Panier']['IdArticle']) > 0 and isset($_POST['validerPanier'])){
+elseif (isset($_SESSION['Panier']) and count($_SESSION['Panier']['IdArticle']) > 0 and isset($_POST['validerPanier'])) {
   // Cas où le client arrive sur la page de paiement
   // On vérifie que le client a un panier non-vide et qu'il arrive bien sur cette page
   //  depuis le panier (où il a dû choisir une date de retrait)
@@ -48,7 +48,7 @@ elseif(isset($_SESSION['Panier']) and count($_SESSION['Panier']['IdArticle']) > 
   $date = explode('-', $_POST['choix_jour']);
   $heureDebut = $_POST['choix_heure'];
 }
-elseif(isset($_POST['payer'])){
+elseif (isset($_POST['payer'])) {
   // Cas où le client vient de remplir le formulaire de paiement
   if (isset($_POST['choix_jour']) and isset($_POST['choix_heure']) and preg_match(REGEX_NOM_PRENOM, $_POST['nom']) and preg_match(REGEX_NUMERO, $_POST['no']) and preg_match(REGEX_DATE, $_POST['cardExpiration']) and preg_match(REGEX_CVV, $_POST['cvv'])) {
 
@@ -115,7 +115,7 @@ else{
           </label>
           <label>
             Code de sécurité
-            <input type="number" id="cvv" name="cvv" value="" min="100" max="9999" placeholder="123" required>
+            <input type="text" id="cvv" name="cvv" value="" pattern="\d{3,4}" size="4" required>
           </label>
           <input type="hidden" id="choix_jour" name="choix_jour" value="<?php echo $_POST['choix_jour'] ?>">
           <input type="hidden" id="choix_heure" name="choix_heure" value="<?php echo $_POST['choix_heure'] ?>">
@@ -132,5 +132,6 @@ else{
       </div>
     </main>
 
+    <script src="/avocaba/js/paiement.js"></script>
   </body>
 </html>
