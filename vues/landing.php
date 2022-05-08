@@ -89,15 +89,22 @@ if ( !empty($_GET['recherche']) ) {
 
   <div class="landing__milieu">
     <h2>Commandez vos produits régionaux, où vous voulez, quand vous voulez !</h2>
-    <p>Avocaba est le premier <em>click-and-collect</em> en circuit-court. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores, quae architecto? Modi sed inventore magni esse, at dignissimos consectetur quasi perspiciatis atque dolore omnis. Cumque officia delectus nisi nam. Perspiciatis!</p>
+    <p>
+      Avocaba est le premier <em>click-and-collect</em> en circuit-court&nbsp;!
+      Tous les produits de votre région sont réunis en un seul endroit.
+    </p>
     <a href="#" class="landing__btn btn btn--large btn--filled">En savoir plus</a>
 
     <h2>Comment ça marche ?</h2>
-    <div class="landing__fonctionnement">Infographie</div>
+    <img class="landing__fonctionnement" src="/avocaba/img/infographie.svg" alt="Fonctionnement de la plateforme Avocaba">
+    <ol class="landing__fonctionnement-texte">
+      <li>Choisissez un magasin près de chez vous&nbsp;;</li>
+      <li>Remplissez votre cabas de bons produits locaux et payez en ligne&nbsp;;</li>
+      <li>Récupérez vos courses au point de retrait.</li>
+    </ol>
     <a href="#" class="landing__btn btn btn--large">En savoir plus</a>
 
     <h2>Pourquoi Avocaba ?</h2>
-    <div class="landing__avantages">Infographie</div>
     <a href="#" class="landing__btn btn btn--large">Découvrez nos engagements</a>
   </div>
 

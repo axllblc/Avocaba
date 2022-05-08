@@ -144,12 +144,8 @@ a:hover {
   color: black;
 }
 
-/* Provisoire */
-.landing__fonctionnement, .landing__avantages {
-  border: 2px solid gray;
-}
+  /* Résultats de recherche */
 
-/* Résultats de recherche */
 .resultats-magasins {
   background-color: white;
   color: black;

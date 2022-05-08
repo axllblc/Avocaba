@@ -233,10 +233,17 @@ nav {
   margin: auto;
 }
 
-/* Provisoire */
-.landing__fonctionnement, .landing__avantages {
-  height: 250px;
-  margin-bottom: 10px;
+.landing__fonctionnement {
+  width: 100%;
+  max-width: 750px;
+}
+
+.landing__fonctionnement-texte {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0;
+  list-style-type: none;
 }
 
 
