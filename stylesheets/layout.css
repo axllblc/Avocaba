@@ -1093,3 +1093,10 @@ label.authentification__row {
 .mes-produits__produit img {
   height: 150px;
 }
+
+
+/* ✅ Commande validée */
+
+#commande__bouton-commande{
+  width: max-content;
+}

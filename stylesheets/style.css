@@ -279,16 +279,6 @@ input.selection-qte__set {
 }
 
 
-/* ✅ Confirmation de commande */
-
-#commande__bouton-commande{
-  border: 1px solid black;
-  padding: 4px;
-  background-color: lightgray;
-  text-decoration: none;
-  color: black;
-}
-
 
 /* 🧑‍🌾 Page d'un fournisseur */
 
