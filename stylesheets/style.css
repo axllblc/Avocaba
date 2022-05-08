@@ -129,6 +129,12 @@ a:hover {
 
 /* 🏠 Accueil du site - Landing page */
 
+.landing__header__logo {
+  background-color: whitesmoke;
+  padding: 10px;
+  border-radius: 50%;
+}
+
 .recherche-magasin {
   color: black;
 }

@@ -2,8 +2,6 @@
 
 /* ⬆️ En-tête des pages du magasin */
 
-// TODO modifier les liens
-
 /**
  * Afficher l'en-tête des pages du magasin.
  * @param bool $magasin Booléen indiquant si un clic sur le logo du site redirige vers l'accueil du magasin ou du site.
@@ -16,7 +14,7 @@ function htmlHeader (bool $magasin = false, string $query = ''): void { ?>
   <header class="header-magasin">
     <a class="header__logo"
        href="<?= $magasin ? '/avocaba/vues/magasin.php' : '/avocaba' ?>">
-      Avocaba
+      <img src="/avocaba/img/avocaba.svg" alt="Avocaba" title="Avocaba">
     </a>
 
     <a class="header__btn header__rayons"

@@ -12,6 +12,7 @@ function htmlHead (string $title = 'Avocaba'): void { ?>
   <link rel="stylesheet" href="/avocaba/stylesheets/layout.css">
   <link rel="stylesheet" href="/avocaba/stylesheets/style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="icon" href="/avocaba/img/favicon.png">
   <title><?= $title ?></title>
 </head>
 <?php }

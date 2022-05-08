@@ -69,6 +69,10 @@ nav {
 .header__mon-compte   { grid-area: header__mon-compte;   }
 .header__mon-cabas    { grid-area: header__mon-cabas;    }
 
+.header__logo img {
+  height: 100%;
+}
+
 .header__btn {
   cursor: pointer;
   text-align: center;

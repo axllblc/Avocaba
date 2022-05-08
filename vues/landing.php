@@ -52,7 +52,7 @@ if ( !empty($_GET['recherche']) ) {
 
 <div class="landing">
   <header class="landing__header">
-    <div class="landing__header__logo">Logo Avocaba</div>
+    <img class="landing__header__logo" src="/avocaba/img/avocaba.svg" alt="Avocaba" title="Avocaba">
     <a class="landing__header__connexion btn btn--white" href="/avocaba/vues/espace-client/account.php">Se connecter</a>
   </header>
 
