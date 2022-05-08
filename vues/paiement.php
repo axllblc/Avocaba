@@ -50,7 +50,9 @@ elseif (isset($_SESSION['Panier']) and count($_SESSION['Panier']['IdArticle']) >
 }
 elseif (isset($_POST['payer'])) {
   // Cas où le client vient de remplir le formulaire de paiement
-  if (isset($_POST['choix_jour']) and isset($_POST['choix_heure']) and preg_match(REGEX_NOM_PRENOM, $_POST['nom']) and preg_match(REGEX_NUMERO, $_POST['no']) and preg_match(REGEX_DATE, $_POST['cardExpiration']) and preg_match(REGEX_CVV, $_POST['cvv'])) {
+  if ( isset($_POST['choix_jour']) && isset($_POST['choix_heure']) && preg_match(REGEX_NOM_PRENOM, $_POST['nom'])
+       && preg_match(REGEX_NUMERO, $_POST['no']) && preg_match(REGEX_DATE, $_POST['cardExpiration'])
+       && preg_match(REGEX_CVV, $_POST['cvv']) ) {
 
     // Si les informations renseignées sont correctes, on valide sa commande
 
@@ -69,14 +71,14 @@ elseif (isset($_POST['payer'])) {
     header('Location: confirmation-commande.php?no=' . $IdCommande);
   }
   else {
-    // Les informations de paiement sont incorrectes (l'utilisateur a modifié le formulaire) : retour à l'Accueil
-    session_destroy();
-    header('Location: /avocaba');
+    // Les informations de paiement sont incorrectes
+    $feedback = 'Les informations saisies sont erronées. Veuillez réessayer.';
   }
 }
 else{
   // Autres cas : le client n'arrive pas sur cette page de manière officielle (on le redirige vers le magasin)
   header('Location: magasin.php');
+  exit;
 }
 
 ?>
@@ -100,18 +102,27 @@ else{
 
       <div class="paiement__main">
         <h2>Informations de paiement</h2>
+
+        <?= !empty($feedback) ? '<div class="feedback">' . $feedback . '</div>' : '' ?>
+
         <form class="paiement__form" action="paiement.php?" method="post">
           <label>
             Nom du porteur
-            <input type="text" id="nom" name="nom" value="" title="Nom Prenom" placeholder="Dupond Jean" pattern="([A-Za-z']{3,25}\s+[A-Za-z']{3,25})" autocomplete="cc-name" required>
+            <input type="text" id="nom" name="nom" title="Nom Prénom" pattern="([A-Za-z']{3,25}\s+[A-Za-z']{3,25})"
+                   autocomplete="cc-name" required value="<?= $_POST['nom'] ?? '' ?>">
           </label>
           <label>
             Numéro de carte
-            <input type="text" id="no" name="no" value="" title="La saisie doit contenir uniquement des chiffres et respecter le format : XXXX XXXX XXXX XXXX" placeholder="XXXX XXXX XXXX XXXX" pattern="([0-9]{4}\s){3}[0-9]{4}" autocomplete="cc-number" required>
+            <input type="text" id="no" name="no"
+                   title="La saisie doit contenir uniquement des chiffres et respecter le format : XXXX XXXX XXXX XXXX"
+                   placeholder="XXXX XXXX XXXX XXXX" pattern="([0-9]{4}\s){3}[0-9]{4}" autocomplete="cc-number"
+                   required value="<?= $_POST['no'] ?? '' ?>">
           </label>
           <label>
             Date de validité
-            <input type="text" id="cardExpiration" name="cardExpiration" value="" title="Date de validité au format MMAA" size="4" pattern="[0-9]{4}" placeholder="MMAA" autocomplete="cc-exp" required>
+            <input type="text" id="cardExpiration" name="cardExpiration" title="Date de validité au format MMAA"
+                   size="4" pattern="[0-9]{4}" placeholder="MMAA" autocomplete="cc-exp" required
+                   value="<?= $_POST['cardExpiration'] ?? '' ?>">
           </label>
           <label>
             Code de sécurité
