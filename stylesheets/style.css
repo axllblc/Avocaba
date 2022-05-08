@@ -112,6 +112,7 @@ a:hover {
 
 .header-magasin {
   background-color: whitesmoke;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 5px 10px;
 }
 
 .header__logo, .header__btn {
