@@ -34,8 +34,7 @@ if(!isset($_SESSION['Client'])){
   $_SESSION['Panier']['Verrouillage'] = false;
   header('Location: espace-client/account.php');
 }
-
-if(isset($_SESSION['Panier']) and count($_SESSION['Panier']['IdArticle']) > 0 and isset($_POST['validerPanier'])){
+elseif(isset($_SESSION['Panier']) and count($_SESSION['Panier']['IdArticle']) > 0 and isset($_POST['validerPanier'])){
   // Cas où le client arrive sur la page de paiement
   // On vérifie que le client a un panier non-vide et qu'il arrive bien sur cette page
   //  depuis le panier (où il a dû choisir une date de retrait)
