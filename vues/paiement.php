@@ -103,19 +103,19 @@ else{
         <form class="paiement__form" action="paiement.php?" method="post">
           <label>
             Nom du porteur
-            <input type="text" id="nom" name="nom" value="" title="Nom Prenom" placeholder="Dupond Jean" pattern="([A-Za-z']{3,25}\s+[A-Za-z']{3,25})" required>
+            <input type="text" id="nom" name="nom" value="" title="Nom Prenom" placeholder="Dupond Jean" pattern="([A-Za-z']{3,25}\s+[A-Za-z']{3,25})" autocomplete="cc-name" required>
           </label>
           <label>
             Numéro de carte
-            <input type="text" id="no" name="no" value="" title="La saisie doit contenir uniquement des chiffres et respecter le format : XXXX XXXX XXXX XXXX" placeholder="XXXX XXXX XXXX XXXX" pattern="([0-9]{4}\s){3}[0-9]{4}" required>
+            <input type="text" id="no" name="no" value="" title="La saisie doit contenir uniquement des chiffres et respecter le format : XXXX XXXX XXXX XXXX" placeholder="XXXX XXXX XXXX XXXX" pattern="([0-9]{4}\s){3}[0-9]{4}" autocomplete="cc-number" required>
           </label>
           <label>
             Date de validité
-            <input type="text" id="cardExpiration" name="cardExpiration" value="" title="Date de validité au format MMAA" size="4" pattern="[0-9]{4}" placeholder="MMAA" required>
+            <input type="text" id="cardExpiration" name="cardExpiration" value="" title="Date de validité au format MMAA" size="4" pattern="[0-9]{4}" placeholder="MMAA" autocomplete="cc-exp" required>
           </label>
           <label>
             Code de sécurité
-            <input type="text" id="cvv" name="cvv" value="" pattern="\d{3,4}" size="4" required>
+            <input type="text" id="cvv" name="cvv" value="" pattern="\d{3,4}" size="4" autocomplete="cc-csc" required>
           </label>
           <input type="hidden" id="choix_jour" name="choix_jour" value="<?php echo $_POST['choix_jour'] ?>">
           <input type="hidden" id="choix_heure" name="choix_heure" value="<?php echo $_POST['choix_heure'] ?>">
