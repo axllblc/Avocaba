@@ -831,6 +831,25 @@ input.selection-qte__set {
   }
 }
 
+.fournisseur__banniere {
+  position: relative;
+}
+
+.fournisseur__banniere-media {
+  margin: 5px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.fournisseur__photo-profil {
+  position: relative;
+}
+
+.fournisseur__banniere-media img {
+  height: 40px;
+}
+
 .fournisseur__infos {
   display: flex;
   flex-direction: column;
