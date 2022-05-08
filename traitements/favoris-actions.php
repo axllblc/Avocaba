@@ -21,10 +21,16 @@ if(!isset($_SESSION['Client'])) {
   header('Location: ../vues/espace-client/account.php');
 }
 
+// pour bien rediriger l'utilisateur après la mise en favoris
+$url = '../vues/mes-produits.php'; // par défault
+if(isset($_SERVER['HTTP_REFERER']))
+  $url = $_SERVER['HTTP_REFERER'];
+
 // On récupère l'action de l'opération en GET
 if (isset($_GET['table']) &&
-    isset($_GET['id'])) {
+    isset($_GET['id']))
   actionsFavoris($_GET['table'], $_SESSION['Client']['IdClient'], $_GET['id']);
-  header('Location: ../vues/mes-produits.php');
-}
+
+// redirection
+header('Location: '.$url);
 ?>
