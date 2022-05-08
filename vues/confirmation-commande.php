@@ -7,6 +7,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 
+// On affiche cette page que si on vient d'effectuer une commande
+if(!isset($_GET['no'])){
+  header('Location: espace-client/account.php');
+}
+
 ?>
 
 <!DOCTYPE html>
