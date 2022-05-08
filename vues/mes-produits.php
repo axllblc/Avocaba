@@ -13,13 +13,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/error.php';
 session_start();
 
 // Si l'utilisateur n'est pas connecté, il est redirigé vers la page de connexion.
-if ( !isset($_SESSION['Client']) ){
-
-  // On enregistre l'adresse à rediriger si l'utilisateur arrive sur va arriser sur la page de connexion depuis une page du site
-  if(isset($_SERVER['HTTP_REFERER']) and (!str_contains($_SERVER['HTTP_REFERER'], 'signin.php') or !str_contains($_SERVER['HTTP_REFERER'], 'signup.php'))){
-    $_SESSION['HTTP-TO-REFER'] = $_SERVER['HTTP_REFERER'];
-  }
-  header('Location: signin.php');
+if(!isset($_SESSION['Client'])){
+  header('Location: espace-client/account.php');
 }
 ?>
 
@@ -51,7 +46,7 @@ if ( !isset($_SESSION['Client']) ){
               <p><a href="/avocaba/vues/fournisseur.php?siret=<?php echo $value['SiretProducteur']; ?>" class="mes-produits__nom-producteur"><?php echo $value['NomProducteur']; ?></a></p>
               <p><?php echo $value['Prix']; ?></p>
             </div>
-            <a href="">
+            <a href="/avocaba/traitements/favoris-actions.php?table=articles&id=<?php echo $value['IdArticle']; ?>">
               <span class="material-icons">delete</span>
             </a>
           </li>
