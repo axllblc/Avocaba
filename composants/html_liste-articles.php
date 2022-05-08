@@ -10,7 +10,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php'
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_qte-article.php';
 
 
-
 /**
  * Afficher la liste des articles.
  * @param array $listeArticles Liste d'articles
@@ -43,7 +42,7 @@ function htmlListeArticles ($listeArticles): void {
             <div class="ls-articles__prix"><?= $article['Unite'] . ' · ' . $article['Prix'] . '&nbsp;€' ?></div>
           </div>
         </a>
-        <?php htmlQteArticle($article['IdArticle'], getQteArticle($article['IdArticle']), $article['Nom']);?>
+        <?php if(isset($_SESSION['Depot']) and count(rechercherArticle($article['IdArticle'], "idArticle", $_SESSION['Depot']['IdDepot']))>0) htmlQteArticle($article['IdArticle'], getQteArticle($article['IdArticle']), $article['Nom']);?>
       </li>
     <?php
 
