@@ -85,12 +85,25 @@ $siteWeb = $fournisseur->getSite();
       <div class="fournisseur__principal">
         <div class="fournisseur__colonne-gauche">
           <h2 class="fournisseur__h2-description">Description</h2>
-          <p class="fournisseur__description"><?php echo lineBreakChange($fournisseur->getDescription()); ?></p>
+          <?php
+          $description = $fournisseur->getDescription();
+          if (!empty($description)) {
+          ?>
+          <p class="fournisseur__description"><?php echo lineBreakChange($description); ?></p>
+          <?php } else { ?>
+          <p class="fournisseur__description">Ce producteur n'a pas de description</p>
+          <?php } ?>
+          <?php 
+          $photos_fournisseur = $fournisseur->photoFournisseur(); 
+          if (!empty($photos_fournisseur)) {
+          ?>
           <div class="fournisseur__photos">
             <div class="fournisseur__chevron">
               <span class="material-icons" id="fournisseur__chevron-left">chevron_left</span>
             </div>
-            <?php foreach ($fournisseur->photoFournisseur() as $key => $value) { ?>
+            <?php 
+            
+            foreach ($photos_fournisseur as $key => $value) { ?>
               <img class="fournisseur__photo-slider"  
                   src="<?php echo $value ?>" 
                   alt="photo <?php echo $key ?>"
@@ -138,6 +151,7 @@ $siteWeb = $fournisseur->getSite();
               })
             </script>
           </div>
+          <?php } ?>
         </div>
         <div class="fournisseur__colonne-droite">
           <h2>Informations</h2>
@@ -156,9 +170,6 @@ $siteWeb = $fournisseur->getSite();
                title="Site web du producteur"><?= $siteWeb ?></a>
             <?php } ?>
           </address>
-
-          <!-- Carte temporaire -->
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6222.185358365255!2d2.141973084391871!3d47.928802557131064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6de6a4e5b93cc26f!2sBoulangerie%20GM!5e0!3m2!1sfr!2sfr!4v1646519078967!5m2!1sfr!2sfr" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
       </div>
 
