@@ -25,10 +25,6 @@ if(!isset($_SESSION['Client'])){
   <body>
     <?php htmlHeader(!empty($_SESSION['Depot'])); ?>
 
-    <style>
-      
-    </style>
-
     <main>
       <h1>Mes Produits</h1>
 
