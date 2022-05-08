@@ -576,11 +576,8 @@ nav {
   /* Rayon */
 
 .details-produit__rayon {
-  display: block;
   width: 350px;
-  text-align: center;
   margin: auto;
-  padding: 10px;
 }
 
 

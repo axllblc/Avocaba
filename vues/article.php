@@ -163,7 +163,7 @@ if ( isset($_GET['IdArticle']) ) {
       <p>Les produits similaires apparaîtront ici</p>
     </div>
 
-    <a class="details-produit__rayon" href="<?= '/avocaba/vues/recherche.php?rayon=' . $a['IdRayon'] ?>">
+    <a class="details-produit__rayon btn btn--large" href="<?= '/avocaba/vues/recherche.php?rayon=' . $a['IdRayon'] ?>">
       Explorer le rayon <?= $a['NomRayon'] ?>
     </a>
   </main>
