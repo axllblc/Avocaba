@@ -46,7 +46,7 @@ if ( !empty($_POST['email']) and !empty($_POST['password']) ) {
 
 <body class="authentification">
   <form class="authentification__form" action="signin.php" method="POST">
-    <button class="nav__btn-retour btn" onclick="history.back();" title="Revenir à la page précédente">Retour</button>
+    <a class="nav__btn-retour btn" href="/avocaba/" title="Revenir à la page précédente">Retour</a>
 
     <h1 id="authentification__titre">Connexion</h1>
 

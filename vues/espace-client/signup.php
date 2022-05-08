@@ -58,7 +58,7 @@ if ( !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['pas
 
 <body class="authentification">
   <form class="authentification__form inscription" action="signup.php" method="post">
-    <button class="nav__btn-retour btn" onclick="history.back();" title="Revenir à la page précédente">Retour</button>
+    <a class="nav__btn-retour btn" href="signin.php" title="Revenir à la page précédente">Retour</a>
 
     <h1 id="authentification__titre">Créer votre compte</h1>
 

@@ -35,7 +35,7 @@ if (!$done) { ?>
 
 <body class="authentification">
   <form class="authentification__form" action="reset-password.php" method="post">
-    <button class="nav__btn-retour btn" onclick="history.back();" title="Revenir à la page précédente">Retour</button>
+    <a class="nav__btn-retour btn" href="signin.php" title="Revenir à la page précédente">Retour</a>
     <h1>Réinitialiser mon mot de passe</h1>
     <div>
       Pour réinitialiser votre mot de passe, entrez votre adresse email ci-dessous.
