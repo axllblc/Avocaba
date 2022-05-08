@@ -14,6 +14,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_qte-article.p
 // Le panier est initialisé. À cette occasion, la session est initialisée.
 initialiserPanier();
 
+
+
 // *************
 // * Fonctions *
 // *************

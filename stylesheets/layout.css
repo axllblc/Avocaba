@@ -3,7 +3,6 @@
 body {
   margin: 0;
   box-sizing: border-box;
-  min-height: 100vh;
 }
 
 main {
@@ -694,30 +693,44 @@ input.selection-qte__set {
 
 /* 💳 Paiement */
 
-.paiement__payer {
-  grid-area: paiement__payer;
-  margin: 1em;
+.paiement {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "paiement__titre paiement__titre        "
+                       "paiement__main  paiement__recapitulatif";
+  gap: 25px;
+}
+
+.paiement__main {
+  grid-area: paiement__main;
+  justify-self: center;
 }
 
 .paiement__recapitulatif {
   grid-area: paiement__recapitulatif;
+  justify-self: center;
 }
 
 .paiement__titre {
   grid-area: paiement__titre;
 }
 
-.paiement__main{
-  padding-left: 12%;
+.paiement__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.paiement {
-  display: grid;
-  grid-template-rows: 1fr auto;;
-  grid-template-columns: 3fr 2fr;
-  grid-template-areas: "paiement__titre paiement__titre"
-                       "paiement__payer paiement__recapitulatif";
+@media (max-width: 767px) {
+  .paiement {
+    grid-template: repeat(3, auto) / 1fr;
+    grid-template-areas: "paiement__titre        "
+                         "paiement__recapitulatif"
+                         "paiement__main         ";
+  }
 }
+
 
 
 /* 🧑‍🌾 Page d'un fournisseur */
@@ -1044,6 +1057,7 @@ input.selection-qte__set {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
 }
 
 .authentification__form {
