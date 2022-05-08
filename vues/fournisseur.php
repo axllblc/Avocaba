@@ -189,13 +189,15 @@ $siteWeb = $fournisseur->getSite();
             $i++;
           ?>
           <li class="fournisseur__cellule">
-            <img class="fournisseur__photo" 
-                 src="<?= !empty($article['PhotoVignette']) ? $article['PhotoVignette'] : '/avocaba/img/article-placeholder.png' ?>" 
-                 alt="<?php echo $article['Nom']; ?> - <?php echo $nom; ?>">
-            <div class="fournisseur__etiquette">
-              <p class="fournisseur__nom-produits-phares"><?php echo $article['Nom']; ?></p>
-              <p class="fournisseur__prix-produits-phares"><?php echo $article['Prix']; ?> €</p>
-            </div>
+            <a href="/avocaba/vues/article.php?IdArticle=<?php echo $articles_phares[$i]; ?>">
+              <img class="fournisseur__photo" 
+                  src="<?= !empty($article['PhotoVignette']) ? $article['PhotoVignette'] : '/avocaba/img/article-placeholder.png' ?>" 
+                  alt="<?php echo $article['Nom']; ?> - <?php echo $nom; ?>">
+              <div class="fournisseur__etiquette">
+                <p class="fournisseur__nom-produits-phares"><?php echo $article['Nom']; ?></p>
+                <p class="fournisseur__prix-produits-phares"><?php echo $article['Prix']; ?> €</p>
+              </div>
+            </a>
           </li>
           <?php } ?>
         </ul>
@@ -224,13 +226,15 @@ $siteWeb = $fournisseur->getSite();
               $i++;
             ?>
             <li class="fournisseur__cellule">
-              <img class="fournisseur__photo" 
-                   src="<?= !empty($photoProfil) ? $photoProfil : '/avocaba/img/farmer.png' ?>" 
-                   alt="producteur proche de chez moi - <?php echo $fournisseur_proche->getNom(); ?>">
-              <div class="fournisseur__etiquette">
-                <p class="fournisseur__nom-producteur-proche"><?php echo $fournisseur_proche->getNom(); ?></p>
-                <p class="fournisseur__localisation-producteur-proche"><?php echo $fournisseur_proche->getVille(); ?></p>
-              </div>
+              <a href="/avocaba/vues/fournisseur.php?siret=<?php echo $producteurs_proches[$i]; ?>">
+                <img class="fournisseur__photo" 
+                    src="<?= !empty($photoProfil) ? $photoProfil : '/avocaba/img/farmer.png' ?>" 
+                    alt="producteur proche de chez moi - <?php echo $fournisseur_proche->getNom(); ?>">
+                <div class="fournisseur__etiquette">
+                  <p class="fournisseur__nom-producteur-proche"><?php echo $fournisseur_proche->getNom(); ?></p>
+                  <p class="fournisseur__localisation-producteur-proche"><?php echo $fournisseur_proche->getVille(); ?></p>
+                </div>
+              </a>
             </li>
             <?php } ?>
           </ul>

@@ -835,15 +835,23 @@ input.selection-qte__set {
 }
 
 .fournisseur__cellule {
-  display: grid;
-  grid-template-rows: auto 60px;
+  list-style: none;
 }
 
-.fournisseur__cellule img {
+.fournisseur__cellule a {
+  display: grid;
+  grid-template-rows: auto 60px;
+  grid-template-areas: "fournisseur__photo"
+                       "fournisseur__etiquette";
+}
+
+.fournisseur__photo {
+  grid-area: fournisseur__photo;
   width: 100%;
 }
 
 .fournisseur__etiquette {
+  grid-area: fournisseur__etiquette;
   display: grid;
   grid-template-rows: 1fr 1fr;
 }
