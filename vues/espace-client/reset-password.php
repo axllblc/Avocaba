@@ -45,7 +45,8 @@ if (!$done) { ?>
     </div>
     <label>
       Votre adresse email
-      <input type="email" name="email" id="email" required>
+      <input type="email" name="email" id="email" 
+             autocomplete="email" required>
     </label>
     <input type="submit" class="btn btn--filled" name="valider-reset" value="Réinitialiser le mot de passe">
   </form>

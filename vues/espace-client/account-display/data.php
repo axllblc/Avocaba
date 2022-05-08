@@ -56,29 +56,29 @@ else{
   <form class="client__data" action="?btClient=infos" method="POST">
     <label for="prenom">
       Prénom
-      <input <?php if(!$edit) echo 'disabled="disabled"'; ?> type="text" name="prenom" id="prenom" minlength="2" size="40" pattern="[a-zA-Z -]{2,30}" value="<?php if(isset($_SESSION['Client']['Prenom'])) echo $_SESSION['Client']['Prenom']; ?>">
+      <input <?php if(!$edit) echo 'disabled="disabled"'; ?> type="text" name="prenom" id="prenom" minlength="2" size="40" pattern="[a-zA-Z -]{2,30}" value="<?php if(isset($_SESSION['Client']['Prenom'])) echo $_SESSION['Client']['Prenom']; ?>" autocomplete="given-name">
     </label>
     <label for="nom">
       Nom
-      <input <?php if(!$edit) echo 'disabled="disabled"'; ?> type="text" name="nom" id="nom" minlength="2" size="40" pattern="[a-zA-Z -]{2,30}" value="<?php if(isset($_SESSION['Client']['Nom'])) echo $_SESSION['Client']['Nom']; ?>">
+      <input <?php if(!$edit) echo 'disabled="disabled"'; ?> type="text" name="nom" id="nom" minlength="2" size="40" pattern="[a-zA-Z -]{2,30}" value="<?php if(isset($_SESSION['Client']['Nom'])) echo $_SESSION['Client']['Nom']; ?>" autocomplete="family-name">
     </label>
     <label for="email">
       Adresse email
-      <input <?php if(!$edit) echo 'disabled="disabled"'; ?> type="email" size="50" name="email" id="email" value="<?php if(isset($_SESSION['Client']['Email'])) echo $_SESSION['Client']['Email']; ?>">
+      <input <?php if(!$edit) echo 'disabled="disabled"'; ?> type="email" size="50" name="email" id="email" value="<?php if(isset($_SESSION['Client']['Email'])) echo $_SESSION['Client']['Email']; ?>" autocomplete="email">
     </label>
     <label for="motdepasse1">
       <?php echo $edit ? 'Nouveau mot de passe' : 'Mot de passe'; ?>
-      <input <?php if(!$edit) echo 'disabled="disabled"'; ?> type="password" size="30"  minlength="8" maxlength="16" name="motdepasse1" id="motdepasse1"  pattern="([0-9a-zA-Z._#-]){8,16}" value="<?php if(!$edit) echo "*********"; ?>">
+      <input <?php if(!$edit) echo 'disabled="disabled"'; ?> type="password" size="30"  minlength="8" maxlength="16" name="motdepasse1" id="motdepasse1"  pattern="([0-9a-zA-Z._#-]){8,16}" value="<?php if(!$edit) echo "*********"; ?>" autocomplete="new-password">
     </label>
 
     <?php if($edit) echo '
     <label for="motdepasse2">
       Nouveau mot de passe
-      <input type="password" size="30" minlength="8" maxlength="16" name="motdepasse2" id="motdepasse2"  pattern="([0-9a-zA-Z._#-]){8,16}" value="">
+      <input type="password" size="30" minlength="8" maxlength="16" name="motdepasse2" id="motdepasse2"  pattern="([0-9a-zA-Z._#-]){8,16}" value="" autocomplete="new-password">
     </label>
     <label for="motdepasseActuel">
       <strong>Pour modifier les informations, veuillez saisir le mot de passe actuel</strong>
-      <input type="password" size="30" minlength="8" maxlength="16" name="motdepasseActuel" id="motdepasseActuel"  pattern="([0-9a-zA-Z._#-]){8,16}" value="" required>
+      <input type="password" size="30" minlength="8" maxlength="16" name="motdepasseActuel" id="motdepasseActuel"  pattern="([0-9a-zA-Z._#-]){8,16}" value="" autocomplete="new-password" required>
     </label>
     ';
     if (isset($message)) echo "<p><strong>$message</strong></p>";?>
