@@ -12,6 +12,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/error.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/annonce-accueil.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_liste-rayons.php';
 
+session_start();
+
 
 
 // **************
@@ -46,6 +48,8 @@ const ERR_DEPOT_INEXISTANT =
 
 // Si un identifiant de dépôt est passé en paramètre...
 if ( isset($_GET['id']) ) {
+  $depotCourant = $_SESSION['Depot']['IdDepot'] ?? 0;
+
   // Si cet identifiant n'est pas une valeur numérique, une erreur 400 est affichée.
   if ( !is_numeric($_GET['id']) )      error(400);
 
@@ -53,12 +57,14 @@ if ( isset($_GET['id']) ) {
   // En cas d'échec, une erreur 404 est affichée.
   if ( !selectionDepot($_GET['id']) )  error(404, ERR_DEPOT_INEXISTANT);
 
+  // Si l'utilisateur change de dépôt, le panier est vidé pour éviter de commander des produits indisponibles
+  if ( isset($_SESSION['Panier']) && intval($_GET['id']) !== $depotCourant )
+    unset($_SESSION['Panier']);
+
   // Si l'utilisateur est connecté, le dépôt qu'il a sélectionné est enregistré en tant que dernier dépôt fréquenté
   if ( isset($_SESSION['Client']) )
     enregistrerDernierDepot($_SESSION['Client']['IdClient'], $_GET['id']);
 }
-
-if ( !isset($_SESSION) ) session_start();
 
 // Si aucun dépôt n'est enregistré dans la session, l'utilisateur est redirigé vers l'accueil
 if ( !isset($_SESSION['Depot']) ) {
