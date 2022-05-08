@@ -14,8 +14,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/error.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/bouton-favoris.php';
 
-session_start();
-
 
 
 // ********************

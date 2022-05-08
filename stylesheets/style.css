@@ -412,3 +412,13 @@ input.selection-qte__set {
   color: black;
   text-decoration: none;
 }
+
+
+/* Bouton favoris */
+.bouton-favoris span {
+  font-size: 3em;
+}
+
+.bouton-favoris .star {
+  color: #FFC300;
+}

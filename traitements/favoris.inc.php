@@ -131,7 +131,10 @@ function getArticlesFavoris(int|String $idClient) : Array{
  * @param string|int $idFavoris siret du fournisseur ou identifiant de l'article en fonction de la table
  * @param mysqli $link objet de connexion à la base
  */
-function estPresentFavoris(String $table, String|int $idClient, String|int $idFavoris, mysqli $link) {
+function estPresentFavoris(String $table, String|int $idClient, String|int $idFavoris) {
+  // connexion à la base de données
+  $link = dbConnect();
+
   // Préparation de la requête
   if ($table = 'articles')
     $stmt = $link->prepare(ARTICLE_EST_FAVORIS);
@@ -151,6 +154,7 @@ function estPresentFavoris(String $table, String|int $idClient, String|int $idFa
   $resultArray = $result->fetch_all(MYSQLI_ASSOC);
 
   // libération de la mémoire associée
+  $link->close();
   $result->close();
   $stmt->close();
 
