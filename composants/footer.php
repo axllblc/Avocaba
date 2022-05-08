@@ -47,7 +47,8 @@ function footer (): void { ?>
       <p>Inscrivez-vous à notre newsletter pour recevoir l’actualité des produits de votre région et diverses offres.</p>
       <?php // TODO modifier l'URL de la page de traitement ?>
       <form class="pied-de-page__newsletter-form" action="#">
-        <input type="email" name="email_newsletter" id="email-newsletter" placeholder="Email" autocomplete="email">
+        <input type="email" name="email_newsletter" id="email-newsletter" placeholder="Email" autocomplete="email"
+               title="Entrez votre adresse e-mail pour vous abonner à la newsletter">
         <input type="submit" value="Je m'abonne">
       </form>
       <p>Vous pouvez vous désabonner de la newsletter à tout moment. Consultez notre <a href="#">politique de confidentialité</a> pour en savoir plus sur notre utilisation des données personnelles.</p>
@@ -57,10 +58,13 @@ function footer (): void { ?>
         <a href="#">Mentions légales</a>
       </li>
       <li class="pied-de-page__item">
-        <a href="#">CGU</a>
+        <a href="#">Conditions d'utilisation</a>
       </li>
       <li class="pied-de-page__item">
         <a href="#">Politique de confidentialité</a>
+      </li>
+      <li class="pied-de-page__item">
+        <a href="#">Conditions générales de vente</a>
       </li>
       <li class="pied-de-page__item">
         © <?= getdate()['year'] ?>, Avocaba
