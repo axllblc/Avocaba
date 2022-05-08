@@ -592,9 +592,16 @@ nav {
 
 .panier__recapitulatif {
   grid-area: panier__recapitulatif;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   padding: 25px;
   box-sizing: border-box;
   height: auto;
+}
+
+.panier__recapitulatif h2 {
+  margin: 10px 0 5px;
 }
 
 .panier__article {

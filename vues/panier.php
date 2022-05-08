@@ -149,7 +149,7 @@ $affichageNbArticles =
     <div id="panier__montant-total">Total&nbsp;: <b><?= montantPanier() . '&nbsp;€' ?></b></div>
     <div><?= $affichageNbArticles?></div>
 
-    <button type="submit" class="panier__valider_panier" name="validerPanier">Valider mon cabas</button><br>
+    <button type="submit" class="panier__valider_panier" name="validerPanier">Valider mon cabas</button>
     <a href="<?= URL_TRAITEMENT_PANIER . '?actionPanier=' . VIDER_PANIER ?>">Vider mon cabas</a>
 
   </form>
