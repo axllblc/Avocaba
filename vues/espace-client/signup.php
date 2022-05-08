@@ -30,8 +30,6 @@ if ( !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['pas
   $passwordBis = $_POST['passwordBis'];
 
   if ( $password === $passwordBis ) {
-    $client = verifierClient($_POST['email'], $_POST['password']);
-
     $inscrire = inscrireClient($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['password']);
 
     if ($inscrire) {

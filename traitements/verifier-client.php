@@ -42,8 +42,9 @@ LIMIT 1;
  * Si l'identifiant et le mot de passe sont corrects, la fonction retourne les infos du client, sinon elle retourne false.
  * @param $email : Adresse e-mail du client
  * @param $motdepasse : Mot de passe du client
+ * @return array|false
  */
-function verifierClient ($email, $motdepasse) {
+function verifierClient ($email, $motdepasse): array|false {
   // Connexion à la base de données
   $link = dbConnect();
 
@@ -51,7 +52,7 @@ function verifierClient ($email, $motdepasse) {
   $resultArrayInfos = NULL;
 
   // Préparation de la requête
-  if ( preg_match(REGEX_EMAIL, $email) and preg_match(REGEX_MOTDEPASSE, $motdepasse) ) {
+  if ( filter_var($email, FILTER_VALIDATE_EMAIL) and preg_match(REGEX_MOTDEPASSE, $motdepasse) ) {
     // Recherche si l'adresse e-mail est connue
 
     $stmtRecherche = $link->prepare(RECHERCHE_CLIENT);

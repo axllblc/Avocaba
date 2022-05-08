@@ -44,7 +44,7 @@ VALUES (?, ?, ?, ?);
  * @param $prenom
  * @param $email
  * @param $motDePasse
- * @return bool
+ * @return bool true si le client a été inscrit, false en cas d'échec
  */
 function inscrireClient ($nom, $prenom, $email, $motDePasse): bool {
   $link = dbConnect();
@@ -52,7 +52,7 @@ function inscrireClient ($nom, $prenom, $email, $motDePasse): bool {
   $result = NULL;
 
   // Préparation de la requête
-  if ( preg_match(REGEX_EMAIL, $email) and preg_match(REGEX_MOTDEPASSE, $motDePasse)
+  if ( filter_var($email, FILTER_VALIDATE_EMAIL) and preg_match(REGEX_MOTDEPASSE, $motDePasse)
   and preg_match(REGEX_NOM, $nom) and preg_match(REGEX_NOM, $prenom) and emailAbsente($email)) {
 
     $stmt = $link->prepare(INSCRIRE_CLIENT);
@@ -82,12 +82,11 @@ function inscrireClient ($nom, $prenom, $email, $motDePasse): bool {
   return false;
 }
 
-// TODO : Documenter la fonction ci-dessous : dans quels cas renvoie-t-elle true ou false ?
 
 /**
  * Vérifier la présence ou non d'une adresse e-mail dans la base de données.
  * @param string $email Email à vérifier
- * @return bool true si l'email est absente de la base de donnée, false sinon
+ * @return bool true si l'email est absent de la base de donnée, false sinon
  */
 function emailAbsente (string $email): bool {
   $link = dbConnect();
@@ -95,7 +94,7 @@ function emailAbsente (string $email): bool {
   $result = NULL;
 
   // Préparation de la requête
-  if ( preg_match(REGEX_EMAIL, $email) ) {
+  if ( filter_var($email, FILTER_VALIDATE_EMAIL) ) {
 
     $stmt = $link->prepare(EMAIL_EXISTE);
     checkError($stmt, $link);
