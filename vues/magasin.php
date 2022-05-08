@@ -83,7 +83,7 @@ if ( !isset($_SESSION['Depot']) ) {
   <address class="magasin__adresse">
     <?php echo $_SESSION['Depot']['Adresse'] . ', ' . $_SESSION['Depot']['CodePostal'] . ' ' . $_SESSION['Depot']['Ville'] ?>
   </address>
-  <a class="magasin__switch" href="/avocaba" title="Sélectionner un autre magasin">Changer de magasin</a>
+  <a class="magasin__switch btn btn--white" href="/avocaba" title="Sélectionner un autre magasin">Changer de magasin</a>
 </div>
 
 <main>
@@ -91,7 +91,7 @@ if ( !isset($_SESSION['Depot']) ) {
 
   <div class="rayons">
     <h2>Rayons</h2>
-    <?php htmlListeRayons($_SESSION['Depot']['IdDepot']); // TODO : Améliorer le CSS ?>
+    <?php htmlListeRayons($_SESSION['Depot']['IdDepot']); ?>
   </div>
 </main>
 

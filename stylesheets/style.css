@@ -35,6 +35,45 @@ a:hover {
 }
 
 
+/* Boutons */
+
+.btn {
+  cursor: pointer;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  border: 2px solid gainsboro;
+  color: #404040;
+  text-decoration: none;
+  font-size: 0.9em;
+  transition-property: background-color, border-color;
+  transition-duration: 250ms;
+  display: block;
+}
+
+.btn:hover {
+  color: #404040;
+  background-color: #b0ffe0;
+  border-color: mediumspringgreen;
+}
+
+.btn--filled {
+  background-color: mediumspringgreen;
+  border-color: #00e08b;
+}
+
+.btn--white {
+  color: white;
+  border-color: white;
+  background-color: transparent;
+}
+
+.btn--white:hover {
+  color: white;
+  border-color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
 /* Tuiles */
 
 .tile {
@@ -74,17 +113,8 @@ a:hover {
   color: black;
 }
 
-/* Provisoire */
 .landing__btn {
-  border: 2px solid black;
-  color: black;
-  text-decoration: none;
-}
-
-/* Provisoire */
-.landing__btn--white {
-  border-color: white;
-  color: white;
+  padding: 10px 20px;
 }
 
 /* Provisoire */
@@ -120,14 +150,6 @@ a:hover {
 
 .resultats-magasins__nom {
   font-weight: bold;
-}
-
-/* Provisoire */
-.magasin__switch {
-  border: 2px solid white;
-  padding: 7.5px;
-  color: white;
-  text-decoration: none;
 }
 
 
@@ -233,15 +255,8 @@ a.ls-articles__item-content {
   border-radius: 5px;
 }
 
-.panier__valider_panier{
-  border: 1px solid black;
-  padding: 4px;
-  background-color: lightgray;
-  text-decoration: none;
-  color: black;
-}
+/* Sélecteur de quantité */
 
-  /* Sélecteur de quantité */
 input.selection-qte__set {
   font-size: 1em;
   font-weight: bold;

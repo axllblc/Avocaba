@@ -53,7 +53,7 @@ if ( !empty($_GET['recherche']) ) {
 <div class="landing">
   <header class="landing__header">
     <div class="landing__header__logo">Logo Avocaba</div>
-    <a class="landing__header__connexion landing__btn landing__btn--white" href="/avocaba/vues/espace-client/account.php">Se connecter</a>
+    <a class="landing__header__connexion btn btn--white" href="/avocaba/vues/espace-client/account.php">Se connecter</a>
   </header>
 
   <div class="landing__haut">
@@ -89,20 +89,20 @@ if ( !empty($_GET['recherche']) ) {
   <div class="landing__milieu">
     <h2>Commandez vos produits régionaux, où vous voulez, quand vous voulez !</h2>
     <p>Avocaba est le premier <em>click-and-collect</em> en circuit-court. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores, quae architecto? Modi sed inventore magni esse, at dignissimos consectetur quasi perspiciatis atque dolore omnis. Cumque officia delectus nisi nam. Perspiciatis!</p>
-    <a href="/avocaba/vues/a-propos" class="landing__btn">En savoir plus</a>
+    <a href="/avocaba/vues/a-propos" class="landing__btn btn btn--filled">En savoir plus</a>
 
     <h2>Comment ça marche ?</h2>
     <div class="landing__fonctionnement">Infographie</div>
-    <a href="/avocaba/vues/a-propos" class="landing__btn">En savoir plus</a>
+    <a href="/avocaba/vues/a-propos" class="landing__btn btn">En savoir plus</a>
 
     <h2>Pourquoi Avocaba ?</h2>
     <div class="landing__avantages">Infographie</div>
-    <a href="/avocaba/vues/a-propos/engagements" class="landing__btn">Découvrez nos engagements</a>
+    <a href="/avocaba/vues/a-propos/engagements" class="landing__btn btn">Découvrez nos engagements</a>
   </div>
 
   <div class="landing__bas">
     <p>Avocaba, votre marché 100% local</p>
-    <a href="#" class="landing__btn landing__btn--white">Haut de page</a>
+    <a href="#" class="landing__btn btn btn--white">Haut de page</a>
   </div>
 </div>
 

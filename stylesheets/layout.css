@@ -9,6 +9,14 @@ main {
 }
 
 
+/* Boutons */
+
+.btn {
+  padding: 5px 10px;
+  text-align: center;
+}
+
+
 /* Section de navigation */
 
 nav {
@@ -200,16 +208,9 @@ nav {
   padding: 25px;
 }
 
-/* Provisoire */
 .landing__btn {
-  display: block;
-  padding: 10px;
-}
-
-/* Provisoire */
-.landing__milieu .landing__btn, .landing__bas .landing__btn {
+  max-width: 250px;
   margin: auto;
-  width: 250px;
 }
 
 /* Provisoire */
