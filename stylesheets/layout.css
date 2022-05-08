@@ -727,6 +727,12 @@ input.selection-qte__set {
   gap: 10px;
 }
 
+.fournisseur__photo-profil {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 @media screen and (min-width: 768px) {
   .fournisseur__en-tete {
     height: 400px;
@@ -740,9 +746,6 @@ input.selection-qte__set {
 
   .fournisseur__photo-profil {
     grid-area: 2 / 2 / 5 / 3;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
   }
 
   .fournisseur__nom {
