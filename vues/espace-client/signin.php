@@ -56,12 +56,13 @@ if ( !empty($_POST['email']) and !empty($_POST['password']) ) {
       Adresse email
       <input type="email" name="email" id="email"
              value="<?= !empty($_POST['email']) ? $_POST['email'] : '' ?>"
-             required>
+             autocomplete="email" required>
     </label>
     <label>
       Mot de passe
       <input type="password" name="password" id="password"
-             minlength="8" maxlength="16" pattern="([0-9a-zA-Z._#-]){8,16}" required>
+             minlength="8" maxlength="16" pattern="([0-9a-zA-Z._#-]){8,16}" 
+             autocomplete="current-password" required>
       <a href="reset-password.php" title="Réinitialiser votre mot de passe">
         J'ai oublié mon mot de passe
       </a>
