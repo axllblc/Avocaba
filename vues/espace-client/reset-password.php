@@ -11,6 +11,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
  * Script principal *
  ********************/
 
+// Si l'utilisateur est déjà connecté, il est redirigé vers la page où il se trouvait
+if ( !empty($_SESSION['Client']) ) {
+  header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/avocaba/') );
+  exit;
+}
+
 $done = false;
 if (isset($_POST['email'])) {
   if (preg_match('/^[a-zA-Z1-9-.]+@[a-zA-Z1-9-]+\.[a-zA-Z]{2,6}$/', $_POST['email'])) {

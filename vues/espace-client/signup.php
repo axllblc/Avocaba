@@ -15,6 +15,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/inscription-clien
 // * Script principal *
 // ********************
 
+// Si l'utilisateur est déjà connecté, il est redirigé vers la page où il se trouvait
+if ( !empty($_SESSION['Client']) ) {
+  header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/avocaba/') );
+  exit;
+}
+
 // Inscription client : Réception de données
 
 if ( !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passwordBis'])

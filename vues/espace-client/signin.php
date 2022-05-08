@@ -16,6 +16,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/verifier-client.p
 
 session_start();
 
+// Si l'utilisateur est déjà connecté, il est redirigé vers la page où il se trouvait
+if ( !empty($_SESSION['Client']) ) {
+  header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? '/avocaba/') );
+  exit;
+}
+
 // Recherche de l'utilisateur : Réception de données
 if ( !empty($_POST['email']) and !empty($_POST['password']) ) {
   // On vérifie que le client est dans la base de données
