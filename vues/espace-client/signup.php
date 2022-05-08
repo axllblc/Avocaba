@@ -66,18 +66,18 @@ if ( !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['pas
       Prénom
       <input type="text" name="prenom" id="prenom"
              minlength="2" maxlength="30" pattern="[a-zA-Z\s\-àáâäæèéêëìíîïòóôöøœùúûüÀÁÂÄÆÈÉÊËÌÍÎÏÒÓÔÖØŒÙÚÛÜ]{2,30}"
-             autocomplete="given-name" required>
+             autocomplete="given-name" required value="<?= $_POST['prenom'] ?? '' ?>">
     </label>
     <label>
       Nom
       <input type="text" name="nom" id="nom"
              minlength="2" maxlength="30" pattern="[a-zA-Z\s\-àáâäæèéêëìíîïòóôöøœùúûüÀÁÂÄÆÈÉÊËÌÍÎÏÒÓÔÖØŒÙÚÛÜ]{2,30}"
-             autocomplete="family-name" required>
+             autocomplete="family-name" required value="<?= $_POST['nom'] ?? '' ?>">
     </label>
     <label>
       Adresse email
       <input type="email" name="email" id="email" 
-             autocomplete="email" required>
+             autocomplete="email" required value="<?= $_POST['email'] ?? '' ?>">
     </label>
     <label>
       Mot de passe
