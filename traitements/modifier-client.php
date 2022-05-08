@@ -48,7 +48,7 @@ function modifierClient ($idClient, $emailActuel, $motDePasseActuel, $nom, $pren
   $result = NULL;
 
   // Préparation de la requête :
-  if ( preg_match(REGEX_EMAIL, $emailActuel) and preg_match(REGEX_MOTDEPASSE, $motDePasseActuel)
+  if ( filter_var_array($emailActuel, FILTER_VALIDATE_EMAIL) and preg_match(REGEX_MOTDEPASSE, $motDePasseActuel)
        and preg_match(REGEX_NOM, $nom) and preg_match(REGEX_NOM, $prenom) and filter_var($email, FILTER_VALIDATE_EMAIL)
        and $motDePasse1 == $motDePasse2 and (preg_match(REGEX_MOTDEPASSE, $motDePasse2) or $motDePasse1 == "")
   ) {

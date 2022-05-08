@@ -11,7 +11,6 @@ require_once 'misc.inc.php';
 
 // Expressions régulières
 
-const REGEX_EMAIL = '/^[a-zA-Z1-9-\.]+@[a-zA-Z1-9-]+\.[a-zA-Z]{2,6}$/';
 const REGEX_MOTDEPASSE = '/^([0-9a-zA-Z._#-]){8,16}$/';
 
 
