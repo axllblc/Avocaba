@@ -80,15 +80,15 @@ $section = $_GET['btClient'] ?? '';
     <h1 class="client__titre">Mon compte</h1>
     <form class="client__onglet" action="account.php" method="GET">
       <button id="client__bt-general"
-              class="<?= ($section === 'accueil' || $section === '')  ? 'client__bt-selection' : '' ?>"
+              class="btn <?= ($section === 'accueil' || $section === '')  ? 'btn--filled' : '' ?>"
               type="submit" name="btClient" value="accueil">Général</button>
       <button id="client__bt-commandes"
-              class="<?= $section === 'commandes' ? 'client__bt-selection' : '' ?>"
+              class="btn <?= $section === 'commandes' ? 'btn--filled' : '' ?>"
               type="submit" name="btClient" value="commandes">Mes commandes</button>
       <button id="client__bt-info-perso"
-              class="<?= $section === 'infos' ? 'client__bt-selection' : '' ?>"
+              class="btn <?= $section === 'infos' ? 'btn--filled' : '' ?>"
               type="submit" name="btClient" value="infos">Mes informations personnelles</button>
-      <button id="client__bt-deconnexion" type="submit" name="btClient" value="deco">Déconnexion</button>
+      <button id="client__bt-deconnexion" class="btn" type="submit" name="btClient" value="deco">Déconnexion</button>
     </form>
     <div class="client__affichage">
       <?php affichage(); ?>

@@ -64,7 +64,7 @@ else{
     </label>
     <label for="email">
       Adresse email
-      <input <?php if(!$edit) echo 'disabled="disabled"'; ?> type="text" size="50" name="email" id="email"  pattern="^[a-zA-Z1-9-\.]+@[a-zA-Z1-9-]+\.[a-zA-Z]{2,6}$" value="<?php if(isset($_SESSION['Client']['Email'])) echo $_SESSION['Client']['Email']; ?>">
+      <input <?php if(!$edit) echo 'disabled="disabled"'; ?> type="email" size="50" name="email" id="email" value="<?php if(isset($_SESSION['Client']['Email'])) echo $_SESSION['Client']['Email']; ?>">
     </label>
     <label for="motdepasse1">
       <?php echo $edit ? 'Nouveau mot de passe' : 'Mot de passe'; ?>
@@ -81,9 +81,9 @@ else{
       <input type="password" size="30" minlength="8" maxlength="16" name="motdepasseActuel" id="motdepasseActuel"  pattern="([0-9a-zA-Z._#-]){8,16}" value="" required>
     </label>
     ';
-    if(isset($message)) echo "<p><strong>$message</strong></p>";?>
+    if (isset($message)) echo "<p><strong>$message</strong></p>";?>
 
-    <input type="submit" value="Modifier mes informations" name=" <?php if($edit) echo 'rempli'; else echo 'aRemplir'; ?>">
+    <input class="btn" type="submit" value="Modifier mes informations" name="<?php if($edit) echo 'rempli'; else echo 'aRemplir'; ?>">
 
   </form>
 </div>
