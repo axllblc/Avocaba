@@ -9,6 +9,10 @@ main {
   margin: 25px;
 }
 
+.feedback {
+  padding: 10px;
+}
+
 
 /* Boutons */
 
@@ -1094,10 +1098,6 @@ input.selection-qte__set {
 
 .authentification__form h1 {
   margin: 0 auto;
-}
-
-.authentification__err {
-  padding: 10px;
 }
 
 .authentification__form label {

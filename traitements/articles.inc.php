@@ -15,7 +15,7 @@ require_once 'misc.inc.php';
 
 // Expressions régulières
 
-const REGEX_NOM = '/^[\dA-Za-z\s]{2,30}$/';
+const REGEX_NOM = '/^[a-zA-Z\s\-àáâäæèéêëìíîïòóôöøœùúûüÀÁÂÄÆÈÉÊËÌÍÎÏÒÓÔÖØŒÙÚÛÜ]{2,30}$/';
 const REGEX_ID = '/^[\d]{1,15}$/';
 
 

@@ -9,6 +9,12 @@
   background-color: rgba(0, 250, 154, 0.5);
 }
 
+.feedback {
+  background-color: lightgoldenrodyellow;
+  border: solid 2px gold;
+  border-radius: 5px;
+}
+
 
 /* Section de navigation */
 
@@ -355,12 +361,6 @@ input.selection-qte__set {
 
 .authentification__form small {
   color: grey;
-}
-
-.authentification__err {
-  background-color: lightgoldenrodyellow;
-  border: solid 2px gold;
-  border-radius: 5px;
 }
 
 @media screen and (min-width: 426px) and (min-height: 500px) {

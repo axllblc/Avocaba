@@ -50,7 +50,7 @@ if ( !empty($_POST['email']) and !empty($_POST['password']) ) {
 
     <h1 id="authentification__titre">Connexion</h1>
 
-    <?= !empty($message) ? "<div class='authentification__err'>$message</div>" : '' ?>
+    <?= !empty($message) ? "<div class='feedback'>$message</div>" : '' ?>
 
     <label>
       Adresse email
@@ -61,7 +61,7 @@ if ( !empty($_POST['email']) and !empty($_POST['password']) ) {
     <label>
       Mot de passe
       <input type="password" name="password" id="password"
-             minlength="8" maxlength="16" pattern="([0-9a-zA-Z._#-]){8,16}" 
+             minlength="8" maxlength="16" pattern="([0-9a-zA-Z._#-]){8,16}"
              autocomplete="current-password" required>
       <a href="reset-password.php" title="Réinitialiser votre mot de passe">
         J'ai oublié mon mot de passe

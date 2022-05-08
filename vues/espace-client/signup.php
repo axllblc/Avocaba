@@ -60,18 +60,18 @@ if ( !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['pas
 
     <h1 id="authentification__titre">Créer votre compte</h1>
 
-    <?= !empty($message) ? "<div class='authentification__err'>$message</div>" : '' ?>
+    <?= !empty($message) ? "<div class='feedback'>$message</div>" : '' ?>
 
     <label>
       Prénom
       <input type="text" name="prenom" id="prenom"
-             minlength="2" maxlength="30" pattern="[a-zA-Z -]{2,30}" 
+             minlength="2" maxlength="30" pattern="[a-zA-Z\s\-àáâäæèéêëìíîïòóôöøœùúûüÀÁÂÄÆÈÉÊËÌÍÎÏÒÓÔÖØŒÙÚÛÜ]{2,30}"
              autocomplete="given-name" required>
     </label>
     <label>
       Nom
       <input type="text" name="nom" id="nom"
-             minlength="2" maxlength="30" pattern="[a-zA-Z -]{2,30}" 
+             minlength="2" maxlength="30" pattern="[a-zA-Z\s\-àáâäæèéêëìíîïòóôöøœùúûüÀÁÂÄÆÈÉÊËÌÍÎÏÒÓÔÖØŒÙÚÛÜ]{2,30}"
              autocomplete="family-name" required>
     </label>
     <label>

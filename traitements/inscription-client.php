@@ -14,7 +14,7 @@ require_once 'verifier-client.php';
 
 // Expressions régulières (email et mot de passe déjà définie dans connexion client)
 
-const REGEX_NOM = "/^[a-zA-Z\s-]{2,30}$/";
+const REGEX_NOM = "/^[a-zA-Z\s\-àáâäæèéêëìíîïòóôöøœùúûüÀÁÂÄÆÈÉÊËÌÍÎÏÒÓÔÖØŒÙÚÛÜ]{2,30}$/";
 
 
 // Requêtes à préparer
