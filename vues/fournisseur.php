@@ -204,8 +204,8 @@ $siteWeb = $fournisseur->getSite();
             $article = rechercherArticle($articles_phares[$i], 'idArticle')[0];
             $i++;
           ?>
-          <li class="fournisseur__cellule">
-            <a href="/avocaba/vues/article.php?IdArticle=<?php echo $articles_phares[$i]; ?>">
+          <li class="fournisseur__cellule tile">
+            <a href="/avocaba/vues/article.php?IdArticle=<?php echo $article['IdArticle'] ?>">
               <img class="fournisseur__photo" 
                   src="<?= !empty($article['PhotoVignette']) ? $article['PhotoVignette'] : '/avocaba/img/article-placeholder.png' ?>" 
                   alt="<?php echo $article['Nom']; ?> - <?php echo $nom; ?>">
@@ -241,8 +241,8 @@ $siteWeb = $fournisseur->getSite();
               $fournisseur_proche = new Fournisseur($producteurs_proches[$i]);
               $i++;
             ?>
-            <li class="fournisseur__cellule">
-              <a href="/avocaba/vues/fournisseur.php?siret=<?php echo $producteurs_proches[$i]; ?>">
+            <li class="fournisseur__cellule tile">
+              <a href="/avocaba/vues/fournisseur.php?siret=<?php echo $fournisseur_proche->getSiret(); ?>">
                 <img class="fournisseur__photo" 
                     src="<?= !empty($photoProfil) ? $photoProfil : '/avocaba/img/farmer.png' ?>" 
                     alt="producteur proche de chez moi - <?php echo $fournisseur_proche->getNom(); ?>">

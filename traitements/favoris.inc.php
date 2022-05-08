@@ -175,7 +175,7 @@ function actionsFavoris(String $table, String|int $idClient, String|int $idFavor
   $present = estPresentFavoris($table, $idClient, $idFavoris, $link);
   if ($present && $table == 'articles')
     $stmt = $link->prepare(ARTICLE_SUPPRIMER_FAVORIS);
-  elseif ($present && $table == 'fournisseur')
+  elseif ($present && $table == 'fournisseurs')
     $stmt = $link->prepare(PRODUCTEUR_SUPPRIMER_FAVORIS);
   elseif (!$present && $table == 'articles')
     $stmt = $link->prepare(ARTICLE_AJOUTER_FAVORIS);
