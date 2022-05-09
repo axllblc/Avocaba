@@ -4,7 +4,7 @@
 
 // TODO : ajouter le lien vers la page de résultats
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/liste-rayons.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/rayons.inc.php';
 
 /**
  * Afficher la liste des rayons du magasin.

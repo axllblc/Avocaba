@@ -7,7 +7,7 @@
 error_reporting(E_ALL);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/nom-rayon.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/rayons.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/magasin.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/misc.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
