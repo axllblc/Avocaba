@@ -316,13 +316,10 @@ input.selection-qte__set {
   text-align: justify;
 }
 
-.fournisseur__cellule {
-  border: solid gray 1px ;
+.fournisseur__nom-producteur-proche, .fournisseur__nom-produits-phares {
+  font-weight: bold;
 }
 
-.fournisseur__etiquette {
-  border-top: solid gray 1px;
-}
 
 
 /* ⬇️ Pied de page du site */
