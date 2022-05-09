@@ -64,17 +64,17 @@ $siteWeb = $fournisseur->getSite();
             <?php if (!empty($fournisseur->getFacebook())) { ?>
             <a href="https://www.facebook.com/<?php echo $fournisseur->getFacebook(); ?>" 
                title="lien vers facebook - <?php echo $nom; ?>">
-              <img src="/avocaba/img/reseaux/facebook.svg" alt="logo de facebook">
+              <img src="/avocaba/img/reseaux/facebook.svg" alt="logo de facebook" height="40">
             </a>
             <?php } if (!empty($fournisseur->getTwitter())) { ?>
             <a href="https://twitter.com/<?php echo $fournisseur->getTwitter(); ?>" 
                title="lien vers twitter - <?php echo $nom; ?>">
-              <img src="/avocaba/img/reseaux/twitter.svg" alt="logo de twitter">
+              <img src="/avocaba/img/reseaux/twitter.svg" alt="logo de twitter" height="40">
             </a>
             <?php } if (!empty($fournisseur->getInstagram())) { ?>
             <a href="https://www.instagram.com/<?php echo $fournisseur->getInstagram(); ?>" 
                title="lien vers instagram - <?php echo $nom; ?>">
-              <img src="/avocaba/img/reseaux/instagram.svg" alt="logo de instagram">
+              <img src="/avocaba/img/reseaux/instagram.svg" alt="logo de instagram" height="40">
             </a>
             <?php } ?>
           </div>
