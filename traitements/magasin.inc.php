@@ -45,7 +45,7 @@ const RECHERCHE_DEPOT_VILLE = '
 SELECT d.`IdDepot`, d.`Nom`, d.`Adresse`, v.`Nom` AS `Ville`, v.`CodePos` AS `CodePostal`
 FROM DEPOTS AS d
 INNER JOIN VILLES AS v USING (`IdVille`)
-WHERE v.`Slug` LIKE ?
+WHERE v.`Slug` LIKE ? OR d.Nom LIKE CONCAT(\'Avocaba \', ?)
 LIMIT 10;
 ';
 
@@ -125,7 +125,7 @@ function rechercherMagasin (string|int $query, bool $id = false): array {
       $stmt = $link->prepare(RECHERCHE_DEPOT_VILLE);
       checkError($stmt, $link);
 
-      $status = $stmt->bind_param('s', $slug);
+      $status = $stmt->bind_param('ss', $slug, $slug);
 
     }
 
