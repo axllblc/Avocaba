@@ -11,10 +11,10 @@
  * @return void
  */
 function htmlHeader (bool $magasin = false, string $query = ''): void { ?>
-  <header class="header-magasin">
+  <header class="header-magasin" title="Avocaba – Accueil">
     <a class="header__logo"
        href="<?= $magasin ? '/avocaba/vues/magasin.php' : '/avocaba' ?>">
-      <img src="/avocaba/img/avocaba.svg" alt="Avocaba" title="Avocaba">
+      <img src="/avocaba/img/avocaba.svg" alt="Avocaba">
     </a>
 
     <a class="header__btn header__rayons"
