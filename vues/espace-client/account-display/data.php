@@ -4,7 +4,7 @@
 
 error_reporting(0);
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/modifier-client.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/client.inc.php';
 
 
 
