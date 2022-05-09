@@ -10,14 +10,43 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/date.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/commandes-client.php';
 
 
+
 // **************
 // * Constantes *
 // **************
 
-const REGEX_NOM_PRENOM = '/^([A-Za-z\']{3,25}\s+[A-Za-z\']{3,25})$/';
-const REGEX_CVV = '/^[\d]{3,4}$/';
-const REGEX_DATE = '/^[\d]{4}$/';
-const REGEX_NUMERO = '/^([0-9]{4}\s){3}[0-9]{4}$/';
+const REGEX_NOM_PRENOM = '/^[A-Za-z\s\-\']{3,25}\s+[A-Za-z\s\-\']{3,25}$/';
+const REGEX_CVV = '/^\d{3,4}$/';
+const REGEX_DATE = '/^\d{4}$/';
+const REGEX_NUMERO = '/^(\d{4}\s){3}[0-9]{4}$/';
+
+
+
+// *************
+// * Fonctions *
+// *************
+
+/**
+ * Vérifier que la date d'expiration de carte est valide et n'est pas dépassée.
+ * @param string $dateExp Chaîne de caractères représentant la date d'expiration au format <code>MMAA</code>
+ * @return bool Booléen indiquant la validité ou non de la date d'expiration.
+ */
+function verifierDateExp (string $dateExp): bool {
+  if ( preg_match(REGEX_DATE, $dateExp) ) {
+    $mois  = intval(substr($dateExp, 0, 2));
+    $annee = intval(substr($dateExp, 2, 2));
+
+    $date = getdate();
+    $moisCourant   = $date['mon'];
+    $anneeCourante = intval(substr($date['year'], 2, 2));
+
+    if (  ($mois > 0) && ($mois <= 12) &&
+          ( ($annee > $anneeCourante) || ($annee === $anneeCourante && $mois >= $moisCourant) )  )
+      return true;
+  }
+
+  return false;
+}
 
 
 
@@ -44,14 +73,11 @@ elseif (isset($_SESSION['Panier']) and count($_SESSION['Panier']['IdArticle']) >
   //  depuis le panier (où il a dû choisir une date de retrait)
   $_SESSION['Panier']['Verrouillage'] = true;
   $panier = $_SESSION['Panier'];
-
-  $date = explode('-', $_POST['choix_jour']);
-  $heureDebut = $_POST['choix_heure'];
 }
 elseif (isset($_POST['payer'])) {
   // Cas où le client vient de remplir le formulaire de paiement
   if ( isset($_POST['choix_jour']) && isset($_POST['choix_heure']) && preg_match(REGEX_NOM_PRENOM, $_POST['nom'])
-       && preg_match(REGEX_NUMERO, $_POST['no']) && preg_match(REGEX_DATE, $_POST['cardExpiration'])
+       && preg_match(REGEX_NUMERO, $_POST['no']) && verifierDateExp($_POST['cardExpiration'])
        && preg_match(REGEX_CVV, $_POST['cvv']) ) {
 
     // Si les informations renseignées sont correctes, on valide sa commande
@@ -81,6 +107,9 @@ else{
   exit;
 }
 
+$date = explode('-', $_POST['choix_jour']);
+$heureDebut = $_POST['choix_heure'];
+
 ?>
 
 <!DOCTYPE html>
@@ -103,9 +132,8 @@ else{
       <div class="paiement__main">
         <h2>Informations de paiement</h2>
 
-        <?= !empty($feedback) ? '<div class="feedback">' . $feedback . '</div>' : '' ?>
-
         <form class="paiement__form" action="paiement.php?" method="post">
+          <?= !empty($feedback) ? '<div class="feedback">' . $feedback . '</div>' : '' ?>
           <label>
             Nom du porteur
             <input type="text" id="nom" name="nom" title="Nom Prénom" pattern="([A-Za-z']{3,25}\s+[A-Za-z']{3,25})"
@@ -136,10 +164,10 @@ else{
 
       <div class="paiement__recapitulatif">
         <h2>Récapitulatif de la commande</h2>
-        <p>Retrait : <?php echo $date[2] . ' ' . MOIS[$date[1]] . ' ' . $date[0]; ?></p>
-        <p>Nombre d'articles : <span><?php echo nbArticles() ?></span></p>
-        <p>Montant total de la commande : <span><?php echo montantPanier() ?></span>€</p>
-        <p>Lieu de retrait : <span><?php echo $_SESSION['Depot']['Nom'] ?></span></p>
+        <p>Retrait : <b><?= $date[2] . ' ' . MOIS[$date[1]] . ' ' . $date[0] ?></b> à <b><?= $heureDebut ?>&nbsp;h</b></p>
+        <p>Nombre d'articles : <b><?= nbArticles() ?></b></p>
+        <p>Montant total de la commande : <b><?= montantPanier() ?>&nbsp;€</b></p>
+        <p>Lieu de retrait : <b><?= $_SESSION['Depot']['Nom'] ?></b></p>
       </div>
     </main>
 
