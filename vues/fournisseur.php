@@ -237,7 +237,7 @@ $siteWeb = $fournisseur->getSite();
             <?php
             $i = 0;
             while ($i < 4 && isset($producteurs_proches[$i])) {
-              // récupérer le fournisseur
+              // Récupérer le fournisseur
               $fournisseur_proche = new Fournisseur($producteurs_proches[$i]);
               $i++;
             ?>

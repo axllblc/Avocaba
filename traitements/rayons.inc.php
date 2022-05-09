@@ -75,7 +75,7 @@ function listeRayons (int $idMagasin): array {
 /**
  * Récupérer le nom du rayon d'après son identifiant.
  * @param int $idRayon L'identifiant du rayon
- * @return string|bool nom du rayon / false si non trouvé
+ * @return string|bool Nom du rayon / false si non trouvé
  */
 function nomRayon (int $idRayon): string|bool {
   // Connexion à la base de données

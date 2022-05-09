@@ -36,7 +36,7 @@ if (isset($_GET['recherche']) and strlen($_GET['recherche']) > 1) {
   }
   else {
     // Pas de magasin renseigné, l'utilisateur peut consulter tous les articles de Avocaba
-    $listeArticles = rechercherArticle($q, 'nomArticle', 'aucun');
+    $listeArticles = rechercherArticle($q, 'nomArticle');
   }
   if ($listeArticles != null) {
     $ok = true;
@@ -55,10 +55,10 @@ if( isset($_GET['rayon']) ){
       $listeArticles = rechercherArticle($idRayon, 'idRayon', $idDepot);
     }
     else {
-      // Pas de magasin renseigné, l'utilisateur peut consulter tout les articles de Avocaba
-      $listeArticles = rechercherArticle($idRayon, 'idRayon', 'aucun');
+      // Pas de magasin renseigné, l'utilisateur peut consulter tous les articles de Avocaba
+      $listeArticles = rechercherArticle($idRayon, 'idRayon');
     }
-    if ($listeArticles != null) {
+    if ( !empty($listeArticles) ) {
       $ok = true;
     }
 

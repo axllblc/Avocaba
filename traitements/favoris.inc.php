@@ -6,6 +6,12 @@ error_reporting(0);
 
 require_once 'db.inc.php';
 
+
+
+// **************
+// * Constantes *
+// **************
+
 // lien entre la table et sa clé primaire
 const TABLE_ID = Array('fournisseurs' => 'Siret', 'articles' => 'IdArticle');
 
@@ -60,13 +66,19 @@ const PRODUCTEUR_SUPPRIMER_FAVORIS = '
   AND Siret = ?;
 ';
 
+
+
+// *************
+// * Fonctions *
+// *************
+
 /**
- * Obtenir la liste des producteurs favoris du client
- * @param int|string @idClient identifiant du client
- * @return array liste des sirets des producteurs favoris
+ * Obtenir la liste des producteurs favoris du client.
+ * @param int|string $idClient Identifiant du client
+ * @return array Liste des SIRET des producteurs favoris
  */
 function getProducteursFavoris(int|String $idClient) : Array {
-  // connexion à la base de données
+  // Connexion à la base de données
   $link = dbConnect();
 
   // Préparation de la requête
@@ -94,13 +106,14 @@ function getProducteursFavoris(int|String $idClient) : Array {
   return $resultArray;
 }
 
+
 /**
- * Obtenir la listes des articles favoris du client
- * @param int|string indentifiant du client
- * @return array liste des articles ('IdArticle', 'NomArticle', 'Prix', 'PhotoVignette', 'SiretProducteur', 'NomProducteur')
+ * Obtenir la listes des articles favoris du client.
+ * @param int|string Identifiant du client
+ * @return array Liste des articles ('IdArticle', 'NomArticle', 'Prix', 'PhotoVignette', 'SiretProducteur', 'NomProducteur')
  */
 function getArticlesFavoris(int|String $idClient) : Array{
-  // connexion à la base de données
+  // Connexion à la base de données
   $link = dbConnect();
 
   // Préparation de la requête
@@ -126,16 +139,15 @@ function getArticlesFavoris(int|String $idClient) : Array{
 }
 
 
-
 /**
- * Regarder si un article ou un fournisseur est dans les favoris
+ * Regarder si un article ou un fournisseur est dans les favoris.
  * @param string $table "fournisseurs" ou "articles"
- * @param string|int $idClient identifiant du client
- * @param string|int $idFavoris siret du fournisseur ou identifiant de l'article en fonction de la table
- * @param mysqli $link objet de connexion à la base
+ * @param string|int $idClient Identifiant du client
+ * @param string|int $idFavoris SIRET du fournisseur ou identifiant de l'article en fonction de la table
+ * @return bool
  */
-function estPresentFavoris(String $table, String|int $idClient, String|int $idFavoris) {
-  // connexion à la base de données
+function estPresentFavoris(String $table, String|int $idClient, String|int $idFavoris): bool {
+  // Connexion à la base de données
   $link = dbConnect();
 
   // Préparation de la requête
@@ -164,18 +176,19 @@ function estPresentFavoris(String $table, String|int $idClient, String|int $idFa
   return !empty($resultArray);
 }
 
+
 /**
- * Suppression ou ajout d'un article ou d'un fournisseur en favoris
+ * Suppression ou ajout d'un article ou d'un fournisseur en favoris.
  * @param string $table "fournisseurs" ou "articles"
- * @param string|int $idClient identifiant du client
- * @param string|int $idFavoris siret du fournisseur ou identifiant de l'article en fonction de la table
+ * @param string|int $idClient Identifiant du client
+ * @param string|int $idFavoris SIRET du fournisseur ou identifiant de l'article en fonction de la table
  */
 function actionsFavoris(String $table, String|int $idClient, String|int $idFavoris) : void {
-  // connexion à la base de données
+  // Connexion à la base de données
   $link = dbConnect();
 
-  // requête d'ajout ou de suppression
-  $present = estPresentFavoris($table, $idClient, $idFavoris, $link);
+  // Requête d'ajout ou de suppression
+  $present = estPresentFavoris($table, $idClient, $idFavoris);
   if ($present && $table == 'articles')
     $stmt = $link->prepare(ARTICLE_SUPPRIMER_FAVORIS);
   elseif ($present && $table == 'fournisseurs')
@@ -196,4 +209,3 @@ function actionsFavoris(String $table, String|int $idClient, String|int $idFavor
   $stmt->close();
   $link->close();
 }
-?>

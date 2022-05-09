@@ -181,8 +181,8 @@ class Fournisseur {
   }
 
   /**
-   * Obtenir la liste des produits phares du fournisseur
-   * @return array liste des identifiants des produits phares
+   * Obtenir la liste des produits phares du fournisseur.
+   * @return array Liste des identifiants des produits phares
    */
   function produitsPhares() : array {
     // Connexion à la base de données
@@ -214,8 +214,8 @@ class Fournisseur {
   }
 
   /**
-   * Obtenir la liste des photos du fournisseur
-   * @return array liste des photos du fournisseur
+   * Obtenir la liste des photos du fournisseur.
+   * @return array Liste des photos du fournisseur
    */
   function photoFournisseur() : array {
     // Connexion à la base de données

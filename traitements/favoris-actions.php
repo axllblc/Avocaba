@@ -23,7 +23,7 @@ if(!isset($_SESSION['Client'])) {
 }
 
 // pour bien rediriger l'utilisateur après la mise en favoris
-$url = '../vues/mes-produits.php'; // par défault
+$url = '../vues/mes-produits.php'; // par défaut
 if(isset($_SERVER['HTTP_REFERER']))
   $url = $_SERVER['HTTP_REFERER'];
 
@@ -32,6 +32,6 @@ if (isset($_GET['table']) &&
     isset($_GET['id']))
   actionsFavoris($_GET['table'], $_SESSION['Client']['IdClient'], $_GET['id']);
 
-// redirection
+// Redirection
 header('Location: '.$url);
-?>
+exit;

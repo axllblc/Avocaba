@@ -13,7 +13,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/bloc-commande.php'
 // * Fonctions *
 // *************
 
-function recupNom () {
+function recupNom (): void {
   if ( isset($_SESSION['Client']['IdClient']) ){
     echo $_SESSION['Client']['Prenom'] . ' ' . $_SESSION['Client']['Nom'];
   }

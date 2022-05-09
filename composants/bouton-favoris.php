@@ -14,8 +14,8 @@ session_start();
  * @param int|string $idElement Siret ou IdArticle en fonction de $table
  */
 function boutonFavoris(String $table, int|String $idElement) : void { 
-  // si le client est connecté on regarde dans la base si l'élément est dans les favoris
-  $present = 0; // par défault false
+  // si le client est connecté, on regarde dans la base si l'élément est dans les favoris
+  $present = 0; // par défaut false
   if (isset($_SESSION['Client'])) {
     $present = estPresentFavoris($table, $_SESSION['Client']['IdClient'], $idElement);
   }

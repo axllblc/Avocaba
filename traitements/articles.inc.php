@@ -146,7 +146,7 @@ function rechercherArticle (string|int $critere, string $nature, string|int $idD
 
   $stmtDepot = $link->prepare(VARIABLE_DEPOT);
   $status = $stmtDepot->bind_param('s',$idDepot);
-  checkError($stmtDepot, $link);
+  checkError($status, $link);
 
   // Préparation de la requête
   switch ($nature) {

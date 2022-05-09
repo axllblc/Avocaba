@@ -29,7 +29,7 @@ WHERE v.IdVille = ?
 /**
  * Récupérer les informations de la ville d'après son identifiant.
  * @param int $idVille L'identifiant de la ville
- * @return array|bool informations sur la ville, false si non trouvé
+ * @return array|bool Informations sur la ville, false si non trouvé
  */
 function ville (int $idVille): array|bool {
   // Connexion à la base de données

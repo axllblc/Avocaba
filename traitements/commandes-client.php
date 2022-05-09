@@ -134,11 +134,11 @@ function rechercheCommandes ($IdClient, $nbComm): bool|array {
  }
 
  /**
-   * @param int : $IdArticle : identifiant de l'article
-   * @param int $IdCommande : identifiant de la commande
-   * @param int $Quantite : quantite de l'article dans la commande
+   * @param int $IdArticle Identifiant de l'article
+   * @param int $IdCommande Identifiant de la commande
+   * @param int $Quantite Quantité de l'article dans la commande
    */
- function ajouterArticleACommande ($IdArticle, $IdCommande, $Quantite): void {
+ function ajouterArticleACommande (int $IdArticle, int $IdCommande, int $Quantite): void {
    // Connexion à la base de données
    $link = dbConnect();
 

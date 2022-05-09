@@ -39,7 +39,7 @@ nav {
   margin: 25px 25px 0 25px;
   display: flex;
   flex-direction: row;
-  gap: 7.5px;
+  gap: 8px;
   align-items: center;
 }
 
@@ -99,7 +99,7 @@ nav {
 
 @media screen and (max-width: 425px) {
   .header-magasin {
-    gap: 12.5px;
+    gap: 12px;
   }
 }
 
@@ -318,6 +318,7 @@ nav {
   width: 250px;
   height: 200px;
   object-fit: contain;
+  display: block;
 }
 
 .annonce-accueil__droite {

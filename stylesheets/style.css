@@ -195,10 +195,6 @@ a:hover {
   border-radius: 5px;
 }
 
-.annonce-accueil__active {
-  background-color: #717171;
-}
-
 /* Animation */
 .annonce-accueil__fade {
   animation-name: annonce-accueil__fade;

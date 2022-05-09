@@ -46,7 +46,7 @@ if ( isset($_GET['IdArticle']) ) {
   // $v est la ville du fournisseur
   $v = ville($f->getIdVille());
 
-  // $dispo indique si l'article est peut être ajouté au panier du client
+  // $dispo indique si l'article peut être ajouté au panier du client
   $dispo = false;
 
 
@@ -55,19 +55,18 @@ if ( isset($_GET['IdArticle']) ) {
   // Adresse du fournisseur
   @$adresse = $f->getAdresse();
 
-  if(isset($_SESSION['Depot']['IdDepot'])){
+  if (isset($_SESSION['Depot']['IdDepot'])) {
     // On récupère le nom du magasin $magasin
     $magasin = rechercherMagasin($_SESSION['Depot']['IdDepot'], true)[0]['Nom'];
 
-      // On récupère les articles ) l'article similaires (même rayon et dispo dans le magasin)
+      // On récupère les articles similaires (même rayon et disponible dans le magasin)
       $listeArticles = array_slice(rechercherArticle($a['IdRayon'], 'idRayon', $_SESSION['Depot']['IdDepot']), 0, 4);
 
     // On vérifie si l'article est disponible dans le dépôt
     if( count(rechercherArticle($_GET['IdArticle'], "idArticle", $_SESSION['Depot']['IdDepot']))>0 ){
       $dispo = true;
     }
-  }
-  else{
+  } else {
     // On récupère les articles similaires (même rayon)
     $listeArticles = array_slice(rechercherArticle($a['IdRayon'], 'idRayon'), 0, 4);
   }
@@ -164,7 +163,7 @@ else {
         <address>
           <?= ( !empty($adresse) ? $adresse . ', ' : '' ) . $v['CodePos'] . ' ' . $v['Nom'] ?>
         </address>
-        <p><?= lineBreakChange($f->getDescription(), true) ?></p>
+        <p><?= lineBreakChange($f->getDescription()) ?></p>
         <a href="<?= '/avocaba/vues/fournisseur.php?siret=' . $f->getSiret() ?>">En savoir plus</a>
       </div>
     </div>

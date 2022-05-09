@@ -15,7 +15,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_qte-article.p
  * @param array $listeArticles Liste d'articles
  * @return void
  */
-function htmlListeArticles ($listeArticles): void {
+function htmlListeArticles (array $listeArticles): void {
 
   if ( count($listeArticles) > 0 ) {
     echo '<ul class="ls-articles">';

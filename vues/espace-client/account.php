@@ -18,12 +18,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
  * Afficher les différents blocs de l'espace client
  * @return void
  */
-function affichage () {
+function affichage (): void {
   if ( isset($_GET['btClient']) ) {
     // Cas où le client a actionné un bouton pour l'affichage d'un bloc spécifique sur son espace client
     $section = $_GET['btClient'];
-  }
-  else{
+  } else {
     // Cas où le client vient d'être redirigé vers son espace client
     $section = 'accueil';
   }

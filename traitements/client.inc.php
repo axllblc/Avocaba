@@ -30,14 +30,8 @@ WHERE c.`Email` = ?
 LIMIT 1;
 ';
 
-const RECUPERE_CLIENT = '
-SELECT c.IdClient, c.`Nom`, c.`Prenom`, c.`Email`, c.`IdDepot` AS DernierDepot
-FROM CLIENTS AS c
-WHERE c.`Email` = ?
-LIMIT 1;
-';
 
-  // Inscription
+// Inscription
 
 const EMAIL_EXISTE = '
 SELECT count(*) AS occurrence
