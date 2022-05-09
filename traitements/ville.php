@@ -1,6 +1,8 @@
 <?php
 
-/* 📂 Information de la ville (selon son identifiant)*/
+/* 🏙️ Information de la ville (selon son identifiant) */
+
+error_reporting(0);
 
 require_once 'db.inc.php';
 

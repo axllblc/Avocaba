@@ -1,7 +1,8 @@
 <?php
-/* Page appelée lors d'un click d'un "bouton" sur les pages articles, mes produits et fournisseur */
 
-error_reporting(E_ALL);
+/* ⭐ Page appelée lors d'un click d'un "bouton" sur les pages articles, mes produits et fournisseur */
+
+error_reporting(0);
 
 /** Url du type /avocaba/traitements/favoris-action.php?table=A&id=B
  * A = "fournisseurs" ou "articles"

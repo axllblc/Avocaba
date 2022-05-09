@@ -2,7 +2,7 @@
 
 /* 🧑‍🌾 Page d'un fournisseur */
 
-error_reporting(E_ALL);
+error_reporting(0);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/fournisseur.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';

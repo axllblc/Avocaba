@@ -2,6 +2,8 @@
 
 /* Recherche du client */
 
+error_reporting(0);
+
 require_once 'db.inc.php';
 require_once 'misc.inc.php';
 require_once 'verifier-client.php';
@@ -12,14 +14,12 @@ require_once 'verifier-client.php';
 // * Constantes *
 // **************
 
-// Expressions régulières (email et mot de passe déjà définie dans connexion client)
+// Expressions régulières (email et mot de passe déjà définies dans connexion client)
 
 const REGEX_NOM = "/^[a-zA-Z\s\-àáâäæèéêëìíîïòóôöøœùúûüÀÁÂÄÆÈÉÊËÌÍÎÏÒÓÔÖØŒÙÚÛÜ]{2,30}$/";
 
 
 // Requêtes à préparer
-
-// IdClient est en Auto-increment, donc on ne le renseigne pas
 
 const EMAIL_EXISTE = '
 SELECT count(*) AS occurrence

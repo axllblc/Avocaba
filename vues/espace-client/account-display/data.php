@@ -2,9 +2,7 @@
 
 /* Section des données personnelles l'espace client */
 
-// TODO: Finir l'aspect dynamique
-
-error_reporting(E_ALL);
+error_reporting(0);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/modifier-client.php';
 

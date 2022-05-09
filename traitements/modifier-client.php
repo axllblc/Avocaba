@@ -1,6 +1,8 @@
 <?php
 
-/* Recherche du client */
+/* Modification d'un client */
+
+error_reporting(0);
 
 require_once 'db.inc.php';
 require_once 'misc.inc.php';

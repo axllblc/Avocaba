@@ -2,6 +2,10 @@
 
 /* 🔒 Procédure de connexion au compte client */
 
+error_reporting(0);
+
+
+
 // *************
 // * Fonctions *
 // *************/

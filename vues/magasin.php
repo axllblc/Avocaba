@@ -2,7 +2,7 @@
 
 /* 🏠 Accueil du magasin */
 
-error_reporting(E_ALL);
+error_reporting(0);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/magasin.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';

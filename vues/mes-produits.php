@@ -1,7 +1,8 @@
 <?php
-/* Page des produits favoris */
 
-error_reporting(E_ALL);
+/* ⭐ Page des produits favoris */
+
+error_reporting(0);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/favoris.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/misc.inc.php';

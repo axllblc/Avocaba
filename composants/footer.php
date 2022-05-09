@@ -2,7 +2,7 @@
 
 /* ⬇️ Pied de page */
 
-// TODO Mettre à jour les liens
+error_reporting(0);
 
 /**
  * Afficher le pied-de-page du site

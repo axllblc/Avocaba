@@ -2,10 +2,14 @@
 
 /* Connexion à la base de données */
 
+error_reporting(0);
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/error.php';
 
 // Ne pas lever d'exception en cas d'erreur (comportement par défaut de PHP < 8.1)
 mysqli_report(MYSQLI_REPORT_OFF);
+
+
 
 /**
  * Se connecter à la base de données. Retourne un objet mysqli permettant de faire le lien avec la base de données.
@@ -20,6 +24,7 @@ function dbConnect (): bool|mysqli {
 
   return $link;
 }
+
 
 /**
  * Vérifier la présence d'erreurs.

@@ -1,8 +1,8 @@
 <?php
 
-/* Espace client (account page) */
+/* Espace client - Page de gestion du compte */
 
-error_reporting(E_ALL);
+error_reporting(0);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';

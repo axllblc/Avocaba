@@ -2,7 +2,7 @@
 
 /* Section principale de l'espace client */
 
-error_reporting(E_ALL);
+error_reporting(0);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/commandes-client.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/bloc-commande.php';

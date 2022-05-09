@@ -1,8 +1,19 @@
 <?php
 
+/* 🧑‍🌾 Traitements liés aux fournisseurs */
+
+error_reporting(0);
+
 require_once 'db.inc.php';
 
-// requêtes
+
+
+// **************
+// * Constantes *
+// **************
+
+// Requêtes à préparer
+
 const RECHERCHE_FOURNISSEUR = '
   SELECT * 
   FROM `fournisseurs` 
@@ -59,6 +70,11 @@ const DOMAINE_FOURNISSEUR = '
 ';
 
 
+
+// **********
+// * Classe *
+// **********
+
 class Fournisseur {
   private $_siret;
   private $_nom;
@@ -102,9 +118,9 @@ class Fournisseur {
     $stmt->close();
     $link->close();
 
-    // vérification des résultats
+    // Vérification des résultats
     if (count($resultArray) == 1) {
-      // affectation
+      // Affectation
       $this->_siret = $resultArray[0]['Siret'];
       $this->_nom = $resultArray[0]['Nom'];
       $this->_description = $resultArray[0]['Description'];
@@ -139,7 +155,7 @@ class Fournisseur {
   function getIdVille() {return $this->_idVille;}
 
   function getVille() {
-    // connexion à la base de données
+    // Connexion à la base de données
     $link = dbConnect();
 
     // Préparation de la requête
@@ -169,7 +185,7 @@ class Fournisseur {
    * @return array liste des identifiants des produits phares
    */
   function produitsPhares() : array {
-    // connexion à la base de données
+    // Connexion à la base de données
     $link = dbConnect();
 
     // Préparation de la requête
@@ -202,7 +218,7 @@ class Fournisseur {
    * @return array liste des photos du fournisseur
    */
   function photoFournisseur() : array {
-    // connexion à la base de données
+    // Connexion à la base de données
     $link = dbConnect();
 
     // Préparation de la requête
@@ -231,18 +247,18 @@ class Fournisseur {
   }
 
   /**
-   * Obtenir le nombre de fournisseur dans la base de données
-   * @return int nombre de fournisseur
+   * Obtenir le nombre de fournisseurs dans la base de données.
+   * @return int Nombre de fournisseurs.
    */
   static function nombreFournisseur() : int {
     $nombre = 0;
 
-    // connexion à la base de données
+    // Connexion à la base de données
     $link = dbConnect();
 
-    // réalisation de la requête
+    // Exécution de la requête
     if ($result = $link->query(NOMBRE_FOURNISSEUR)) {
-      // il y a forcément qu'une ligne obtenue
+      // Il n'y a forcément qu'une ligne obtenue
       $nombre = $result->fetch_array()[0];
       $result->free_result();
     }
@@ -252,11 +268,11 @@ class Fournisseur {
   }
 
   /**
-   * Obtenir la liste des autres producteurs dans la même ville TODO
-   * @return array liste des sirets des autres fournisseurs
+   * Obtenir la liste des autres producteurs dans la même ville.
+   * @return array Liste des SIRET des autres fournisseurs.
    */
   function producteursProches() : array {
-    // connexion à la base de données
+    // Connexion à la base de données
     $link = dbConnect();
 
     // Préparation de la requête
@@ -285,10 +301,10 @@ class Fournisseur {
   }
 
   /**
-   * Connaitre tous les dépots où le producteur se trouve
+   * Connaître tous les dépôts où le producteur se trouve.
    */
   function getDepot() : Array {
-    // connexion à la base de données
+    // Connexion à la base de données
     $link = dbConnect();
 
     // Préparation de la requête
@@ -314,12 +330,12 @@ class Fournisseur {
   }
 
   /**
-   * Obtenir la liste des fournisseurs présent sur le dépot
-   * @param int|string idDepot identifiant du dépot
-   * @return array liste des fournisseurs trouvés
+   * Obtenir la liste des fournisseurs présents sur le dépôt.
+   * @param int|string $idDepot Identifiant du dépôt.
+   * @return array Liste des fournisseurs trouvés.
    */
   static function fournisseurSurDepot(int|String $idDepot) : Array {
-    // connexion à la base de données
+    // Connexion à la base de données
     $link = dbConnect();
 
     // Préparation de la requête
@@ -348,11 +364,11 @@ class Fournisseur {
   }
 
   /**
-   * Obtenir la liste des noms des domaines du fournisseur
-   * @return array liste des domaines
+   * Obtenir la liste des noms des domaines du fournisseur.
+   * @return array Liste des domaines.
    */
   function getDomaines() : Array {
-    // connexion à la base de données
+    // Connexion à la base de données
     $link = dbConnect();
 
     // Préparation de la requête
@@ -380,4 +396,3 @@ class Fournisseur {
     return $resultArray;
   }
 }
-?>

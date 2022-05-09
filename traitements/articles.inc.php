@@ -1,8 +1,8 @@
 <?php
 
-// TODO: COLLATION pour recherche selon nom rayon
-
 /* Liste d'articles */
+
+error_reporting(0);
 
 require_once 'db.inc.php';
 require_once 'misc.inc.php';

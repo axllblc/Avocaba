@@ -2,6 +2,8 @@
 
 /* Fonctions diverses */
 
+error_reporting(0);
+
 /**
  * Transforme une chaîne de caractères en minuscules, remplace les caractères accentués et remplace les caractères non textuels par des espaces.
  */

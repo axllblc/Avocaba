@@ -1,5 +1,9 @@
 <?php
 
+/* En-tête du document HTML */
+
+error_reporting(0);
+
 /**
  * En-tête du document HTML.
  * @param string $title Titre de la page

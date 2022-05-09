@@ -1,6 +1,8 @@
 <?php
 
-/* Recherche de dépôts */
+/* Traitements liés aux dépôts */
+
+error_reporting(0);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/db.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/misc.inc.php';

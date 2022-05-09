@@ -2,8 +2,11 @@
 
 /* Recherche des commandes du client */
 
+error_reporting(0);
+
 require_once 'db.inc.php';
 require_once 'misc.inc.php';
+
 
 
 // **************
@@ -86,11 +89,11 @@ function rechercheCommandes ($IdClient, $nbComm): bool|array {
 }
 
 /**
- * Ajouter une commande à la base de donnée
+ * Ajouter une commande à la base de données
  * @param int : $IdClient : identifiant du client
  * @param int $IdDepot : identifiant du dépôt
  * @param string $DateRetrait : date et heure de retrait de la commande de type DATETIME dans une chaine de caractère
- * @return int|bool l'indentifiant associé à la commande si succès de la requête, false sinon
+ * @return int|bool l'identifiant associé à la commande si succès de la requête, false sinon
  */
  function ajouterCommande (int $IdClient, int $IdDepot, string $DateRetrait): int|bool {
    // Connexion à la base de données

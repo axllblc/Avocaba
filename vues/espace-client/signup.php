@@ -2,7 +2,7 @@
 
 /* 🔒 Page d'inscription (client) (sign-up page) */
 
-error_reporting(E_ALL);
+error_reporting(0);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/signin.inc.php';

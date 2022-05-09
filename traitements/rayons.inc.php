@@ -2,7 +2,11 @@
 
 /* 📂 Liste des rayons */
 
+error_reporting(0);
+
 require_once 'db.inc.php';
+
+
 
 // **************
 // * Constantes *

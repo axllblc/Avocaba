@@ -1,8 +1,8 @@
 <?php
 
-// TODO: Mieux afficher les images (régler la taille)
-
 /* 📂 Liste des articles */
+
+error_reporting(0);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/fournisseur.inc.php';

@@ -2,9 +2,7 @@
 
 /* 🧑‍🌾 Page de résultat de recherche d'articles */
 
-// TODO: Améliorer le rendu du résultat de la recherche : rendre la liste plus responsive, adapter la taille des images, implémenter les boutons d'ajout au panier, améliorer le rendu d'une tuile d'article
-
-error_reporting(E_ALL);
+error_reporting(0);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/rayons.inc.php';

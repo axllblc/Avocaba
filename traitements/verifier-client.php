@@ -1,9 +1,13 @@
 <?php
 
-/* Recherche du client */
+/* Vérification du client */
+
+error_reporting(0);
 
 require_once 'db.inc.php';
 require_once 'misc.inc.php';
+
+
 
 // **************
 // * Constantes *

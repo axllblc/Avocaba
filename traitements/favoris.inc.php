@@ -1,5 +1,8 @@
 <?php
-/* Fonctions en rapport avec les favoris (fournisseur et article) */
+
+/* ⭐ Gestion des favoris */
+
+error_reporting(0);
 
 require_once 'db.inc.php';
 

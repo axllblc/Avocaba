@@ -2,6 +2,8 @@
 
 /* 📣 Annonces sur la page d'accueil */
 
+error_reporting(0);
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/fournisseur.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/articles.inc.php';
 

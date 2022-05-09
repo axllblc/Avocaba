@@ -2,7 +2,7 @@
 
 /* 📂 Liste des rayons */
 
-// TODO : ajouter le lien vers la page de résultats
+error_reporting(0);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/rayons.inc.php';
 

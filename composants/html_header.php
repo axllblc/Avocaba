@@ -2,6 +2,8 @@
 
 /* ⬆️ En-tête des pages du magasin */
 
+error_reporting(0);
+
 /**
  * Afficher l'en-tête des pages du magasin.
  * @param bool $magasin Booléen indiquant si un clic sur le logo du site redirige vers l'accueil du magasin ou du site.
