@@ -1153,3 +1153,11 @@ label.authentification__row {
 #commande__bouton-commande{
   width: max-content;
 }
+
+
+
+/* ⚠️ Page d'erreur */
+.error {
+  text-align: center;
+  font-size: 1.5em;
+}

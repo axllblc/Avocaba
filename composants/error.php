@@ -43,14 +43,16 @@ function error (int $status, string $message = NULL): void {
   <html lang="fr">
   <?php htmlHead(); ?>
   <body>
-    <p>
-      <strong>Erreur <?php echo $status ?></strong>
-      <?php
-        echo $message ? '&nbsp;: ' . htmlspecialchars($message) : '';
-      ?>
-    </p>
+    <main class="error">
+      <p>
+        <strong>Erreur <?php echo $status ?></strong>
+        <?php
+          echo $message ? '&nbsp;: ' . htmlspecialchars($message) : '';
+        ?>
+      </p>
 
-    <a href="/avocaba">Revenir à l'accueil</a>
+      <a href="/avocaba">Revenir à l'accueil</a>
+    </main>
   </body>
   </html>
 
