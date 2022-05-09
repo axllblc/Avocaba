@@ -35,24 +35,6 @@ function annonceAccueil(string|int $depot) : void {
     <?php } ?>
   </div>
 
-  <script>
-    let slideIndex = 0;
-    showSlides();
-
-    function showSlides() {
-      let i;
-      let slides = document.getElementsByClassName("annonce-accueil__mySlides");
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-      slideIndex++;
-      if (slideIndex > slides.length) {slideIndex = 1}
-
-      slides[slideIndex-1].style.display = "block";
-      setTimeout(showSlides, 4000);
-    }
-  </script>
-
   <div class="annonce-accueil__droite">
     <h2 class="annonce-accueil__decouvrir">Venez découvrir <?php echo $fournisseur->getNom(); ?></h2>
     <p class="annonce-accueil__produits-phares">
@@ -83,5 +65,7 @@ function annonceAccueil(string|int $depot) : void {
   <div class="annonce-accueil__plus">
     <a href="/avocaba/vues/fournisseur.php?siret=<?php echo $fournisseur->getSiret(); ?>">En savoir plus</a>
   </div>
+
+  <script src="/avocaba/js/annonces.js"></script>
 </div>
 <?php } ?>
