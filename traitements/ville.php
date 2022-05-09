@@ -4,9 +4,11 @@
 
 require_once 'db.inc.php';
 
-/**************
- * Constantes *
- **************/
+
+
+// **************
+// * Constantes *
+// **************
 
 // Requête à préparer
 
@@ -18,9 +20,9 @@ WHERE v.IdVille = ?
 
 
 
-/*************
- * Fonctions *
- *************/
+// *************
+// * Fonctions *
+// *************
 
 /**
  * Récupérer les informations de la ville d'après son identifiant.

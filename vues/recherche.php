@@ -19,9 +19,9 @@ initialiserPanier();
 
 
 
-/********************
- * Script principal *
- ********************/
+// ********************
+// * Script principal *
+// ********************
 
 $ok = false;
 $q = "";

@@ -8,9 +8,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_header.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 
-/*************
- * Fonctions *
- *************/
+
+
+// *************
+// * Fonctions *
+// *************
 
 /**
  * Afficher les différents blocs de l'espace client
@@ -49,9 +51,11 @@ function affichage () {
     }
 }
 
-/********************
- * Script principal *
- ********************/
+
+
+// ********************
+// * Script principal *
+// ********************
 
 // Si l'utilisateur n'est pas connecté, il est redirigé vers la page de connexion.
 session_start();

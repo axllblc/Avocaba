@@ -5,9 +5,9 @@
 require_once 'db.inc.php';
 require_once 'misc.inc.php';
 
-/**************
- * Constantes *
- **************/
+// **************
+// * Constantes *
+// **************
 
 // Expressions régulières
 
@@ -32,9 +32,9 @@ LIMIT 1;
 
 
 
-/*************
- * Fonctions *
- *************/
+// *************
+// * Fonctions *
+// *************
 
 /**
  * Rechercher un client.

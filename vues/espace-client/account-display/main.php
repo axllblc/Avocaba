@@ -9,9 +9,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/bloc-commande.php'
 
 
 
-/*************
- * Fonctions *
- *************/
+// *************
+// * Fonctions *
+// *************
 
 function recupNom () {
   if ( isset($_SESSION['Client']['IdClient']) ){
@@ -21,9 +21,9 @@ function recupNom () {
 
 
 
-/********************
- * Script principal *
- ********************/
+// ********************
+// * Script principal *
+// ********************
 
 // On essaie de récupérer la commande la plus récente du client
 $commande = rechercheCommandes($_SESSION['Client']['IdClient'], 1);
@@ -34,9 +34,9 @@ if ($commande) {
 
 
 
-/***********
- * Contenu *
- ***********/
+// ***********
+// * Contenu *
+// ***********
 ?>
 
 <div class="client__affichage-general">
@@ -53,5 +53,7 @@ if ($commande) {
     echo '<p><em>Aucune commande effectuée.</em></p>';
   ?>
 
-  <a class="client__voir-commandes" href="account.php?btClient=commandes">Voir toutes mes commandes</a>
+  <a class="client__voir-commandes" href="/avocaba/vues/espace-client/account.php?btClient=commandes">
+    Voir toutes mes commandes
+  </a>
 </div>

@@ -11,18 +11,18 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/bloc-commande.php'
 
 
 
-/********************
-* Script principal *
-********************/
+// ********************
+// * Script principal *
+// ********************/
 
 // On récupère les commandes (on se limite au 20 dernières)
 $commandes = rechercheCommandes ($_SESSION['Client']['IdClient'], 20);
 
 
 
-/***********
- * Contenu *
- ***********/
+// ***********
+// * Contenu *
+// ***********
 ?>
 
 <div class="client__affichage-commandes">

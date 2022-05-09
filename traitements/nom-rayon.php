@@ -1,12 +1,14 @@
 <?php
 
-/* 📂 Nom du rayon (selon son identifiant)*/
+/* 📂 Nom du rayon (selon son identifiant) */
 
 require_once 'db.inc.php';
 
-/**************
- * Constantes *
- **************/
+
+
+// **************
+// * Constantes *
+// **************
 
 // Requête à préparer
 
@@ -18,9 +20,9 @@ WHERE r.IdRayon = ?
 
 
 
-/*************
- * Fonctions *
- *************/
+// *************
+// * Fonctions *
+// *************
 
 /**
  * Récupérer le nom du rayon d'après son identifiant.

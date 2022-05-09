@@ -6,9 +6,11 @@ require_once 'db.inc.php';
 require_once 'misc.inc.php';
 require_once 'verifier-client.php';
 
-/**************
- * Constantes *
- **************/
+
+
+// **************
+// * Constantes *
+// **************
 
  // Expressions régulières (regex mot de passe déjà définie dans verifier-client)
 const REGEX_NOM = "/^[a-zA-Z\s\-àáâäæèéêëìíîïòóôöøœùúûüÀÁÂÄÆÈÉÊËÌÍÎÏÒÓÔÖØŒÙÚÛÜ]{2,30}$/";
@@ -24,9 +26,11 @@ MotDePasse = ?
 WHERE IdClient = ?;
 ";
 
-/*************
- * Fonctions *
- *************/
+
+
+// *************
+// * Fonctions *
+// *************
 
 /**
  * Modifier les informations d'un client.

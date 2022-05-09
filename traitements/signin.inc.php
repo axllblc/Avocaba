@@ -2,9 +2,9 @@
 
 /* 🔒 Procédure de connexion au compte client */
 
-/*************
- * Fonctions *
- *************/
+// *************
+// * Fonctions *
+// *************/
 
 /**
  * Établir la mise en session des informations sur l'utilisateur. L'utilisateur est ensuite redirigé.

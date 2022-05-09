@@ -8,9 +8,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/magasin.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/footer.php';
 
-/*************
- * Fonctions *
- *************/
+// *************
+// * Fonctions *
+// *************
 
 function afficherMagasins ($magasins): void {
   echo '<div class="resultats-magasins">';
@@ -31,9 +31,9 @@ function afficherMagasins ($magasins): void {
 
 
 
-/********************
- * Script principal *
- ********************/
+// ********************
+// * Script principal *
+// ********************
 
 // Recherche d'un magasin : Réception de données
 

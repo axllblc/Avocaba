@@ -10,9 +10,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/traitements/modifier-client.p
 
 
 
-/********************
- * Script principal *
- ********************/
+// ********************
+// * Script principal *
+// ********************
 
 if ( isset($_POST['aRemplir']) ) {
   $edit = true;
@@ -46,9 +46,9 @@ else{
 
 
 
-/***********
- * Contenu *
- ***********/
+// ***********
+// * Contenu *
+// ***********
 ?>
 
 <div class="client__affichage-infos">

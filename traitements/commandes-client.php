@@ -6,6 +6,10 @@ require_once 'db.inc.php';
 require_once 'misc.inc.php';
 
 
+// **************
+// * Constantes *
+// **************
+
 // Requêtes à préparer
 
 const RECHERCHE_COMMANDES = '
@@ -36,9 +40,9 @@ VALUES (?, ?, ?);
 
 
 
-/*************
- * Fonctions *
- *************/
+// *************
+// * Fonctions *
+// *************
 
 /**
  * Rechercher des commandes du client.

@@ -7,9 +7,10 @@ error_reporting(E_ALL);
 require_once $_SERVER['DOCUMENT_ROOT'] . '/avocaba/composants/html_head.php';
 
 
-/********************
- * Script principal *
- ********************/
+
+// ********************
+// * Script principal *
+// ********************
 
 // Si l'utilisateur est déjà connecté, il est redirigé vers la page où il se trouvait
 if ( !empty($_SESSION['Client']) ) {

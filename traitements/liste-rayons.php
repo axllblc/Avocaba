@@ -4,9 +4,9 @@
 
 require_once 'db.inc.php';
 
-/**************
- * Constantes *
- **************/
+// **************
+// * Constantes *
+// **************
 
 // Requête à préparer
 
@@ -22,9 +22,9 @@ ORDER BY r.Nom;
 
 
 
-/*************
- * Fonctions *
- *************/
+// *************
+// * Fonctions *
+// *************
 
 /**
  * Récupérer la liste des rayons disponibles dans un dépôt.
