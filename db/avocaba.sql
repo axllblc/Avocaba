@@ -1,0 +1,153 @@
+CREATE TABLE VILLES(
+   IdVille INT AUTO_INCREMENT,
+   Nom VARCHAR(50) NOT NULL,
+   CodeCom CHAR(5),
+   CodePos INT,
+   CodeDep VARCHAR(3),
+   Slug VARCHAR(50),
+   PRIMARY KEY(IdVille)
+);
+
+CREATE TABLE FOURNISSEURS(
+   Siret BIGINT,
+   Nom VARCHAR(50) NOT NULL,
+   Description TEXT,
+   Adresse VARCHAR(50),
+   Email VARCHAR(50) NOT NULL,
+   Site VARCHAR(50),
+   Facebook VARCHAR(50),
+   Twitter VARCHAR(50),
+   Instagram VARCHAR(50),
+   MotDePasse VARCHAR(255) NOT NULL,
+   PhotoProfil TEXT,
+   PhotoBanniere TEXT,
+   IdVille INT NOT NULL,
+   PRIMARY KEY(Siret),
+   UNIQUE(Nom),
+   FOREIGN KEY(IdVille) REFERENCES VILLES(IdVille)
+);
+
+CREATE TABLE RAYONS(
+   IdRayon INT AUTO_INCREMENT,
+   Nom VARCHAR(50) NOT NULL,
+   PRIMARY KEY(IdRayon),
+   UNIQUE(Nom)
+);
+
+CREATE TABLE MOTS_CLES(
+   IdMotCle INT AUTO_INCREMENT,
+   Nom VARCHAR(50) NOT NULL,
+   PRIMARY KEY(IdMotCle),
+   UNIQUE(Nom)
+);
+
+CREATE TABLE PHOTOS_FOURNISSEURS(
+   IdPhotoFournisseur VARCHAR(255),
+   Siret BIGINT,
+   PRIMARY KEY(IdPhotoFournisseur),
+   FOREIGN KEY(Siret) REFERENCES FOURNISSEURS(Siret)
+);
+
+CREATE TABLE DEPOTS(
+   IdDepot INT AUTO_INCREMENT,
+   Nom VARCHAR(50) NOT NULL,
+   Adresse VARCHAR(50) NOT NULL,
+   IdVille INT NOT NULL,
+   PRIMARY KEY(IdDepot),
+   FOREIGN KEY(IdVille) REFERENCES VILLES(IdVille)
+);
+
+CREATE TABLE ARTICLES(
+   IdArticle INT AUTO_INCREMENT,
+   Nom VARCHAR(50) NOT NULL,
+   Prix DECIMAL(15,2) NOT NULL,
+   PrixRelatif DECIMAL(15,2),
+   Unite VARCHAR(50),
+   Description TEXT,
+   PhotoVignette TEXT,
+   ProduitPhare BOOLEAN,
+   SiretProducteur BIGINT,
+   IdRayon INT,
+   PRIMARY KEY(IdArticle),
+   FOREIGN KEY(SiretProducteur) REFERENCES FOURNISSEURS(Siret),
+   FOREIGN KEY(IdRayon) REFERENCES RAYONS(IdRayon)
+);
+
+CREATE TABLE PHOTOS_ARTICLES(
+   IdPhotoArticle VARCHAR(255),
+   IdArticle INT,
+   PRIMARY KEY(IdPhotoArticle),
+   FOREIGN KEY(IdArticle) REFERENCES ARTICLES(IdArticle)
+);
+
+CREATE TABLE CLIENTS(
+   IdClient INT AUTO_INCREMENT,
+   Nom VARCHAR(50) NOT NULL,
+   Prenom VARCHAR(50) NOT NULL,
+   Email VARCHAR(50) NOT NULL,
+   MotDePasse VARCHAR(255) NOT NULL,
+   IdDepot INT,
+   PRIMARY KEY(IdClient),
+   UNIQUE(Email),
+   FOREIGN KEY(IdDepot) REFERENCES DEPOTS(IdDepot)
+);
+
+CREATE TABLE COMMANDES(
+   IdCommande INT AUTO_INCREMENT,
+   DateRetrait DATETIME,
+   DateValidation DATETIME,
+   IdDepot INT NOT NULL,
+   IdClient INT NOT NULL,
+   PRIMARY KEY(IdCommande),
+   FOREIGN KEY(IdDepot) REFERENCES DEPOTS(IdDepot),
+   FOREIGN KEY(IdClient) REFERENCES CLIENTS(IdClient)
+);
+
+CREATE TABLE FOURNISSEURS_FAVORIS(
+   IdClient INT,
+   Siret BIGINT,
+   PRIMARY KEY(IdClient, Siret),
+   FOREIGN KEY(IdClient) REFERENCES CLIENTS(IdClient),
+   FOREIGN KEY(Siret) REFERENCES FOURNISSEURS(Siret)
+);
+
+CREATE TABLE STOCKER(
+   IdDepot INT,
+   IdArticle INT,
+   PRIMARY KEY(IdDepot, IdArticle),
+   FOREIGN KEY(IdDepot) REFERENCES DEPOTS(IdDepot),
+   FOREIGN KEY(IdArticle) REFERENCES ARTICLES(IdArticle)
+);
+
+CREATE TABLE MOTS_CLES_ARTICLES(
+   IdArticle INT,
+   IdMotCle INT,
+   PRIMARY KEY(IdArticle, IdMotCle),
+   FOREIGN KEY(IdArticle) REFERENCES ARTICLES(IdArticle),
+   FOREIGN KEY(IdMotCle) REFERENCES MOTS_CLES(IdMotCle)
+);
+
+CREATE TABLE CONTENIR(
+   IdArticle INT,
+   IdCommande INT,
+   Quantite INT,
+   PRIMARY KEY(IdArticle, IdCommande),
+   FOREIGN KEY(IdArticle) REFERENCES ARTICLES(IdArticle),
+   FOREIGN KEY(IdCommande) REFERENCES COMMANDES(IdCommande)
+);
+
+CREATE TABLE ALIAS_RAYONS(
+   IdRayon INT,
+   IdMotCle INT,
+   PRIMARY KEY(IdRayon, IdMotCle),
+   FOREIGN KEY(IdRayon) REFERENCES RAYONS(IdRayon),
+   FOREIGN KEY(IdMotCle) REFERENCES MOTS_CLES(IdMotCle)
+);
+
+CREATE TABLE ARTICLES_FAVORIS(
+   IdClient INT,
+   IdArticle INT,
+   PRIMARY KEY(IdClient, IdArticle),
+   FOREIGN KEY(IdClient) REFERENCES CLIENTS(IdClient),
+   FOREIGN KEY(IdArticle) REFERENCES ARTICLES(IdArticle)
+);
