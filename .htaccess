@@ -1,3 +1,4 @@
+Options -Indexes
 DirectoryIndex vues/landing.php vues/404.php
 ErrorDocument 404 /avocaba/vues/404.php
 ErrorDocument 403 /avocaba/vues/403.php
